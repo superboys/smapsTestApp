@@ -782,7 +782,6 @@ public class Utils {
     }
 
     /**
-     * @param str
      * @return 二进制数组转换为二进制字符串   2-2
      */
     public static String bytes2BinStr(byte[] bArray) {

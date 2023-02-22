@@ -481,10 +481,10 @@ public class JsonConvertCom {
                 
                 Map value = (Map) map.get("value");
 
-                int replacementId = (int) value.get("replacementId");
-                int replacementType = (int) value.get("replacementType");
-                int quantity = (int) value.get("quantity");
-                int expirationInDays = (int) value.get("expirationInDays");
+                int replacementId = (int) value.get("consumableId");
+                int replacementType = (int) value.get("consumableType");
+                int quantity = (int) value.get("initialValue");
+                int expirationInDays = (int) value.get("initialExpirationDays");
                 byte[] bytes = BLEConstant.setRequestForConsumableNew(replacementId, replacementType, quantity, expirationInDays);
                 LiveDataBus.get().with("sendDataToDir").setValue(bytes);
             } else {

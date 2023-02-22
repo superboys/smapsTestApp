@@ -860,13 +860,13 @@ public class ComConvertJson {
             Map value = new LinkedHashMap();
 
             value.put("filterId", (int) bytes[7]);
-            value.put("filterStatus", (int) bytes[8]);
-            value.put("filterExpiration",Integer.valueOf(bytes1[10],16) * 255 + Integer.valueOf(bytes1[9],16));
-            value.put("disinfectionExpiration", Integer.valueOf(bytes1[12],16) * 255 + Integer.valueOf(bytes1[11],16));
+            value.put("filterStatusRemainingPercent", (int) bytes[8]);
+            value.put("filterExpirationRemainingDays",Integer.valueOf(bytes1[10],16) * 255 + Integer.valueOf(bytes1[9],16));
+            value.put("disinfectionExpirationRemainingDays", Integer.valueOf(bytes1[12],16) * 255 + Integer.valueOf(bytes1[11],16));
             value.put("co2Id", (int) bytes[13]);
-            value.put("co2Status", (int) bytes[14]);
-            value.put("flavorQuanity", (int) bytes[15]);
-            value.put("flavorStatus", (int) bytes[16]);
+            value.put("co2StatusRemainingPercent", (int) bytes[14]);
+            value.put("flavorQuantityRemaingCc", (int) bytes[15]);
+            value.put("flavorStatusRemainingPercent", (int) bytes[16]);
             map.put("value", value);
 
             LiveDataBus.get().with("showComConvertJson").setValue(JsonUtils.mapToJson(map));
@@ -1263,10 +1263,10 @@ public class ComConvertJson {
             value.put("flavorDisinfection0%Alert", true);
         }
 
-        value.put("sodaIntensity", Utils.convertValue(Utils.hexToInt(bytes1[15])));
-        value.put("flavorIntensity", Utils.convertValue(Utils.hexToInt(bytes1[16])));
-        value.put("flavorQuanity", Utils.convertValue(Utils.hexToInt(bytes1[17])));
-        value.put("flavorStatus", Utils.convertValue(Utils.hexToInt(bytes1[18])));
+        value.put("sodaIntensity", Utils.getBitsNum(bytes[15], 2, 1));
+        value.put("flavorIntensity", Utils.getBitsNum(bytes[15], 2, 3));
+        value.put("flavorQuanity", Utils.convertValue(Utils.hexToInt(bytes1[16])));
+        value.put("flavorStatus", Utils.convertValue(Utils.hexToInt(bytes1[17])));
         map.put("value", value);
         LiveDataBus.get().with("showComConvertJson").setValue(JsonUtils.mapToJson(map));
         Log.e("comConvertJson-->", JsonUtils.mapToJson(map));
