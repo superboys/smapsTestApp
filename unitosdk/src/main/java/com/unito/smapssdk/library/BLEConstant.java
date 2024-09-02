@@ -20,6 +20,7 @@ public class BLEConstant {
 
     public static final UUID WATERSYSTEM_SERVICE = UUID.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
     public static final UUID WATERSYSTEM_CHARACTERSTIC = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
+//    public static final UUID WATERSYSTEM_CHARACTERSTIC = UUID.fromString("00002a3d-0000-1000-8000-00805f9b34fb");
     //TYPE CONSUMABLE
 
     public static final byte WATER_FILTER = 0x01;
@@ -648,17 +649,16 @@ public class BLEConstant {
 
     public static byte[] getRequestForFlavor() {
         byte[] bytes = new byte[10];
-
         bytes[0] = (byte) 0x00; //First
-        bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
-        bytes[3] = MSGID_REQUEST_STATUS_WATER_SYSTEM1;//MSGID High
-        bytes[4] = MSGID_REQUEST_STATUS_WATER_SYSTEM2;//MSGID LOW
-        bytes[5] = GET;//MSG CATEGORY
-        bytes[6] = (byte) 0x01;//DATA LENGTH
-        bytes[7] = (byte) 0x01;//VAL
-        bytes[8] = (byte) Utils.getCheckSum(bytes);
-        bytes[9] = (byte) 0xFF;
+        bytes[1] = 0x0B; //Destination
+        bytes[2] = 0X07; //Source
+        bytes[3] = (byte) 0XEE; //MSGID High
+        bytes[4] = (byte) 0XFE; //MSGID LOW
+        bytes[5] = 0X01; //MSG CATEGORY
+        bytes[6] = (byte) 0x01; //DATA LENGTH
+        bytes[7] = (byte) 0x01; //DATA
+        bytes[8] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[9] = (byte) 0xFF; //LAST
         return bytes;
     }
 

@@ -34,6 +34,7 @@ import com.unito.smapssdk.library.NotifyResponse;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,19 +43,22 @@ import java.util.UUID;
 
 public class UnitoManager {
 
-    private BluetoothClient bleClient;
+    private static BluetoothClient bleClient;
     private List<SearchResult> saveSearchResult = new ArrayList<>();
     public String mac;
     public static int msgId = 1;
     public static String target = "";
     public static byte[] sendBytes;
-    private NotifyResponse notifyResponse;
+    private static NotifyResponse notifyResponse;
     private int maxRssi;
     private String blueToothName;
     private Map jsonMap;
     public static boolean isWrite;
     public int timeOut = 3000;
     private boolean disConnect = false;
+
+    private volatile static UnitoManager singleton;
+    private UnitoManager (){}
 
     public boolean getConnectStatus() {
         if (null != bleClient) {
@@ -104,42 +108,50 @@ public class UnitoManager {
         },500);
     }
 
-    public UnitoManager(Context context) {
-        bleClient = new BluetoothClient(context);
-        LiveDataBus.get()
-                .with("showComConvertJson", String.class)
-                .observe((LifecycleOwner) context, new Observer<String>() {
-                    @Override
-                    public void onChanged(@Nullable String s) {
-                        ThreadPoolUtil.handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                notity(s);
-                            }
-                        });
-                    }
-                });
+    public static UnitoManager getSingleton(Context context) {
+        if (singleton == null) {
+            synchronized (UnitoManager.class) {
+                if (singleton == null) {
+                    singleton = new UnitoManager();
+                    bleClient = new BluetoothClient(context);
+                    LiveDataBus.get()
+                            .with("showComConvertJson", String.class)
+                            .observe((LifecycleOwner) context, new Observer<String>() {
+                                @Override
+                                public void onChanged(@Nullable String s) {
+                                    ThreadPoolUtil.handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notity(s);
+                                        }
+                                    });
+                                }
+                            });
 
-        LiveDataBus.get()
-                .with("sendDataToDir", byte[].class)
-                .observe((LifecycleOwner) context, new Observer<byte[]>() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onChanged(@Nullable byte[] bytes) {
-                        Log.e("sendDataToDir-->", Utils.bytesToHex(bytes));
-                        sendBytes = bytes;
-                    }
-                });
+                    LiveDataBus.get()
+                            .with("sendDataToDir", byte[].class)
+                            .observe((LifecycleOwner) context, new Observer<byte[]>() {
+                                @RequiresApi(api = Build.VERSION_CODES.N)
+                                @Override
+                                public void onChanged(@Nullable byte[] bytes) {
+                                    Log.e("sendDataToDir-->", Utils.bytesToHex(bytes));
+                                    sendBytes = bytes;
+                                }
+                            });
 
 
-        ThreadPoolUtil.handler.post(new Runnable() {
-            @Override
-            public void run() {
-                String jsonRequests = Utils.loadJSONFromAsset(context, "appSettings.json");
-                Map<String, Object> jsonParam = JsonUtils.jsonToMap(jsonRequests);
-                appSettings(jsonParam);
+                    ThreadPoolUtil.handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            String jsonRequests = Utils.loadJSONFromAsset(context, "appSettings.json");
+                            Map<String, Object> jsonParam = JsonUtils.jsonToMap(jsonRequests);
+                            appSettings(jsonParam);
+                        }
+                    });
+                }
             }
-        });
+        }
+        return singleton;
     }
 
     public void bleConnectToWaterSystem() {
@@ -328,8 +340,9 @@ public class UnitoManager {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onNotify(UUID service, UUID character, byte[] value) {
-                Log.e("readDirData--->", Utils.bytesToHex(value));
+                Log.e("readDirData--->", new String(value, StandardCharsets.UTF_8));
                 ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
+
                 if (null != value || value.length > 0) {
                     if (value[0] == (byte) 0x00 && value[value.length - 1] == (byte) 0xff) {
                         try {
@@ -410,7 +423,18 @@ public class UnitoManager {
         }
     }
 
-    Runnable runnableTimeOut = new Runnable() {
+    public void writeDirData2(byte[] bytes) {
+        bleClient.write(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, bytes, new BleWriteResponse() {
+            @Override
+            public void onResponse(int code) {
+                if (code == REQUEST_SUCCESS) {
+                    Log.e("writeDirData-->", "写入成功" + code);
+                }
+            }
+        });
+    }
+
+    static Runnable runnableTimeOut = new Runnable() {
         @Override
         public void run() {
             Log.e("timeOut--->","blueT TimeOut");
@@ -425,7 +449,7 @@ public class UnitoManager {
         }
     };
 
-    public synchronized void notity(String jsonObject) {
+    public static synchronized void notity(String jsonObject) {
         ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
         notifyResponse.unitoWaterSystemNotify(jsonObject);
     }
@@ -461,7 +485,7 @@ public class UnitoManager {
         return jsonMap;
     }
 
-    public void appSettings(Map map) {
+    public static void appSettings(Map map) {
 
     }
 }

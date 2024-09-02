@@ -1,0 +1,1521 @@
+[{
+    "id": "1",
+    "target": "bleConnectToWaterSystem",
+    "msgType": "set",
+    "SMAPS": "none",
+    "json": {
+        "msgId": 1,
+        "destination": "waterSystem",
+        "source": "appBle",
+        "target": "bleConnectToWaterSystem",
+        "msgType": "set"
+    }
+},
+    {
+        "id": "4",
+        "target": "bleDisconnectFromWaterSystem",
+        "msgType": "set",
+        "SMAPS": "none",
+        "json": {
+            "msgId": 4,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "bleDisconnectFromWaterSystem",
+            "msgType": "set"
+        }
+    },
+    {
+        "id": "7",
+        "target": "waterSystemAllData",
+        "msgType": "get",
+        "SMAPS": "0x0C33",
+        "json": {
+            "msgId": 7,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "msgType": "get",
+            "target": "waterSystemAllData"
+        }
+    },
+    {
+        "id": "9",
+        "target": "temperatureHotWater",
+        "msgType": "get",
+        "SMAPS": "0x0C21",
+        "json": {
+            "msgId": 9,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureHotWater",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "11",
+        "target": "temperatureHotWater",
+        "msgType": "set",
+        "SMAPS": "0x0C21",
+        "json": {
+            "msgId": 11,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureHotWater",
+            "msgType": "set",
+            "value": {
+                "desiredHotWaterTemperature": 100
+            }
+        }
+    },
+    {
+        "id": "12",
+        "target": "temperatureHotWater",
+        "msgType": "set",
+        "SMAPS": "0x0C21",
+        "json": {
+            "msgId": 12,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureHotWater",
+            "msgType": "set",
+            "value": {
+                "desiredHotWaterTemperature": 60
+            }
+        }
+    },
+    {
+        "id": "13",
+        "target": "temperatureColdWater",
+        "msgType": "get",
+        "SMAPS": "0x0C22",
+        "json": {
+            "msgId": 13,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureColdWater",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "15",
+        "target": "temperatureColdWater",
+        "msgType": "set",
+        "SMAPS": "0x0C22",
+        "json": {
+            "msgId": 15,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureColdWater",
+            "msgType": "set",
+            "value": {
+                "desiredColdWaterTemperature": 25
+            }
+        }
+    },
+    {
+        "id": "16",
+        "target": "temperatureColdWater",
+        "msgType": "set",
+        "SMAPS": "0x0C22",
+        "json": {
+            "msgId": 16,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "temperatureColdWater",
+            "msgType": "set",
+            "value": {
+                "desiredColdWaterTemperature": 3
+            }
+        }
+    },
+    {
+        "id": "17",
+        "target": "sodaIntensity",
+        "msgType": "get",
+        "SMAPS": "0x0C23",
+        "json": {
+            "msgId": 17,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaIntensity",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "19",
+        "target": "sodaIntensity",
+        "msgType": "set",
+        "SMAPS": "0x0C23",
+        "json": {
+            "msgId": 19,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaIntensity",
+            "msgType": "set",
+            "value": {
+                "sodaIntensity": 1
+            }
+        }
+    },
+    {
+        "id": "20",
+        "target": "sodaIntensity",
+        "msgType": "set",
+        "SMAPS": "0x0C23",
+        "json": {
+            "msgId": 19,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaIntensity",
+            "msgType": "set",
+            "value": {
+                "sodaIntensity": 3
+            }
+        }
+    },
+    {
+        "id": "21",
+        "target": "flavorIntensity",
+        "msgType": "get",
+        "SMAPS": "0x0C40",
+        "json": {
+            "msgId": 21,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensity",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "23",
+        "target": "flavorIntensity",
+        "msgType": "set",
+        "SMAPS": "0x0C40",
+        "json": {
+            "msgId": 23,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensity",
+            "msgType": "set",
+            "value": {
+                "flavorIntensity": 1
+            }
+        }
+    },
+    {
+        "id": "24",
+        "target": "flavorIntensity",
+        "msgType": "set",
+        "SMAPS": "0x0C40",
+        "json": {
+            "msgId": 24,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensity",
+            "msgType": "set",
+            "value": {
+                "flavorIntensity": 3
+            }
+        }
+    },
+    {
+        "id": "29",
+        "target": "consumableAllData",
+        "msgType": "get",
+        "SMAPS": "0x0C3A",
+        "json": {
+            "msgId": 29,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "consumableAllData",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "31",
+        "target": "consumableAllData",
+        "msgType": "set",
+        "SMAPS": "0x0C3A",
+        "json": {
+            "msgId": 31,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "consumableAllData",
+            "msgType": "set",
+            "value": {
+                "replacementId": 1,
+                "replacementType": 1,
+                "quantity": 2,
+                "expirationInDays": 365
+            }
+        }
+    },
+    {
+        "id": "32",
+        "target": "consumableAllData",
+        "msgType": "set",
+        "SMAPS": "0x0C3A",
+        "json": {
+            "msgId": 32,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "consumableAllData",
+            "msgType": "set",
+            "value": {
+                "replacementId": 2,
+                "replacementType": 1,
+                "quantity": 100,
+                "expirationInDays": 363
+            }
+        }
+    },
+    {
+        "id": "33",
+        "target": "timer1",
+        "msgType": "get",
+        "SMAPS": "0xC2B",
+        "json": {
+            "msgId": 33,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer1",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "35",
+        "target": "timer1",
+        "msgType": "set",
+        "SMAPS": "0xC2B",
+        "json": {
+            "msgId": 35,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer1",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": false,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "interval1": {
+                    "from": "12:00",
+                    "to": "14:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval2": {
+                    "from": "15:00",
+                    "to": "16:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval3": {
+                    "from": "18:00",
+                    "to": "19:30",
+                    "active": true,
+                    "24h": false
+                },
+                "interval4": {
+                    "from": "",
+                    "to": "",
+                    "active": false,
+                    "24h": true
+                }
+            }
+        }
+    },
+    {
+        "id": "36",
+        "target": "timer1",
+        "msgType": "set",
+        "SMAPS": "0xC2B",
+        "json": {
+            "msgId": 36,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer1",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": true,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "interval1": {
+                    "from": "02:00",
+                    "to": "04:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval2": {
+                    "from": "05:00",
+                    "to": "06:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval3": {
+                    "from": "08:00",
+                    "to": "09:30",
+                    "active": true,
+                    "24h": false
+                },
+                "interval4": {
+                    "from": "",
+                    "to": "",
+                    "active": false,
+                    "24h": true
+                }
+            }
+        }
+    },
+    {
+        "id": "37",
+        "target": "timer2",
+        "msgType": "get",
+        "SMAPS": "0xC2C",
+        "json": {
+            "msgId": 37,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer2",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "39",
+        "target": "timer2",
+        "msgType": "set",
+        "SMAPS": "0xC2C",
+        "json": {
+            "msgId": 39,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer2",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": false,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "interval1": {
+                    "from": "12:00",
+                    "to": "14:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval2": {
+                    "from": "15:00",
+                    "to": "16:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval3": {
+                    "from": "18:00",
+                    "to": "19:30",
+                    "active": true,
+                    "24h": false
+                },
+                "interval4": {
+                    "from": "",
+                    "to": "",
+                    "active": false,
+                    "24h": true
+                }
+            }
+        }
+    },
+    {
+        "id": "40",
+        "target": "timer2",
+        "msgType": "set",
+        "SMAPS": "0xC2C",
+        "json": {
+            "msgId": 40,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "timer2",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": true,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "interval1": {
+                    "from": "02:00",
+                    "to": "04:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval2": {
+                    "from": "05:00",
+                    "to": "06:00",
+                    "active": true,
+                    "24h": false
+                },
+                "interval3": {
+                    "from": "08:00",
+                    "to": "09:30",
+                    "active": true,
+                    "24h": false
+                },
+                "interval4": {
+                    "from": "",
+                    "to": "",
+                    "active": false,
+                    "24h": true
+                }
+            }
+        }
+    },
+    {
+        "id": "41",
+        "target": "sterilizationTimer",
+        "msgType": "get",
+        "SMAPS": "0x0C34",
+        "json": {
+            "msgId": 41,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sterilizationTimer",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "43",
+        "target": "sterilizationTimer",
+        "msgType": "set",
+        "SMAPS": "0x0C34",
+        "json": {
+            "msgId": 43,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sterilizationTimer",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": false,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "startTime": "12:00"
+            }
+        }
+    },
+    {
+        "id": "44",
+        "target": "sterilizationTimer",
+        "msgType": "set",
+        "SMAPS": "0x0C34",
+        "json": {
+            "msgId": 44,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sterilizationTimer",
+            "msgType": "set",
+            "value": {
+                "days": {
+                    "day1": true,
+                    "day2": true,
+                    "day3": true,
+                    "day4": true,
+                    "day5": true,
+                    "day6": true,
+                    "day7": true
+                },
+                "startTime": "02:00"
+            }
+        }
+    },
+    {
+        "id": "45",
+        "target": "childProtect",
+        "msgType": "get",
+        "SMAPS": "0x0C27",
+        "json": {
+            "msgId": 45,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "childProtect",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "47",
+        "target": "childProtect",
+        "msgType": "set",
+        "SMAPS": "0x0C27",
+        "json": {
+            "msgId": 47,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "childProtect",
+            "msgType": "set",
+            "value": {
+                "childProtect": true
+            }
+        }
+    },
+    {
+        "id": "48",
+        "target": "childProtect",
+        "msgType": "set",
+        "SMAPS": "0x0C27",
+        "json": {
+            "msgId": 48,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "childProtect",
+            "msgType": "set",
+            "value": {
+                "childProtect": false
+            }
+        }
+    },
+    {
+        "id": "49",
+        "target": "autoSodaMake",
+        "msgType": "get",
+        "SMAPS": "0x0C45",
+        "json": {
+            "msgId": 49,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "autoSodaMake",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "51",
+        "target": "autoSodaMake",
+        "msgType": "set",
+        "SMAPS": "0x0C45",
+        "json": {
+            "msgId": 51,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "autoSodaMake",
+            "msgType": "set",
+            "value": {
+                "autoSodaMake": true
+            }
+        }
+    },
+    {
+        "id": "52",
+        "target": "autoSodaMake",
+        "msgType": "set",
+        "SMAPS": "0x0C45",
+        "json": {
+            "msgId": 52,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "autoSodaMake",
+            "msgType": "set",
+            "value": {
+                "autoSodaMake": false
+            }
+        }
+    },
+    {
+        "id": "57",
+        "target": "realTimeClock",
+        "msgType": "get",
+        "SMAPS": "0x0C2A",
+        "json": {
+            "msgId": 57,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "realTimeClock",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "59",
+        "target": "realTimeClock",
+        "msgType": "set",
+        "SMAPS": "0x0C2A",
+        "json": {
+            "msgId": 59,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "realTimeClock",
+            "msgType": "set",
+            "value": {
+                "years": "2022",
+                "months": "9",
+                "days": "23",
+                "weekday": "5",
+                "hours": "17",
+                "minutes": "28",
+                "seconds": "46"
+            }
+        }
+    },
+    {
+        "id": "60",
+        "target": "realTimeClock",
+        "msgType": "set",
+        "SMAPS": "0x0C2A",
+        "json": {
+            "msgId": 60,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "realTimeClock",
+            "msgType": "set",
+            "value": {
+                "years": "2023",
+                "months": "1",
+                "days": "5",
+                "weekday": "4",
+                "hours": "9",
+                "minutes": "45",
+                "seconds": "22"
+            }
+        }
+    },
+    {
+        "id": "65",
+        "target": "jarPushTime",
+        "msgType": "get",
+        "SMAPS": "0x0C37",
+        "json": {
+            "msgId": 65,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "jarPushTime",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "67",
+        "target": "jarPushTime",
+        "msgType": "set",
+        "SMAPS": "0x0C37",
+        "json": {
+            "msgId": 67,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "jarPushTime",
+            "msgType": "set",
+            "value": {
+                "jarPushTime": 1
+            }
+        }
+    },
+    {
+        "id": "68",
+        "target": "jarPushTime",
+        "msgType": "set",
+        "SMAPS": "0x0C37",
+        "json": {
+            "msgId": 68,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "jarPushTime",
+            "msgType": "set",
+            "value": {
+                "jarPushTime": 120
+            }
+        }
+    },
+    {
+        "id": "69",
+        "target": "singleClickWaterOutTime",
+        "msgType": "get",
+        "SMAPS": "0x0C46",
+        "json": {
+            "msgId": 69,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "singleClickWaterOutTime",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "71",
+        "target": "singleClickWaterOutTime",
+        "msgType": "set",
+        "SMAPS": "0x0C46",
+        "json": {
+            "msgId": 71,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "singleClickWaterOutTime",
+            "msgType": "set",
+            "value": {
+                "singleClick": true,
+                "singleClickWaterOutTime": 1
+            }
+        }
+    },
+    {
+        "id": "72",
+        "target": "singleClickWaterOutTime",
+        "msgType": "set",
+        "SMAPS": "0x0C46",
+        "json": {
+            "msgId": 72,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "singleClickWaterOutTime",
+            "msgType": "set",
+            "value": {
+                "singleClick": true,
+                "singleClickWaterOutTime": 120
+            }
+        }
+    },
+    {
+        "id": "572",
+        "target": "singleClickWaterOutTime",
+        "msgType": "set",
+        "SMAPS": "0x0C46",
+        "json": {
+            "msgId": 572,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "singleClickWaterOutTime",
+            "msgType": "set",
+            "value": {
+                "singleClick": false,
+                "singleClickWaterOutTime": 60
+            }
+        }
+    },
+    {
+        "id": "73",
+        "target": "knobStatus",
+        "msgType": "get",
+        "SMAPS": "0x0C39",
+        "json": {
+            "msgId": 73,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "knobStatus",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "75",
+        "target": "knobStatus",
+        "msgType": "set",
+        "SMAPS": "0x0C39",
+        "json": {
+            "msgId": 75,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "knobStatus",
+            "msgType": "set",
+            "value": {
+                "reset": true,
+                "enterPairingMode": true
+            }
+        }
+    },
+    {
+        "id": "76",
+        "target": "knobStatus",
+        "msgType": "set",
+        "SMAPS": "0x0C39",
+        "json": {
+            "msgId": 76,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "knobStatus",
+            "msgType": "set",
+            "value": {
+                "reset": false,
+                "enterPairingMode": false
+            }
+        }
+    },
+    {
+        "id": "77",
+        "target": "version",
+        "msgType": "get",
+        "SMAPS": "0x0C3D",
+        "json": {
+            "msgId": 77,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "version",
+            "msgType": "get",
+            "value": {
+                "boardType": 0
+            }
+        }
+    },
+    {
+        "id": "78",
+        "target": "version",
+        "msgType": "get",
+        "SMAPS": "0x0C3D",
+        "json": {
+            "msgId": 78,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "version",
+            "msgType": "get",
+            "value": {
+                "boardType": 4
+            }
+        }
+    },
+    {
+        "id": "79",
+        "target": "flavorIntensityParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C41",
+        "json": {
+            "msgId": 79,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensityParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "81",
+        "target": "flavorIntensityParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C41",
+        "json": {
+            "msgId": 81,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensityParameters",
+            "msgType": "set",
+            "value": {
+                "softFlavorInjection": 0.1,
+                "mediumFlavorInjection": 2.5,
+                "intenseFlavorInjection": 5.0,
+                "boilingChilledFilteredWaterFlavorInjectionTime": 0.1,
+                "sodaWaterFlavorInjectionTime": 7.0
+            }
+        }
+    },
+    {
+        "id": "82",
+        "target": "flavorIntensityParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C41",
+        "json": {
+            "msgId": 82,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorIntensityParameters",
+            "msgType": "set",
+            "value": {
+                "softFlavorInjection": 5.0,
+                "mediumFlavorInjection": 8.0,
+                "intenseFlavorInjection": 10.0,
+                "boilingChilledFilteredWaterFlavorInjectionTime": 10.0,
+                "sodaWaterFlavorInjectionTime": 8.0
+            }
+        }
+    },
+    {
+        "id": "83",
+        "target": "flavorCleaningParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C42",
+        "json": {
+            "msgId": 83,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorCleaningParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "85",
+        "target": "flavorCleaningParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C42",
+        "json": {
+            "msgId": 85,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorCleaningParameters",
+            "msgType": "set",
+            "value": {
+                "flavorReverseTime": 5.0,
+                "flavorCleaningInterval": 5
+            }
+        }
+    },
+    {
+        "id": "86",
+        "target": "flavorCleaningParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C42",
+        "json": {
+            "msgId": 86,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorCleaningParameters",
+            "msgType": "set",
+            "value": {
+                "flavorReverseTime": 0.1,
+                "flavorCleaningInterval": 1
+            }
+        }
+    },
+    {
+        "id": "87",
+        "target": "flavorDisinfectionParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C43",
+        "json": {
+            "msgId": 87,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorDisinfectionParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "89",
+        "target": "flavorDisinfectionParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C43",
+        "json": {
+            "msgId": 89,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorDisinfectionParameters",
+            "msgType": "set",
+            "value": {
+                "disinfectionCycles": 50,
+                "disinfectionForwardTime": 5.0,
+                "disinfectionBackwardsTime": 2.0,
+                "disinfectionVolumeThreshold": 2000,
+                "disinfectionDaysThreshold": 110
+            }
+        }
+    },
+    {
+        "id": "90",
+        "target": "flavorDisinfectionParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C43",
+        "json": {
+            "msgId": 90,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "flavorDisinfectionParameters",
+            "msgType": "set",
+            "value": {
+                "disinfectionCycles": 1,
+                "disinfectionForwardTime": 0.1,
+                "disinfectionBackwardsTime": 0.2,
+                "disinfectionVolumeThreshold": 2000,
+                "disinfectionDaysThreshold": 110
+            }
+        }
+    },
+    {
+        "id": "95",
+        "target": "sodaWaterInParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C2E",
+        "json": {
+            "msgId": 95,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaWaterInParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "97",
+        "target": "sodaWaterInParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C2E",
+        "json": {
+            "msgId": 97,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaWaterInParameters",
+            "msgType": "set",
+            "value": {
+                "sodaWaterInMinTime": 1,
+                "sodaWaterInMaxTime": 45,
+                "sodaWaterInTemperature": 25.4
+            }
+        }
+    },
+    {
+        "id": "98",
+        "target": "sodaWaterInParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C2E",
+        "json": {
+            "msgId": 98,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaWaterInParameters",
+            "msgType": "set",
+            "value": {
+                "sodaWaterInMinTime": 2,
+                "sodaWaterInMaxTime": 30,
+                "sodaWaterInTemperature": 3.0
+            }
+        }
+    },
+    {
+        "id": "99",
+        "target": "sodaCo2InParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C2F",
+        "json": {
+            "msgId": 99,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "101",
+        "target": "sodaCo2InParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C2F",
+        "json": {
+            "msgId": 101,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InParameters",
+            "msgType": "set",
+            "value": {
+                "co2InMinTime": 0.7,
+                "co2InMaxTime": 1.7,
+                "co2SoftLevelTime": 0.5,
+                "co2MediumLevelTime": 0.7,
+                "co2IntenseLevelTime": 1.0
+            }
+        }
+    },
+    {
+        "id": "102",
+        "target": "sodaCo2InParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C2F",
+        "json": {
+            "msgId": 102,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InParameters",
+            "msgType": "set",
+            "value": {
+                "co2InMinTime": 0.6,
+                "co2InMaxTime": 1.8,
+                "co2SoftLevelTime": 0.1,
+                "co2MediumLevelTime": 0.2,
+                "co2IntenseLevelTime": 0.3
+            }
+        }
+    },
+    {
+        "id": "103",
+        "target": "sodaCo2InOnOffParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C30",
+        "json": {
+            "msgId": 103,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InOnOffParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "105",
+        "target": "sodaCo2InOnOffParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C30",
+        "json": {
+            "msgId": 105,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InOnOffParameters",
+            "msgType": "set",
+            "value": {
+                "co2InOnOffStatus": 1,
+                "co2InOnNominalTime": 1.0,
+                "co2InOnMinTime": 0.3,
+                "co2InOnMaxTime": 5.0,
+                "co2InOffNominalTime": 1.0,
+                "co2InOffMinTime": 0.3,
+                "co2InOffMaxTime": 5.0
+            }
+        }
+    },
+    {
+        "id": "106",
+        "target": "sodaCo2InOnOffParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C30",
+        "json": {
+            "msgId": 106,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "sodaCo2InOnOffParameters",
+            "msgType": "set",
+            "value": {
+                "co2InOnOffStatus": 1,
+                "co2InOnNominalTime": 0.1,
+                "co2InOnMinTime": 0.1,
+                "co2InOnMaxTime": 5.0,
+                "co2InOffNominalTime": 0.1,
+                "co2InOffMinTime": 0.1,
+                "co2InOffMaxTime": 5.0
+            }
+        }
+    },
+    {
+        "id": "107",
+        "target": "washPipeParameters",
+        "msgType": "get",
+        "SMAPS": "0x0C32",
+        "json": {
+            "msgId": 107,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "washPipeParameters",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "109",
+        "target": "washPipeParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C32",
+        "json": {
+            "msgId": 109,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "washPipeParameters",
+            "msgType": "set",
+            "value": {
+                "boilingWaterFlushTime": 0.1,
+                "sparkleWaterFlushTime": 0.1
+            }
+        }
+    },
+    {
+        "id": "110",
+        "target": "washPipeParameters",
+        "msgType": "set",
+        "SMAPS": "0x0C32",
+        "json": {
+            "msgId": 110,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "washPipeParameters",
+            "msgType": "set",
+            "value": {
+                "boilingWaterFlushTime": 25.4,
+                "sparkleWaterFlushTime": 25.4
+            }
+        }
+    },
+    {
+        "id": "115",
+        "target": "systemPowerOn",
+        "msgType": "get",
+        "SMAPS": "0x0C20",
+        "json": {
+            "msgId": 115,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "systemPowerOn",
+            "msgType": "get",
+            "value": {
+                "systemPowerOn": true
+            }
+        }
+    },
+    {
+        "id": "116",
+        "target": "systemPowerOn",
+        "msgType": "get",
+        "SMAPS": "0x0C20",
+        "json": {
+            "msgId": 116,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "systemPowerOn",
+            "msgType": "get",
+            "value": {
+                "systemPowerOn": false
+            }
+        }
+    },
+    {
+        "id": "117",
+        "target": "systemPowerOn",
+        "msgType": "set",
+        "SMAPS": "0x0C20",
+        "json": {
+            "msgId": 117,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "systemPowerOn",
+            "msgType": "set",
+            "value": {
+                "systemPowerOn": true
+            }
+        }
+    },
+    {
+        "id": "118",
+        "target": "systemPowerOn",
+        "msgType": "set",
+        "SMAPS": "0x0C20",
+        "json": {
+            "msgId": 118,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "systemPowerOn",
+            "msgType": "set",
+            "value": {
+                "systemPowerOn": false
+            }
+        }
+    },
+    {
+        "id": "119",
+        "target": "waterType",
+        "msgType": "get",
+        "SMAPS": "0x0C28",
+        "json": {
+            "msgId": 119,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "waterType",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "123",
+        "target": "pullOutFunction",
+        "msgType": "get",
+        "SMAPS": "0x0C3E",
+        "json": {
+            "msgId": 123,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "pullOutFunction",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "125",
+        "target": "pullOutFunction",
+        "msgType": "set",
+        "SMAPS": "0x0C3E",
+        "json": {
+            "msgId": 125,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "pullOutFunction",
+            "msgType": "set",
+            "value": {
+                "pullOutFunction": true
+            }
+        }
+    },
+    {
+        "id": "126",
+        "target": "pullOutFunction",
+        "msgType": "set",
+        "SMAPS": "0x0C3E",
+        "json": {
+            "msgId": 125,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "pullOutFunction",
+            "msgType": "set",
+            "value": {
+                "pullOutFunction": false
+            }
+        }
+    },
+    {
+        "id": "127",
+        "target": "waterOutStatus",
+        "msgType": "get",
+        "SMAPS": "0x0013",
+        "json": {
+            "msgId": 127,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "waterOutStatus",
+            "msgType": "get",
+            "value": {
+                "waterType": 1
+            }
+        }
+    },
+    {
+        "id": "128",
+        "target": "waterOutStatus",
+        "msgType": "get",
+        "SMAPS": "0x0013",
+        "json": {
+            "msgId": 128,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "waterOutStatus",
+            "msgType": "get",
+            "value": {
+                "waterType": 5
+            }
+        }
+    },
+    {
+        "id": "129",
+        "target": "waterOutStatus",
+        "msgType": "set",
+        "SMAPS": "0x0013",
+        "json": {
+            "msgId": 129,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "waterOutStatus",
+            "msgType": "set",
+            "value": {
+                "waterType": 2
+            }
+        }
+    },
+    {
+        "id": "130",
+        "target": "waterOutStatus",
+        "msgType": "set",
+        "SMAPS": "0x0013",
+        "json": {
+            "msgId": 130,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "waterOutStatus",
+            "msgType": "set",
+            "value": {
+                "waterType": 6
+            }
+        }
+    },
+    {
+        "id": "131",
+        "target": "activateFlavorDisinfection",
+        "msgType": "set",
+        "SMAPS": "0x0C44",
+        "json": {
+            "msgId": 131,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "activateFlavorDisinfection",
+            "msgType": "set",
+            "value": {
+                "activateFlavorDisinfection": 2
+            }
+        }
+    },
+    {
+        "id": "135",
+        "target": "leakageSensorFunction",
+        "msgType": "get",
+        "SMAPS": "0x0C47",
+        "json": {
+            "msgId": 135,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "leakageSensorFunction",
+            "msgType": "get"
+        }
+    },
+    {
+        "id": "137",
+        "target": "leakageSensorFunction",
+        "msgType": "set",
+        "SMAPS": "0x0C47",
+        "json": {
+            "msgId": 137,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "leakageSensorFunction",
+            "msgType": "set",
+            "value": {
+                "leakageSensorFunction": true
+            }
+        }
+    },
+    {
+        "id": "138",
+        "target": "leakageSensorFunction",
+        "msgType": "set",
+        "SMAPS": "0x0C47",
+        "json": {
+            "msgId": 138,
+            "destination": "waterSystem",
+            "source": "appBle",
+            "target": "leakageSensorFunction",
+            "msgType": "set",
+            "value": {
+                "leakageSensorFunction": false
+            }
+        }
+    },
+    {
+        "id": "141",
+        "target": "changeLanguage",
+        "msgType": "set",
+        "SMAPS": "none",
+        "json": {
+            "destination": "waterSystem",
+            "msgId": 141,
+            "source": "appBle",
+            "msgType": "set",
+            "target": "changeLanguage",
+            "value": {
+                "language": "iw"
+            }
+        }
+    },
+    {
+        "id": "145",
+        "target": "startOTA",
+        "msgType": "set",
+        "SMAPS": "none",
+        "json": {
+            "destination": "waterSystem",
+            "msgId": 145,
+            "source": "appBle",
+            "msgType": "set",
+            "target": "startOTA"
+        }
+    }]

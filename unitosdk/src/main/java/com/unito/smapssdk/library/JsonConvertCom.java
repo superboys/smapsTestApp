@@ -517,6 +517,9 @@ public class JsonConvertCom {
                 timerarray[0] = intDays;
 
                 Map interval1 = (Map) value.get("interval1");
+                if (null != interval1) {
+                    Log.e("interval1===","null");
+                }
 
                 String strFrom = (String) interval1.get("from");
                 String to = (String) interval1.get("to");
@@ -544,7 +547,7 @@ public class JsonConvertCom {
                     timerarray[1] = byteFrom;
                     Log.e("1from--->", "24h");
 
-                    int byteTo = (active) ? 97 + (1 << 7) * 1 : 97 + (1 << 7) * 0;
+                    int byteTo = 97 + (1 << 7) * 1;
                     timerarray[2] = byteTo;
                     Log.e("1to--->", "24h");
                 }
@@ -576,7 +579,7 @@ public class JsonConvertCom {
                     timerarray[3] = byteFrom;
                     Log.e("1from--->", "24h");
 
-                    int byteTo = (active) ? 97 + (1 << 7) * 1 : 97 + (1 << 7) * 0;
+                    int byteTo = 97 + (1 << 7) * 1;
                     timerarray[4] = byteTo;
                     Log.e("1to--->", "24h");
                 }

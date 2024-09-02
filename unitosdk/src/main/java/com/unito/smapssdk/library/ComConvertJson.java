@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.unito.smapssdk.UnitoManager;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -1155,121 +1156,121 @@ public class ComConvertJson {
     private static void waterSystemAllData(byte[] bytes) {
         Log.e("waterSystemAllData-->", Utils.bytesToHex(bytes));
 
-        String[] bytes1 = Utils.bytesToHexString(bytes);
-
-        Map map = new LinkedHashMap();
-        map.put("msgId", UnitoManager.msgId);
-        map.put("destination", "appBle");
-        map.put("source", "waterSystem");
-        map.put("msgType", "response");
-        map.put("target", "waterSystemAllData");
-        Map value = new LinkedHashMap();
-        value.put("physicalHotWaterTempeprature", Utils.hexToInt(bytes1[7]));
-        value.put("physicalColdWaterTemperature", Utils.hexToInt(bytes1[8]));
-        value.put("filterStatus", Utils.hexToInt(bytes1[9]));
-        value.put("co2Status", Utils.hexToInt(bytes1[10]));
-        value.put("uvStatus", Utils.hexToInt(bytes1[11]));
-
-        if (Utils.getBitsNum(bytes[12], 1, 1) == 0) {
-            value.put("timer1On", false);
-        } else {
-            value.put("timer1On", true);
-        }
-        if (Utils.getBitsNum(bytes[12], 1, 2) == 0) {
-            value.put("boilerActive", false);
-        } else {
-            value.put("boilerActive", true);
-        }
-        if (Utils.getBitsNum(bytes[12], 1, 3) == 0) {
-            value.put("chillerActive", false);
-        } else {
-            value.put("chillerActive", true);
-        }
-        if (Utils.getBitsNum(bytes[12], 1, 4) == 0) {
-            value.put("childProtect", false);
-        } else {
-            value.put("childProtect", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 1) == 0) {
-            value.put("hotWaterExistence", false);
-        } else {
-            value.put("hotWaterExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 2) == 0) {
-            value.put("coldWaterExistence", false);
-        } else {
-            value.put("coldWaterExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 3) == 0) {
-            value.put("sodaWaterExistence", false);
-        } else {
-            value.put("sodaWaterExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 4) == 0) {
-            value.put("filterWaterExistence", false);
-        } else {
-            value.put("filterWaterExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 5) == 0) {
-            value.put("mixWaterExistence", false);
-        } else {
-            value.put("mixWaterExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[13], 1, 6) == 0) {
-            value.put("flavorExistence", false);
-        } else {
-            value.put("flavorExistence", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 1) == 0) {
-            value.put("filterAlert", false);
-        } else {
-            value.put("filterAlert", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 2) == 0) {
-            value.put("co2Alert", false);
-        } else {
-            value.put("co2Alert", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 3) == 0) {
-            value.put("tankDisinfectionAlert", false);
-        } else {
-            value.put("tankDisinfectionAlert", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 4) == 0) {
-            value.put("flavorAlert", false);
-        } else {
-            value.put("flavorAlert", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 5) == 0) {
-            value.put("flavorDisinfection20%Alert", false);
-        } else {
-            value.put("flavorDisinfection20%Alert", true);
-        }
-
-        if (Utils.getBitsNum(bytes[14], 1, 6) == 0) {
-            value.put("flavorDisinfection0%Alert", false);
-        } else {
-            value.put("flavorDisinfection0%Alert", true);
-        }
-
-        value.put("sodaIntensity", Utils.getBitsNum(bytes[15], 2, 1));
-        value.put("flavorIntensity", Utils.getBitsNum(bytes[15], 2, 3));
-        value.put("flavorQuanity", Utils.convertValue(Utils.hexToInt(bytes1[16])));
-        value.put("flavorStatus", Utils.convertValue(Utils.hexToInt(bytes1[17])));
-        map.put("value", value);
-        LiveDataBus.get().with("showComConvertJson").setValue(JsonUtils.mapToJson(map));
-        Log.e("comConvertJson-->", JsonUtils.mapToJson(map));
+//        String[] bytes1 = Utils.bytesToHexString(bytes);
+//
+//        Map map = new LinkedHashMap();
+//        map.put("msgId", UnitoManager.msgId);
+//        map.put("destination", "appBle");
+//        map.put("source", "waterSystem");
+//        map.put("msgType", "response");
+//        map.put("target", "waterSystemAllData");
+//        Map value = new LinkedHashMap();
+//        value.put("physicalHotWaterTempeprature", Utils.hexToInt(bytes1[7]));
+//        value.put("physicalColdWaterTemperature", Utils.hexToInt(bytes1[8]));
+//        value.put("filterStatus", Utils.hexToInt(bytes1[9]));
+//        value.put("co2Status", Utils.hexToInt(bytes1[10]));
+//        value.put("uvStatus", Utils.hexToInt(bytes1[11]));
+//
+//        if (Utils.getBitsNum(bytes[12], 1, 1) == 0) {
+//            value.put("timer1On", false);
+//        } else {
+//            value.put("timer1On", true);
+//        }
+//        if (Utils.getBitsNum(bytes[12], 1, 2) == 0) {
+//            value.put("boilerActive", false);
+//        } else {
+//            value.put("boilerActive", true);
+//        }
+//        if (Utils.getBitsNum(bytes[12], 1, 3) == 0) {
+//            value.put("chillerActive", false);
+//        } else {
+//            value.put("chillerActive", true);
+//        }
+//        if (Utils.getBitsNum(bytes[12], 1, 4) == 0) {
+//            value.put("childProtect", false);
+//        } else {
+//            value.put("childProtect", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 1) == 0) {
+//            value.put("hotWaterExistence", false);
+//        } else {
+//            value.put("hotWaterExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 2) == 0) {
+//            value.put("coldWaterExistence", false);
+//        } else {
+//            value.put("coldWaterExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 3) == 0) {
+//            value.put("sodaWaterExistence", false);
+//        } else {
+//            value.put("sodaWaterExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 4) == 0) {
+//            value.put("filterWaterExistence", false);
+//        } else {
+//            value.put("filterWaterExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 5) == 0) {
+//            value.put("mixWaterExistence", false);
+//        } else {
+//            value.put("mixWaterExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[13], 1, 6) == 0) {
+//            value.put("flavorExistence", false);
+//        } else {
+//            value.put("flavorExistence", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 1) == 0) {
+//            value.put("filterAlert", false);
+//        } else {
+//            value.put("filterAlert", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 2) == 0) {
+//            value.put("co2Alert", false);
+//        } else {
+//            value.put("co2Alert", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 3) == 0) {
+//            value.put("tankDisinfectionAlert", false);
+//        } else {
+//            value.put("tankDisinfectionAlert", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 4) == 0) {
+//            value.put("flavorAlert", false);
+//        } else {
+//            value.put("flavorAlert", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 5) == 0) {
+//            value.put("flavorDisinfection20%Alert", false);
+//        } else {
+//            value.put("flavorDisinfection20%Alert", true);
+//        }
+//
+//        if (Utils.getBitsNum(bytes[14], 1, 6) == 0) {
+//            value.put("flavorDisinfection0%Alert", false);
+//        } else {
+//            value.put("flavorDisinfection0%Alert", true);
+//        }
+//
+//        value.put("sodaIntensity", Utils.getBitsNum(bytes[15], 2, 1));
+//        value.put("flavorIntensity", Utils.getBitsNum(bytes[15], 2, 3));
+//        value.put("flavorQuanity", Utils.convertValue(Utils.hexToInt(bytes1[16])));
+//        value.put("flavorStatus", Utils.convertValue(Utils.hexToInt(bytes1[17])));
+//        map.put("value", value);
+        LiveDataBus.get().with("showComConvertJson").setValue(new String(bytes, StandardCharsets.UTF_8));
+//        Log.e("comConvertJson-->", JsonUtils.mapToJson(map));
     }
 
     private static void temperatureColdWater(byte[] bytes) {
