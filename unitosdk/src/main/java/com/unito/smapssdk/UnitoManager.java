@@ -5,6 +5,7 @@ import static com.inuker.bluetooth.library.Constants.STATUS_CONNECTED;
 import static com.inuker.bluetooth.library.Constants.STATUS_DEVICE_CONNECTED;
 import static com.inuker.bluetooth.library.Constants.STATUS_DISCONNECTED;
 import static com.unito.smapssdk.library.BLEConstant.WATERSYSTEM_CHARACTERSTIC;
+import static com.unito.smapssdk.library.BLEConstant.WATERSYSTEM_DESCRIPTORS;
 import static com.unito.smapssdk.library.BLEConstant.WATERSYSTEM_SERVICE;
 
 import android.content.Context;
@@ -18,8 +19,10 @@ import androidx.lifecycle.Observer;
 
 import com.inuker.bluetooth.library.BluetoothClient;
 import com.inuker.bluetooth.library.connect.listener.BleConnectStatusListener;
+import com.inuker.bluetooth.library.connect.request.BleRequest;
 import com.inuker.bluetooth.library.connect.response.BleConnectResponse;
 import com.inuker.bluetooth.library.connect.response.BleNotifyResponse;
+import com.inuker.bluetooth.library.connect.response.BleReadResponse;
 import com.inuker.bluetooth.library.connect.response.BleWriteResponse;
 import com.inuker.bluetooth.library.model.BleGattProfile;
 import com.inuker.bluetooth.library.search.SearchRequest;
@@ -58,7 +61,9 @@ public class UnitoManager {
     private boolean disConnect = false;
 
     private volatile static UnitoManager singleton;
-    private UnitoManager (){}
+
+    private UnitoManager() {
+    }
 
     public boolean getConnectStatus() {
         if (null != bleClient) {
@@ -105,7 +110,7 @@ public class UnitoManager {
             public void run() {
                 notity(JsonUtils.mapToJson(map));
             }
-        },500);
+        }, 500);
     }
 
     public static UnitoManager getSingleton(Context context) {
@@ -226,6 +231,10 @@ public class UnitoManager {
                     Log.e("maxRSSI-->", searchResult.getName() + "   " + searchResult.getAddress() + "   " + searchResult.rssi);
 //                    connectBle(searchResult.getAddress());
                     blueToothName = searchResult.getName();
+//                    if (blueToothName.contains("40")) {
+//                        WATERSYSTEM_SERVICE = HUB_SUCCESS_SERVICE;
+//                        WATERSYSTEM_CHARACTERSTIC = HUB_SUCCESS_CHARACTERSTIC;
+//                    }
                     if (null == mac) {
                         mac = searchResult.getAddress();
                     } else {
@@ -275,7 +284,7 @@ public class UnitoManager {
                     Map value = new LinkedHashMap<>();
                     value.put("deviceUUID", WATERSYSTEM_SERVICE.toString());
                     value.put("rssi", maxRssi);
-                    value.put("localName", blueToothName.replaceFirst("UNITO",""));
+                    value.put("localName", blueToothName.replaceFirst("UNITO", ""));
                     value.put("mac", mac);
                     value.put("unixTimestamp", System.currentTimeMillis());
                     value.put("deviceType", "Faucet");
@@ -298,9 +307,9 @@ public class UnitoManager {
     Runnable autoConnectBle = new Runnable() {
         @Override
         public void run() {
-            Log.e("autoConnectBle-->","自动连接线程");
+            Log.e("autoConnectBle-->", "自动连接线程");
             search(true);
-            ThreadPoolUtil.handler.postDelayed(autoConnectBle,3000);
+            ThreadPoolUtil.handler.postDelayed(autoConnectBle, 3000);
         }
     };
 
@@ -314,6 +323,9 @@ public class UnitoManager {
         public void onConnectStatusChanged(String findMac, int status) {
             if (status == STATUS_CONNECTED) {
                 disConnect = false;
+                if (blueToothName.contains("40")) {
+
+                }
                 notifyDirData(mac);
             } else if (status == STATUS_DISCONNECTED) {
                 ThreadPoolUtil.handler.postDelayed(new Runnable() {
@@ -327,9 +339,9 @@ public class UnitoManager {
                         map.put("msgType", "event");
                         notity(JsonUtils.mapToJson(map));
                     }
-                },500);
+                }, 500);
                 if (!disConnect) {
-                    ThreadPoolUtil.handler.postDelayed(autoConnectBle,3000);
+                    ThreadPoolUtil.handler.postDelayed(autoConnectBle, 3000);
                 }
             }
         }
@@ -354,6 +366,72 @@ public class UnitoManager {
                 }
             }
 
+            @Override
+            public void onResponse(int code) {
+                Log.e("onResponse", code + "");
+            }
+        });
+    }
+
+    private void IndicateDirData(String mac) {
+        bleClient.indicate(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, new BleNotifyResponse() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onNotify(UUID service, UUID character, byte[] value) {
+                Log.e("readDirData--->", new String(value, StandardCharsets.UTF_8));
+                ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
+
+                if (null != value || value.length > 0) {
+                    if (value[0] == (byte) 0x00 && value[value.length - 1] == (byte) 0xff) {
+                        try {
+                            ComConvertJson.CONVERT_MAP.get(value[3]).accept(value);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onResponse(int code) {
+                Log.e("Indicate", code + "");
+            }
+        });
+    }
+
+    private void ReadDirData(String mac) {
+        bleClient.read(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, new BleReadResponse() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onResponse(int code, byte[] value) {
+                Log.e("read", code + "");
+                Log.e("readDirData--->", new String(value, StandardCharsets.UTF_8));
+                ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
+
+                if (null != value || value.length > 0) {
+                    if (value[0] == (byte) 0x00 && value[value.length - 1] == (byte) 0xff) {
+                        try {
+                            ComConvertJson.CONVERT_MAP.get(value[3]).accept(value);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void readDescriptor(String mac) {
+        bleClient.readDescriptor(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, WATERSYSTEM_DESCRIPTORS, new BleReadResponse() {
+            @Override
+            public void onResponse(int code, byte[] data) {
+                Log.e("code:", code + "  " + new String(data, StandardCharsets.UTF_8));
+            }
+        });
+    }
+
+    public void writeDescriptor(byte[] bytes) {
+        bleClient.writeDescriptor(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, WATERSYSTEM_DESCRIPTORS, bytes, new BleWriteResponse() {
             @Override
             public void onResponse(int code) {
 
@@ -437,7 +515,7 @@ public class UnitoManager {
     static Runnable runnableTimeOut = new Runnable() {
         @Override
         public void run() {
-            Log.e("timeOut--->","blueT TimeOut");
+            Log.e("timeOut--->", "blueT TimeOut");
             Map map = new LinkedHashMap();
             map.put("msgId", msgId);
             map.put("destination", "appBle");

@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
                         @Override
                         public void run() {
                             UnitoManager.getSingleton(MainActivity.this).writeDirData(UnitoManager.getSingleton(MainActivity.this).sendBytes);
+//                            UnitoManager.getSingleton(MainActivity.this).writeDescriptor(UnitoManager.getSingleton(MainActivity.this).sendBytes);
                         }
                     });
                     binding.tvFunction.setText("response");

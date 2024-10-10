@@ -18,8 +18,12 @@ public class BLEConstant {
     //Remove line checksum from Checksum command
     public static final String DIR_MODE_CHECKSUM_COMMAND = "550800F9000000070000";
 
-    public static final UUID WATERSYSTEM_SERVICE = UUID.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
-    public static final UUID WATERSYSTEM_CHARACTERSTIC = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
+    public static UUID HUB_SUCCESS_SERVICE = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
+    public static UUID HUB_SUCCESS_CHARACTERSTIC = UUID.fromString("00002a3d-0000-1000-8000-00805f9b34fb");
+
+    public static UUID WATERSYSTEM_SERVICE = UUID.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
+    public static UUID WATERSYSTEM_CHARACTERSTIC = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
+    public static UUID WATERSYSTEM_DESCRIPTORS = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 //    public static final UUID WATERSYSTEM_CHARACTERSTIC = UUID.fromString("00002a3d-0000-1000-8000-00805f9b34fb");
     //TYPE CONSUMABLE
 

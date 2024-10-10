@@ -26,14 +26,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('C:\\project\\smapsTestApp\\smapsTest.jks')
+            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
             keyPassword '123456'
             keyAlias 'smapsTest'
             storePassword '123456'
         }
 
         debug {
-            storeFile file('C:\\project\\smapsTestApp\\smapsTest.jks')
+            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
             storePassword "123456"
             keyAlias "smapsTest"
             keyPassword "123456"
@@ -93,5 +93,5 @@ dependencies {
     implementation project(':jsonviewer')
     implementation project(':unitosdk')
     // For developers using the Android Support Library
-    implementation 'pub.devrel:easypermissions:2.0.1'
+    implementation 'pub.devrel:easypermissions:3.0.0'
 }
