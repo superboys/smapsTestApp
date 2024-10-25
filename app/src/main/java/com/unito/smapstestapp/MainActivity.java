@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.heaton.blelibrary.ble.BleLog;
+import com.heaton.blelibrary.ble.callback.BleScanCallback;
 import com.unito.smapssdk.UnitoManager;
+import com.unito.smapssdk.library.BleRssiDevice;
 import com.unito.smapssdk.library.NotifyResponse;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapstestapp.adapter.DataTypeAdapter;
@@ -32,7 +35,7 @@ import java.util.Map;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends AppCompatActivity implements NotifyResponse {
+public class MainActivity extends AppCompatActivity implements NotifyResponse, UnitoManager.ISearchBleCallback, UnitoManager.IGetHubtokenCallback {
 
     private ActivityMainBinding binding;
     private LinearLayoutManager mLayoutManager;
@@ -64,21 +67,23 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
         });
 
 //        if (null != actionBar) {
-//            if (unitoManager.getConnectStatus()) {
+//            if (UnitoManager.getConnectStatus()) {
 //                actionBar.setSubtitle("BLE connected");
 //            } else {
 //                actionBar.setSubtitle("BLE disConnected");
 //            }
 //        }
 
+//        UnitoManager.getSingleton(this).getBleDevices(this);
+
         binding.sendRequest.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
                 if (UnitoManager.getSingleton(MainActivity.this).target.equals("bleConnectToWaterSystem")) {
-                    if (null != UnitoManager.getSingleton(MainActivity.this).mac) {
+//                    if (null != UnitoManager.getSingleton(MainActivity.this).mac) {
                         UnitoManager.getSingleton(MainActivity.this).bleConnectToWaterSystem();
-                    }
+//                    }
                     return;
                 } else if (UnitoManager.getSingleton(MainActivity.this).target.equals("bleDisconnectFromWaterSystem")) {
                     UnitoManager.getSingleton(MainActivity.this).bleDisconnectFromWaterSystem();
@@ -90,7 +95,8 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
                         @Override
                         public void run() {
                             UnitoManager.getSingleton(MainActivity.this).writeDirData(UnitoManager.getSingleton(MainActivity.this).sendBytes);
-//                            UnitoManager.getSingleton(MainActivity.this).writeDescriptor(UnitoManager.getSingleton(MainActivity.this).sendBytes);
+//                            UnitoManager.getSingleton(MainActivity.this).get40HubToken(MainActivity.this);
+//                            UnitoManager.getSingleton(MainActivity.this).writeDirData(UnitoManager.getSingleton(MainActivity.this).sendBytes);
                         }
                     });
                     binding.tvFunction.setText("response");
@@ -129,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
                         sendJsonMap = jsonRequestList.get(position);
                         Map dataMap = (Map) sendJsonMap.get("json");
                         binding.tvFunction.setText(dataMap.get("msgType") + "");
-//                        unitoManager.target = (String) dataMap.get("target");
+//                        UnitoManager.target = (String) dataMap.get("target");
                         binding.tvJsonData.bindJson(new Gson().toJson(UnitoManager.getSingleton(MainActivity.this).sendCommand(dataMap)));
                         binding.tvJsonData.expandAll();
                     }
@@ -167,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
         }
 
         if (EasyPermissions.hasPermissions(this, perms)) {
-            UnitoManager.getSingleton(MainActivity.this).search(false);
+//            UnitoManager.getSingleton(MainActivity.this).search(false);
         } else {
             // 没有权限
             EasyPermissions.requestPermissions(this, "App needs location permission", REQUEST_PERMISSION_CODE, perms);
@@ -191,5 +197,19 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse {
         }
         binding.tvJsonData.bindJson(s);
         binding.tvJsonData.expandAll();
+    }
+
+    @Override
+    public void onBleDeviceFind(List<BleRssiDevice> devices) {
+        if (null!=devices && devices.size()>0) {
+            for (int i = 0; i < devices.size(); i++) {
+                BleLog.e(devices.get(i).getBleName()+"   ",devices.get(i).getBleAddress()+"  "+devices.get(i).getRssi());
+            }
+        }
+    }
+
+    @Override
+    public void onGetHubtoken(JSONObject jsonObject) {
+        BleLog.e("token--->",jsonObject.toString());
     }
 }
