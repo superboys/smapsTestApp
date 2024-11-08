@@ -19,12 +19,17 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AlertDialog;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -32,6 +37,7 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Date;
 import java.util.Locale;
@@ -44,6 +50,8 @@ public class Utils {
 
     public static String DATE_FORMAT_DD_MM_YYYY = "dd/MM/yyyy";
     public static String DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
+
+    public static String secretKey = "YellowSubmarine_"; // Replace with your secret key
 
     /**
      * 16进制中的字符集
@@ -187,6 +195,15 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static byte[] getBytes(char[] chars) {
+        Charset cs = Charset.forName("UTF-8");
+        CharBuffer cb = CharBuffer.allocate(chars.length);
+        cb.put(chars);
+        cb.flip();
+        ByteBuffer bb = cs.encode(cb);
+        return bb.array();
     }
 
     public static String bytesToHexTimer(byte[] bytes) {
@@ -802,6 +819,26 @@ public class Utils {
     public static int getBitsNum(byte hex, int bitsCount, int bitsIndex) {
         int bitsToolNum = (int) (Math.pow(2, bitsCount) - 1);
         return (hex & (bitsToolNum << bitsIndex)) >> bitsIndex;
+    }
+
+    public static ArrayList<String> txtToArrayList(String path) throws IOException {
+        //创建字符缓冲输入流对象
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        //创建ArrayList集合对象
+        ArrayList<String> array = new ArrayList<String>();
+        //调用字符缓冲输入流对象的方法读数据
+        String line;
+        while ((line = br.readLine()) != null) {
+            //把读取到的字符串数据存储到集合中
+            array.add(line.substring(0,line.length()-2));
+        }
+        //释放资源
+        br.close();
+        //遍历集合输出
+        for (String s : array) {
+            System.out.println(s);
+        }
+        return array;
     }
 
 }

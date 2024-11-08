@@ -2,6 +2,7 @@ package com.unito.smapssdk.library;
 
 import android.util.Log;
 
+import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -276,6 +277,8 @@ public class BLEConstant {
     public static byte MSGID_ACTIVATE_FLAVOR_DISINFECTION = 0x44;
     public static byte MSGID_ACTIVATE_FLAVOR_DISINFECTION2 = (byte) 0x0C;
 
+    public static byte START_ESP_OTA_1 = 0x38;
+    public static byte START_ESP_OTA_2 = (byte) 0xfe;
 
     //---------------------------System Identification----------------------//
 

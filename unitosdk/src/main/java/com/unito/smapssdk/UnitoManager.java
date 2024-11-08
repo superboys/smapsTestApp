@@ -1,110 +1,14 @@
 package com.unito.smapssdk;
 
 import static com.heaton.blelibrary.ble.model.BleDevice.TAG;
-import static com.unito.smapssdk.library.BLEConstant.APP_HUB;
-import static com.unito.smapssdk.library.BLEConstant.APP_INTERNAL;
-import static com.unito.smapssdk.library.BLEConstant.GET;
-import static com.unito.smapssdk.library.BLEConstant.HUB_SUCCESS_CHARACTERSTIC;
-import static com.unito.smapssdk.library.BLEConstant.HUB_SUCCESS_SERVICE;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_ACTIVATE_FLAVOR_DISINFECTION;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_ACTIVATE_FLAVOR_DISINFECTION2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_AUTO_FILL_TIMER_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_AUTO_FILL_TIMER_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CHILD_PROTECT1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CHILD_PROTECT2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CO2_TANK_REPLACEMENT1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CO2_TANK_REPLACEMENT2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_COMMUNICATION_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_COMMUNICATION_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CONSUMABLE_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CONSUMABLE_1_NEW;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CONSUMABLE_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_CONSUMABLE_2_NEW;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIAGNOSTIC_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIAGNOSTIC_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIR_MODE_FLASH_PROCESS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIR_MODE_FLASH_PROCESS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIR_NOTIFICATION_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_DIR_NOTIFICATION_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_ERROR;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_ERROR2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FILTER_REPLACEMENT1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FILTER_REPLACEMENT2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_CLEANING_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_CLEANING_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_DISINFECTION_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_PARAMETERS_DISINFECTION_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_WATER_TYPE_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLAVOR_WATER_TYPE_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLUSH_TIMER_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_FLUSH_TIMER_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_AUTO_SODA_REFILL_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_AUTO_SODA_REFILL_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_COLDWATER1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_COLDWATER2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_ENABLE_LEAKAGE_SENSOR_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_ENABLE_LEAKAGE_SENSOR_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_ENABLE_PULL_OUT_SENSOR_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_ENABLE_PULL_OUT_SENSOR_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_HOTWATER1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_HOTWATER2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_SINGLE_CLICK_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_SINGLE_CLICK_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_SODAWATER1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_GET_SODAWATER2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_IP_ADDRESS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_IP_ADDRESS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_MAC_ADDRESS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_MAC_ADDRESS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_MODE_WS_OTA_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_MODE_WS_OTA_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_VERSION_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_HUB_VERSION_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_PAIRING_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_PAIRING_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_POWER_ON_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_POWER_ON_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_REQUEST_STATUS_WATER_SYSTEM1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_REQUEST_STATUS_WATER_SYSTEM2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_CO2_INONOFF_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_CO2_INONOFF_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_CO2_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_CO2_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_WATER_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_SODA_WATER_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_STERILIZATION_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_STERILIZATION_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_TIMER1_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_TIMER1_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_TIMER2_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_TIMER2_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_UVLAMP_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_UVLAMP_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WASH_PIPE_PARAMETERS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WASH_PIPE_PARAMETERS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_OUT_STATUS_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_OUT_STATUS_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_CLOCK1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_CLOCK2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_IDENTIFICATION1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_IDENTIFICATION2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_UPTIME_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_SYSTEM_UPTIME_2;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_TYPE_1;
-import static com.unito.smapssdk.library.BLEConstant.MSGID_WATER_TYPE_2;
-import static com.unito.smapssdk.library.BLEConstant.SET;
-import static com.unito.smapssdk.library.BLEConstant.VERSION_1;
-import static com.unito.smapssdk.library.BLEConstant.VERSION_2;
-import static com.unito.smapssdk.library.BLEConstant.WATERSYSTEM_SERVICE;
-import static com.unito.smapssdk.library.BLEConstant.WATER_SYSTEM_CONTROLLER;
+import static com.unito.smapssdk.library.BLEConstant.*;
 
 import android.app.Application;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
 import android.os.Build;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -119,8 +23,10 @@ import com.heaton.blelibrary.ble.callback.BleNotifyCallback;
 import com.heaton.blelibrary.ble.callback.BleReadCallback;
 import com.heaton.blelibrary.ble.callback.BleScanCallback;
 import com.heaton.blelibrary.ble.callback.BleWriteCallback;
+import com.heaton.blelibrary.ble.callback.BleWriteEntityCallback;
 import com.heaton.blelibrary.ble.model.BleFactory;
 import com.heaton.blelibrary.ble.utils.UuidUtils;
+import com.unito.smapssdk.library.BLEConstant;
 import com.unito.smapssdk.library.BleRssiDevice;
 import com.unito.smapssdk.library.ComConvertJson;
 import com.unito.smapssdk.library.JsonConvertCom;
@@ -128,14 +34,26 @@ import com.unito.smapssdk.library.JsonUtils;
 import com.unito.smapssdk.library.LiveDataBus;
 import com.unito.smapssdk.library.MyBleWrapperCallback;
 import com.unito.smapssdk.library.NotifyResponse;
+import com.unito.smapssdk.library.SocketUtil;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 import com.unito.smapssdk.library.UtilsKt;
 
+
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +61,7 @@ import java.util.UUID;
 
 public class UnitoManager {
 
+    public static List<String> commandList = new ArrayList<>();
     private List<BleRssiDevice> saveSearchResult = new ArrayList<>();
     public String mac;
     public static int msgId = 1;
@@ -159,10 +78,22 @@ public class UnitoManager {
     private boolean disConnect = false;
     public static String secretKey = "YellowSubmarine_"; // Replace with your secret key
 
+    private static final String SERVER_IP = "192.168.4.1"; // 服务端IP
+    private static final int SERVER_PORT = 9008; // 服务端端口
 
     private volatile static UnitoManager singleton;
+    public int isota; // 0,no 1,ws ota ing 2,ws ota end  6,esp ota ing 7,esp ota end
+    private InputStream is;
+    private InputStreamReader isr;
+    private BufferedReader br;
+    private String response;
+    private SocketUtil socketUtil;
+    private byte[] deviceUuid;
+    public boolean isBoth;
+    private int num = 0;
 
     private UnitoManager() {
+
     }
 
     public boolean getConnectStatus() {
@@ -188,8 +119,40 @@ public class UnitoManager {
     }
 
 
-    public void registerUnitoWaterSystemNotify(NotifyResponse notifyResponse) {
+    public void registerUnitoWaterSystemNotify(Context context, NotifyResponse notifyResponse) {
         this.notifyResponse = notifyResponse;
+        LiveDataBus.get()
+                .with("showComConvertJson", String.class)
+                .observe((LifecycleOwner) context, new Observer<String>() {
+                    @Override
+                    public void onChanged(@Nullable String s) {
+                        ThreadPoolUtil.handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                notity(s);
+                            }
+                        });
+                    }
+                });
+
+        LiveDataBus.get()
+                .with("sendDataToDir", byte[].class)
+                .observe((LifecycleOwner) context, new Observer<byte[]>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onChanged(@Nullable byte[] bytes) {
+                        Log.e("sendDataToDir-->", Utils.bytesToHex(bytes));
+                        sendBytes = bytes;
+                    }
+                });
+        ThreadPoolUtil.handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String jsonRequests = Utils.loadJSONFromAsset(context, "appSettings.json");
+                Map<String, Object> jsonParam = JsonUtils.jsonToMap(jsonRequests);
+                appSettings(jsonParam);
+            }
+        });
         Map map = new LinkedHashMap();
         if (getBlueToothOpened()) {
             map.put("msgId", 0);
@@ -214,45 +177,11 @@ public class UnitoManager {
         }, 500);
     }
 
-    public static UnitoManager getSingleton(Context context) {
+    public static UnitoManager getSingleton() {
         if (singleton == null) {
             synchronized (UnitoManager.class) {
                 if (singleton == null) {
                     singleton = new UnitoManager();
-                    LiveDataBus.get()
-                            .with("showComConvertJson", String.class)
-                            .observe((LifecycleOwner) context, new Observer<String>() {
-                                @Override
-                                public void onChanged(@Nullable String s) {
-                                    ThreadPoolUtil.handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            notity(s);
-                                        }
-                                    });
-                                }
-                            });
-
-                    LiveDataBus.get()
-                            .with("sendDataToDir", byte[].class)
-                            .observe((LifecycleOwner) context, new Observer<byte[]>() {
-                                @RequiresApi(api = Build.VERSION_CODES.N)
-                                @Override
-                                public void onChanged(@Nullable byte[] bytes) {
-                                    Log.e("sendDataToDir-->", Utils.bytesToHex(bytes));
-                                    sendBytes = bytes;
-                                }
-                            });
-
-
-                    ThreadPoolUtil.handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            String jsonRequests = Utils.loadJSONFromAsset(context, "appSettings.json");
-                            Map<String, Object> jsonParam = JsonUtils.jsonToMap(jsonRequests);
-                            appSettings(jsonParam);
-                        }
-                    });
                 }
             }
         }
@@ -294,7 +223,7 @@ public class UnitoManager {
                 .setLogBleEnable(true)//设置是否输出打印蓝牙日志
                 .setThrowBleException(true)//设置是否抛出蓝牙异常
                 .setLogTAG("AndroidBLE")//设置全局蓝牙操作日志TAG
-                .setAutoConnect(true)//设置是否自动连接
+                .setAutoConnect(false)//设置是否自动连接
                 .setIgnoreRepeat(true)//设置是否过滤扫描到的设备(已扫描到的不会再次扫描)
                 .setConnectFailedRetryCount(3)//连接异常时（如蓝牙协议栈错误）,重新连接次数
                 .setConnectTimeout(10 * 1000)//设置连接超时时长
@@ -516,9 +445,7 @@ public class UnitoManager {
             ble.enableNotify(device, true, new BleNotifyCallback<BleRssiDevice>() {
                 @Override
                 public void onChanged(BleRssiDevice device, BluetoothGattCharacteristic characteristic) {
-                    Log.e("readDirData--->", new String(characteristic.getValue(), StandardCharsets.UTF_8));
                     ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
-
                     if (null != characteristic.getValue() || characteristic.getValue().length > 0) {
                         if (characteristic.getValue()[0] == (byte) 0x00 && characteristic.getValue()[characteristic.getValue().length - 1] == (byte) 0xff) {
                             try {
@@ -526,13 +453,42 @@ public class UnitoManager {
                                     ThreadPoolUtil.handler.post(new Runnable() {
                                         @Override
                                         public void run() {
-                                            ComConvertJson.CONVERT_MAP.get(characteristic.getValue()[3]).accept(characteristic.getValue());
+                                            try {
+                                                ComConvertJson.CONVERT_MAP.get(characteristic.getValue()[3]).accept(characteristic.getValue());
+                                            } catch (Exception exception) {
+                                                exception.printStackTrace();
+                                            }
                                         }
                                     });
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                        }
+                        if (characteristic.getValue()[0] == (byte) 0x55 && characteristic.getValue()[1] == (byte) 0x08) {
+                            if (isota == 1) {
+                            } else {
+                                isota = 1;
+                            }
+                            num++;
+                            writeOtaData(Utils.hexStringToByteArray(commandList.get(num)));
+                        } else if (characteristic.getValue()[0] == (byte) 0x55 && characteristic.getValue()[1] == (byte) 0x03 && characteristic.getValue()[4] == (byte) 0x00 && characteristic.getValue()[5] == (byte) 0x00 && characteristic.getValue()[7] == (byte) 0x10 && characteristic.getValue()[characteristic.getValue().length - 1] == (byte) 0x01) {
+                            num++;
+                            writeOtaData(Utils.hexStringToByteArray(commandList.get(num)));
+                        } else if (characteristic.getValue()[0] == (byte) 0x55 && characteristic.getValue()[1] == (byte) 0x03 && characteristic.getValue()[4] == (byte) 0x00 && characteristic.getValue()[5] == (byte) 0x00 && characteristic.getValue()[7] == (byte) 0x88 && characteristic.getValue()[characteristic.getValue().length - 1] == (byte) 0x01) {
+                            num++;
+                            writeOtaData(Utils.hexStringToByteArray(commandList.get(num)));
+                        } else if (characteristic.getValue()[0] == (byte) 0x55 && characteristic.getValue()[1] == (byte) 0x02) {
+                            try {
+                                Thread.sleep(40);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            num++;
+                            writeOtaData(Utils.hexStringToByteArray(commandList.get(num)));
+                        } else if (characteristic.getValue()[0] == (byte) 0x55 && characteristic.getValue()[1] == (byte) 0x09) {
+                            num = 0;
+                            Log.e("", "ota完成");
                         }
                     }
                 }
@@ -597,7 +553,7 @@ public class UnitoManager {
                 try {
                     response = new String(UtilsKt.decryptWithAES(secretKey, bytes), StandardCharsets.UTF_8);
                     final JSONObject jsonObject = new JSONObject(response);
-                    BleLog.e("token--->",jsonObject.toString());
+                    BleLog.e("token--->", jsonObject.toString());
                     callback.onGetHubtoken(jsonObject);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -612,7 +568,6 @@ public class UnitoManager {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.Q)
     public int writeDirData(byte[] bytes) {
         if (getConnectStatus()) {
             if (!isWrite) {
@@ -620,8 +575,10 @@ public class UnitoManager {
             } else {
                 msgId++;
             }
-            if (ThreadPoolUtil.handler.hasCallbacks(runnableTimeOut)) {
-                return msgId;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (ThreadPoolUtil.handler.hasCallbacks(runnableTimeOut)) {
+                    return msgId;
+                }
             }
             ble.write(bleRssiDevice, bytes, new BleWriteCallback<BleRssiDevice>() {
                 @Override
@@ -649,18 +606,22 @@ public class UnitoManager {
         return msgId;
     }
 
-//    public void writeDirData2(byte[] bytes) {
-//        bleClient.write(mac, WATERSYSTEM_SERVICE, WATERSYSTEM_CHARACTERSTIC, bytes, new BleWriteResponse() {
-//            @Override
-//            public void onResponse(int code) {
-//                if (code == REQUEST_SUCCESS) {
-//                    Log.e("writeDirData-->", "写入成功" + code);
-//                }
-//            }
-//        });
-//    }
+    public void writeOtaData(byte[] bytes) {
+        ble.writeEntity(bleRssiDevice, bytes, 20, 50, new BleWriteEntityCallback<BleRssiDevice>() {
 
-    static Runnable runnableTimeOut = new Runnable() {
+            @Override
+            public void onWriteSuccess() {
+                BleLog.e("onWriteSuccess: ", "success->" + Utils.bytesToHex(bytes));
+            }
+
+            @Override
+            public void onWriteFailed() {
+//                BleLog.e("onWriteFailed: ", "failed->" + Utils.bytesToHex(bytes));
+            }
+        });
+    }
+
+    Runnable runnableTimeOut = new Runnable() {
         @Override
         public void run() {
             Log.e("timeOut--->", "blueT TimeOut");
@@ -675,7 +636,7 @@ public class UnitoManager {
         }
     };
 
-    public static synchronized void notity(String jsonObject) {
+    public synchronized void notity(String jsonObject) {
         ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
         notifyResponse.unitoWaterSystemNotify(jsonObject);
     }
@@ -830,13 +791,12 @@ public class UnitoManager {
     }
 
 
-
     /**
      * Request for gettting value of SODA WATER PARAMETERS
      *
      * @return
      */
-    public void setRequestForSodaCo2InParameters(int co2InMinTime, int co2InMaxTime, int co2SoftLevelTime,int co2MediumLevelTime,int co2IntenseLevelTime) {
+    public void setRequestForSodaCo2InParameters(int co2InMinTime, int co2InMaxTime, int co2SoftLevelTime, int co2MediumLevelTime, int co2IntenseLevelTime) {
         byte[] bytes = new byte[14];
 
         bytes[0] = (byte) 0x00; //First
@@ -887,7 +847,7 @@ public class UnitoManager {
      *
      * @return
      */
-    public void setRequestForSodaCo2InOnOffParameters(int co2InOnOffStatus, int co2InOnNominalTime, int co2InOnMinTime,int co2InOnMaxTime,int co2InOffNominalTime,int co2InOffMinTime,int co2InOffMaxTime) {
+    public void setRequestForSodaCo2InOnOffParameters(int co2InOnOffStatus, int co2InOnNominalTime, int co2InOnMinTime, int co2InOnMaxTime, int co2InOffNominalTime, int co2InOffMinTime, int co2InOffMaxTime) {
         byte[] bytes = new byte[16];
 
         bytes[0] = (byte) 0x00; //First
@@ -962,7 +922,7 @@ public class UnitoManager {
      *
      * @return
      */
-    public void setRequestForWashPipeParameters(int boilingWaterFlushTime,int sparkleWaterFlushTime) {
+    public void setRequestForWashPipeParameters(int boilingWaterFlushTime, int sparkleWaterFlushTime) {
         byte[] bytes = new byte[11];
 
         bytes[0] = (byte) 0x00; //First
@@ -1682,7 +1642,7 @@ public class UnitoManager {
         }
     }
 
-    public void setRequestForConsumableNew(int replacementId,int replacementType,int quantity,int expirationInDays) {
+    public void setRequestForConsumableNew(int replacementId, int replacementType, int quantity, int expirationInDays) {
         byte[] bytes = new byte[14];
 
         bytes[0] = (byte) 0x00; //First
@@ -1930,7 +1890,7 @@ public class UnitoManager {
         }
     }
 
-    public void setRequestForDirModeFlashProcess(int startFlash) {
+    public byte[] setRequestForDirModeFlashProcess(int startFlash) {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
@@ -1942,9 +1902,22 @@ public class UnitoManager {
         bytes[7] = (byte) startFlash; //DATA
         bytes[8] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
         bytes[9] = (byte) 0xFF; //LAST
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            writeDirData(bytes);
-        }
+        return bytes;
+    }
+
+    public static byte[] getRequestForHUBModeFlashProcess() {
+        byte[] bytes = new byte[10];
+        bytes[0] = (byte) 0x00; //First
+        bytes[1] = APP_HUB; //Destination
+        bytes[2] = APP_INTERNAL; //Source
+        bytes[3] = MSGID_DIR_MODE_FLASH_PROCESS_1; //MSGID High
+        bytes[4] = MSGID_DIR_MODE_FLASH_PROCESS_2; //MSGID LOW
+        bytes[5] = SET; //MSG CATEGORY
+        bytes[6] = (byte) 0x01; //DATA LENGTH
+        bytes[7] = (byte) 0x01; //DATA
+        bytes[8] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[9] = (byte) 0xFF; //LAST
+        return bytes;
     }
 
     public void setRequestForHUBModeOTAForHUB() {
@@ -2355,7 +2328,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
     }
 
     public void setRequestForFlavorParametersDisinfection(int fisinfectionCycles, int disinfectionForward, int disinfectionBackwards,
-                                                                   int disinfectionThresholdLow, int disinfectionThresholdHigh, int disinfectionThreshold) {
+                                                          int disinfectionThresholdLow, int disinfectionThresholdHigh, int disinfectionThreshold) {
         byte[] bytes = new byte[15];
 
         bytes[0] = (byte) 0x00; //First
@@ -2487,5 +2460,154 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         }
     }
 
+    public byte[] Turn_on_wifi(byte type, byte[] uuid) {
+        byte[] bytes = new byte[15];
+        bytes[0] = (byte) 0x00; //First
+        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[2] = getSourceAddress(); //Source
+        bytes[3] = START_ESP_OTA_1; //MSGID High
+        bytes[4] = START_ESP_OTA_2; //MSGID LOW
+        bytes[5] = SET; //MSG CATEGORY
+        bytes[6] = (byte) 0x06; //DATA LENGTH
+        bytes[7] = 0x01; //DATA
+        bytes[8] = type; //DATA
+        bytes[9] = (byte) uuid[0]; //DATA
+        bytes[10] = (byte) uuid[1]; //DATA
+        bytes[11] = (byte) uuid[2]; //DATA
+        bytes[12] = (byte) uuid[3]; //DATA
+        bytes[13] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[14] = (byte) 0xFF; //LAST
 
+        return bytes;
+    }
+
+    public byte[] selectType(byte type, byte[] uuid) {
+        byte[] bytes = new byte[19];
+        bytes[0] = (byte) 0x00; //First
+        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[2] = getSourceAddress(); //Source
+        bytes[3] = START_ESP_OTA_1; //MSGID High
+        bytes[4] = START_ESP_OTA_2; //MSGID LOW
+        bytes[5] = SET; //MSG CATEGORY
+        bytes[6] = (byte) 0x0a; //DATA LENGTH
+        bytes[7] = 0x01; //DATA
+        bytes[8] = type; //DATA
+        bytes[9] = (byte) uuid[0]; //DATA
+        bytes[10] = (byte) uuid[1]; //DATA
+        bytes[11] = (byte) uuid[2]; //DATA
+        bytes[12] = (byte) uuid[3]; //DATA
+        bytes[13] = (byte) 0x00; //DATA
+        bytes[14] = (byte) 0x00; //DATA
+        bytes[15] = (byte) 0x00; //DATA
+        bytes[16] = (byte) 0x00; //DATA
+        bytes[17] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[18] = (byte) 0xFF; //LAST
+        return bytes;
+    }
+
+
+    public byte[] setESPOTA2(byte data, byte num1, byte num2) {
+        byte[] bytes = new byte[12];
+        bytes[0] = (byte) 0x00; //First
+        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[2] = getSourceAddress(); //Source
+        bytes[3] = START_ESP_OTA_1; //MSGID High
+        bytes[4] = START_ESP_OTA_2; //MSGID LOW
+        bytes[5] = SET; //MSG CATEGORY
+        bytes[6] = (byte) 0x03; //DATA LENGTH
+        bytes[7] = data; //DATA
+        bytes[8] = num1; //DATA
+        bytes[9] = num2; //DATA
+        bytes[10] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[11] = (byte) 0xFF; //LAST
+        return bytes;
+    }
+
+    public byte[] setESPOTA5(byte data) {
+        byte[] bytes = new byte[10];
+        bytes[0] = (byte) 0x00; //First
+        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[2] = getSourceAddress(); //Source
+        bytes[3] = START_ESP_OTA_1; //MSGID High
+        bytes[4] = START_ESP_OTA_2; //MSGID LOW
+        bytes[5] = SET; //MSG CATEGORY
+        bytes[6] = (byte) 0x01; //DATA LENGTH
+        bytes[7] = data; //DATA
+        bytes[8] = (byte) Utils.getCheckSum(bytes); // CHECKSUM
+        bytes[9] = (byte) 0xFF; //LAST
+        return bytes;
+    }
+
+    private void getWS20File() {
+        try {
+            commandList = Utils.txtToArrayList("/data/data/com.unito.smapstestapp/files/1.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("", "ota文件不存在");
+        }
+    }
+
+    private void getWSFile() {
+        try {
+            commandList = Utils.txtToArrayList("/data/data/com.unito.smapstestapp/files/3.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("", "ota文件不存在");
+        }
+    }
+
+    public void starOTA() {
+        writeDirData(setRequestForDirModeFlashProcess(1));
+        getWS20File();
+        ThreadPoolUtil.handler.postDelayed(() -> writeOtaData(Utils.hexStringToByteArray(commandList.get(num))), 10000);
+    }
+
+    public void socketWriteData(byte[] bytes) {
+        ThreadPoolUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                socketUtil.write(bytes);
+            }
+        });
+    }
+
+    public void connectHotPort() {
+        ThreadPoolUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                socketUtil = new SocketUtil(SERVER_IP, SERVER_PORT);
+                socketUtil.run(deviceUuid);
+            }
+        });
+    }
+
+    public void openHotPort(byte[] deviceUuid) {
+        this.deviceUuid = deviceUuid;
+        UnitoManager.getSingleton().writeDirData(UnitoManager.getSingleton().Turn_on_wifi((byte) 0x09, deviceUuid));
+    }
+
+    public void start_20_ws_ota() {
+        UnitoManager.getSingleton().isota = 0;
+        starOTA();
+    }
+
+    public void start_ws_ota() {
+        isBoth = false;
+        getWSFile();
+        UnitoManager.getSingleton().isota = 0;
+        socketWriteData(selectType((byte) 0x01, deviceUuid));
+    }
+
+    public void start_hub_ota() {
+        isBoth = false;
+        UnitoManager.getSingleton().isota = 5;
+        socketWriteData(selectType((byte) 0x00, deviceUuid));
+    }
+
+    public void start_ws_and_hub() {
+        isBoth = true;
+        getWSFile();
+        UnitoManager.getSingleton().isota = 0;
+        socketWriteData(selectType((byte) 0x01, deviceUuid));
+    }
 }

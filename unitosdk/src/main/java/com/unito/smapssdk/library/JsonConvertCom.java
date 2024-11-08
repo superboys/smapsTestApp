@@ -73,12 +73,12 @@ public class JsonConvertCom {
     }
     private static void startOTA(Map map) {
 
-        Log.e("leakageSensorFunction", JsonUtils.mapToJson(map));
-        if (null != map) {
+//        Log.e("leakageSensorFunction", JsonUtils.mapToJson(map));
+//        if (null != map) {
 //            if (map.get("msgType").equals("set")) {
-//                
+//
 //                Map value = (Map) map.get("value");
-//                int leakageSensorFunction = ((boolean) value.get("leakageSensorFunction")) ? 2 : 1;
+//                int ota = ((boolean) value.get("ota")) ? 2 : 1;
 //
 //                byte[] bytes = BLEConstant.setRequestForEnableLeakageSensor(leakageSensorFunction);
 //                LiveDataBus.get().with("sendDataToDir").setValue(bytes);
@@ -86,7 +86,7 @@ public class JsonConvertCom {
 //                byte[] bytes = BLEConstant.getRequestForEnableLeakageSensor();
 //                LiveDataBus.get().with("sendDataToDir").setValue(bytes);
 //            }
-        }
+//        }
     }
     public static void leakageSensorFunction(Map map) {
 
