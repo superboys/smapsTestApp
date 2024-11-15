@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -839,6 +841,82 @@ public class Utils {
             System.out.println(s);
         }
         return array;
+    }
+
+    /**
+     * FileChannel 获取文件的MD5值
+     *
+     * @param file 文件路径
+     * @return md5
+     */
+    public static String getFileMd52(File file) {
+        MessageDigest messageDigest;
+        FileInputStream fis = null;
+        FileChannel ch=null;
+        try {
+            messageDigest = MessageDigest.getInstance("MD5");
+            if (file == null) {
+                return "";
+            }
+            if (!file.exists()) {
+                return "";
+            }
+            fis = new FileInputStream(file);
+            ch = fis.getChannel();
+            int size = 1024 * 1024 * 10;
+            long part = file.length() / size + (file.length() % size > 0 ? 1 : 0);
+            System.err.println("文件分片数" + part);
+            for (int j = 0; j < part; j++) {
+                MappedByteBuffer byteBuffer = ch.map(FileChannel.MapMode.READ_ONLY, j * size, j == part - 1 ? file.length() : (j + 1) * size);
+                messageDigest.update(byteBuffer);
+                byteBuffer.clear();
+            }
+            BigInteger bigInt = new BigInteger(1, messageDigest.digest());
+            String md5 = bigInt.toString(16);
+            while (md5.length() < 32) {
+                md5 = "0" + md5;
+            }
+            return md5;
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                    fis = null;
+                }
+                if (ch!=null){
+                    ch.close();
+                    ch=null;
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
+
+    public static boolean deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    // 递归删除子文件夹
+                    deleteFolder(file);
+                }
+                // 删除文件或空文件夹
+                file.delete();
+            }
+        }
+        return folder.delete(); // 删除当前空文件夹
     }
 
 }

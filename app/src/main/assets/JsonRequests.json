@@ -1542,61 +1542,50 @@
     "msgType": "set",
     "SMAPS": "0xFE38",
     "json": {
-        "msgId": 146,
-        "destination": "waterSystem",
-        "source": "appBle",
-        "target": "Turn on wifi",
-        "msgType": "set"
+      "msgId": 146,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "Turn on wifi",
+      "msgType": "set"
     }
-},
+  },
   {
     "id": "147",
     "target": "connect_wifi",
     "msgType": "set",
     "SMAPS": "0xFE38",
     "json": {
-        "msgId": 147,
-        "destination": "waterSystem",
-        "source": "appBle",
-        "target": "connect_wifi",
-        "msgType": "set"
+      "msgId": 147,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "connect_wifi",
+      "msgType": "set"
     }
-  },{
-    "id": "148",
-    "target": "start_water_system",
+  },
+  {
+    "id": "150",
+    "target": "downLoadOtaFile",
     "msgType": "set",
     "SMAPS": "0xFE38",
     "json": {
-        "msgId": 148,
-        "destination": "waterSystem",
-        "source": "appBle",
-        "target": "start_water_system",
-        "msgType": "set"
+      "msgId": 150,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "downLoadOtaFile",
+      "msgType": "set"
     }
   },
   {
     "id": "149",
-    "target": "start_hub",
+    "target": "ota_ws_and_hub",
     "msgType": "set",
     "SMAPS": "0xFE38",
     "json": {
-        "msgId": 149,
-        "destination": "waterSystem",
-        "source": "appBle",
-        "target": "start_hub",
-        "msgType": "set"
-    }
-  },{
-    "id": "150",
-    "target": "start_ws_and_hub",
-    "msgType": "set",
-    "SMAPS": "0xFE38",
-    "json": {
-        "msgId": 150,
-        "destination": "waterSystem",
-        "source": "appBle",
-        "target": "start_ws_and_hub",
-        "msgType": "set"
+      "msgId": 149,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "ota_ws_and_hub",
+      "msgType": "set"
     }
   }
 ]

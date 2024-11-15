@@ -17,6 +17,7 @@
 
         <service
             android:name="com.inuker.bluetooth.library.BluetoothService" />
+
     </application>
 
 </manifest>

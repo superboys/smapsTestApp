@@ -99,22 +99,19 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                     UnitoManager.getSingleton().bleDisconnectFromWaterSystem();
                     return;
                 } else if (UnitoManager.getSingleton().target.equals("start_20_OTA")) {
-                    UnitoManager.getSingleton().start_20_ws_ota();
+//                    UnitoManager.getSingleton().start_20_ws_ota();
                     return;
                 } else if (UnitoManager.getSingleton().target.equals("Turn on wifi")) {
-                    UnitoManager.getSingleton().openHotPort(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).getBytes());
+                    UnitoManager.getSingleton().openHotPort();
                     return;
                 } else if (UnitoManager.getSingleton().target.equals("connect_wifi")) {
                     UnitoManager.getSingleton().connectHotPort();
                     return;
-                } else if (UnitoManager.getSingleton().target.equals("start_water_system")) {
-                    UnitoManager.getSingleton().start_ws_ota();
+                } else if (UnitoManager.getSingleton().target.equals("ota_ws_and_hub")) {
+                    UnitoManager.getSingleton().starESP();
                     return;
-                } else if (UnitoManager.getSingleton().target.equals("start_hub")) {
-                    UnitoManager.getSingleton().start_hub_ota();
-                    return;
-                } else if (UnitoManager.getSingleton().target.equals("start_ws_and_hub")) {
-                    UnitoManager.getSingleton().start_ws_and_hub();
+                } else if (UnitoManager.getSingleton().target.equals("downLoadOtaFile")) {
+                    UnitoManager.getSingleton().downLoadOtaFile(MainActivity.this,Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).getBytes());
                     return;
                 }
                 if (null != UnitoManager.getSingleton().sendBytes) {

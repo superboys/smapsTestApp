@@ -1,15 +1,25 @@
 package com.unito.smapssdk;
 
+import static android.content.Context.RECEIVER_EXPORTED;
 import static com.heaton.blelibrary.ble.model.BleDevice.TAG;
 import static com.unito.smapssdk.library.BLEConstant.*;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.app.DownloadManager;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
+import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -39,21 +49,20 @@ import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 import com.unito.smapssdk.library.UtilsKt;
 
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.Socket;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +71,7 @@ import java.util.UUID;
 public class UnitoManager {
 
     public static List<String> commandList = new ArrayList<>();
+    public static List<String> otaFiles = new ArrayList<>();
     private List<BleRssiDevice> saveSearchResult = new ArrayList<>();
     public String mac;
     public static int msgId = 1;
@@ -91,6 +101,13 @@ public class UnitoManager {
     private byte[] deviceUuid;
     public boolean isBoth;
     private int num = 0;
+    private String hubToken = "WeAllLiveInTheYellowSubmarine";
+    private String hubSn;
+    private DownloadManager downloadManager;
+    private List<Long> downloadIds = new ArrayList<>();
+    private String[] urls;
+    private Context context;
+    private String folderPath;
 
     private UnitoManager() {
 
@@ -499,6 +516,9 @@ public class UnitoManager {
                     BleLog.e(TAG, "onNotifySuccess: " + device.getBleName());
                 }
             });
+            if (blueToothName.contains("40")) {
+                get40HubToken();
+            }
         }
     };
 
@@ -564,6 +584,32 @@ public class UnitoManager {
             public void onReadFailed(BleRssiDevice device, int failedCode) {
                 super.onReadFailed(device, failedCode);
                 callback.onGetHubtoken(null);
+            }
+        });
+    }
+
+    private void get40HubToken() {
+        ble.readByUuid(bleRssiDevice, HUB_SUCCESS_SERVICE, HUB_SUCCESS_CHARACTERSTIC, new BleReadCallback<BleRssiDevice>() {
+            @Override
+            public void onReadSuccess(BleRssiDevice dedvice, BluetoothGattCharacteristic characteristic) {
+                super.onReadSuccess(dedvice, characteristic);
+                final byte[] bytes = characteristic.getValue();
+                String response = null;
+                try {
+                    response = new String(UtilsKt.decryptWithAES(secretKey, bytes), StandardCharsets.UTF_8);
+                    final JSONObject jsonObject = new JSONObject(response);
+                    hubToken = jsonObject.optString("HubToken");
+                    hubSn = jsonObject.optString("HubSn");
+                    BleLog.e("token--->", jsonObject.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    BleLog.e("token--->", "token failed");
+                }
+            }
+
+            @Override
+            public void onReadFailed(BleRssiDevice device, int failedCode) {
+                super.onReadFailed(device, failedCode);
             }
         });
     }
@@ -2463,7 +2509,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
     public byte[] Turn_on_wifi(byte type, byte[] uuid) {
         byte[] bytes = new byte[15];
         bytes[0] = (byte) 0x00; //First
-        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[1] = APP_HUB; //Destination
         bytes[2] = getSourceAddress(); //Source
         bytes[3] = START_ESP_OTA_1; //MSGID High
         bytes[4] = START_ESP_OTA_2; //MSGID LOW
@@ -2484,7 +2530,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
     public byte[] selectType(byte type, byte[] uuid) {
         byte[] bytes = new byte[19];
         bytes[0] = (byte) 0x00; //First
-        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[1] = APP_HUB; //Destination
         bytes[2] = getSourceAddress(); //Source
         bytes[3] = START_ESP_OTA_1; //MSGID High
         bytes[4] = START_ESP_OTA_2; //MSGID LOW
@@ -2509,7 +2555,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
     public byte[] setESPOTA2(byte data, byte num1, byte num2) {
         byte[] bytes = new byte[12];
         bytes[0] = (byte) 0x00; //First
-        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[1] = APP_HUB; //Destination
         bytes[2] = getSourceAddress(); //Source
         bytes[3] = START_ESP_OTA_1; //MSGID High
         bytes[4] = START_ESP_OTA_2; //MSGID LOW
@@ -2526,7 +2572,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
     public byte[] setESPOTA5(byte data) {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
-        bytes[1] = BLEConstant.APP_HUB; //Destination
+        bytes[1] = APP_HUB; //Destination
         bytes[2] = getSourceAddress(); //Source
         bytes[3] = START_ESP_OTA_1; //MSGID High
         bytes[4] = START_ESP_OTA_2; //MSGID LOW
@@ -2538,27 +2584,28 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         return bytes;
     }
 
-    private void getWS20File() {
+    private void getWS20File(String path) {
         try {
-            commandList = Utils.txtToArrayList("/data/data/com.unito.smapstestapp/files/1.txt");
+            commandList = Utils.txtToArrayList(path);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("", "ota文件不存在");
         }
     }
 
-    private void getWSFile() {
+    private void getWSFile(String path) {
         try {
-            commandList = Utils.txtToArrayList("/data/data/com.unito.smapstestapp/files/3.txt");
+            commandList = Utils.txtToArrayList(path);
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("", "ota文件不存在");
         }
     }
 
-    public void starOTA() {
+    public void star20OTA(String path) {
+        UnitoManager.getSingleton().isota = 0;
         writeDirData(setRequestForDirModeFlashProcess(1));
-        getWS20File();
+        getWS20File(path);
         ThreadPoolUtil.handler.postDelayed(() -> writeOtaData(Utils.hexStringToByteArray(commandList.get(num))), 10000);
     }
 
@@ -2566,7 +2613,9 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         ThreadPoolUtil.execute(new Runnable() {
             @Override
             public void run() {
-                socketUtil.write(bytes);
+                if (null != socketUtil) {
+                    socketUtil.write(bytes);
+                }
             }
         });
     }
@@ -2581,21 +2630,15 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         });
     }
 
-    public void openHotPort(byte[] deviceUuid) {
-        this.deviceUuid = deviceUuid;
+    public void openHotPort() {
         UnitoManager.getSingleton().writeDirData(UnitoManager.getSingleton().Turn_on_wifi((byte) 0x09, deviceUuid));
     }
 
-    public void start_20_ws_ota() {
-        UnitoManager.getSingleton().isota = 0;
-        starOTA();
-    }
-
     public void start_ws_ota() {
-        isBoth = false;
-        getWSFile();
-        UnitoManager.getSingleton().isota = 0;
-        socketWriteData(selectType((byte) 0x01, deviceUuid));
+//        isBoth = false;
+//        getWSFile();
+//        UnitoManager.getSingleton().isota = 0;
+//        socketWriteData(selectType((byte) 0x01, deviceUuid));
     }
 
     public void start_hub_ota() {
@@ -2604,10 +2647,174 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         socketWriteData(selectType((byte) 0x00, deviceUuid));
     }
 
-    public void start_ws_and_hub() {
-        isBoth = true;
-        getWSFile();
-        UnitoManager.getSingleton().isota = 0;
-        socketWriteData(selectType((byte) 0x01, deviceUuid));
+    public void starESP() {
+        if (null != socketUtil) {
+            if (urls.length == 2) {
+                isBoth = true;
+                getWSFile(otaFiles.get(0));
+                UnitoManager.getSingleton().isota = 0;
+                socketWriteData(selectType((byte) 0x01, deviceUuid));
+                socketUtil.setESPFilePath(otaFiles.get(1));
+            } else {
+                if (otaFiles.get(0).contains(".txt")) {
+                    isBoth = false;
+                    getWSFile(otaFiles.get(0));
+                    UnitoManager.getSingleton().isota = 0;
+                    socketWriteData(selectType((byte) 0x01, deviceUuid));
+                } else {
+                    isBoth = false;
+                    socketUtil.setESPFilePath(otaFiles.get(0));
+                    UnitoManager.getSingleton().isota = 5;
+                    socketWriteData(selectType((byte) 0x00, deviceUuid));
+                }
+            }
+        }
     }
+
+    public void downLoadOtaFile(Context context, byte[] deviceUuid) {
+        this.deviceUuid = deviceUuid;
+        this.context = context;
+        ThreadPoolUtil.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject param = new JSONObject();
+                    param.put("HubToken", hubToken);
+                    param.put("ManualOta", false);
+                    param.put("ProductName", blueToothName);
+                    param.put("HubFwVersion", 0);
+
+                    String response = sendPOSTRequest("https://iot-test.unito-oauth.com/unito/ota/getFirmware", param);
+                    Log.e("response-->", response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (null != jsonObject && jsonObject.optInt("code") == 200) {
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        String hubFwUrl = "";
+                        String hubFwHash;
+
+                        String wsFwUrl = data.optString("wsFwUrl");
+                        String wsFwHash = data.optString("wsFwHash");
+                        if (blueToothName.contains("40")) {
+                            hubFwUrl = data.optString("hubFwUrl");
+                            hubFwHash = data.optString("hubFwHash");
+                            urls = new String[]{wsFwUrl, hubFwUrl};
+                        } else {
+                            urls = new String[]{wsFwUrl};
+                        }
+                        downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+                        downloadIds.clear();
+                        // 获取应用的私有外部存储目录
+                        folderPath = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + "/files/";
+
+                        // 创建文件夹（如果不存在）
+                        File folder = new File(folderPath);
+                        if (folder.exists()) {
+                            Utils.deleteFolder(folder);
+                            Log.e("",Utils.deleteFolder(folder)+"");
+                        }
+                        folder.mkdirs();
+
+                        for (String url : urls) {
+                            downloadFile(url);
+                        }
+                    } else {
+                        BleLog.e("", "response failed");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), RECEIVER_EXPORTED);
+        } else {
+            context.registerReceiver(downloadReceiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        }
+    }
+
+    private String sendPOSTRequest(String path, JSONObject jsonObject) throws Exception {
+        String success = "";
+
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(2000);
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json"); // Set your header
+        conn.setRequestProperty("Authorization", hubSn);
+        conn.setDoOutput(true);
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = jsonObject.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+        int responseCode = conn.getResponseCode();
+        StringBuilder response = new StringBuilder();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) { // 200
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+            }
+            // Use the response string
+            String responseData = response.toString();
+            success = responseData;
+        } else {
+            // Handle errors
+        }
+        if (conn != null)
+            conn.disconnect();
+        return success;
+    }
+
+    private void downloadFile(String url) {
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setTitle("Downloading file")
+                .setDescription("Please wait...")
+//                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS+"/otaFiles", Uri.parse(url).getLastPathSegment())
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedOverMetered(false) // optional: restrict download to Wi-Fi
+                .setAllowedOverRoaming(false) // optional: restrict roaming downloads
+                .setDestinationUri(Uri.parse("file://" + folderPath + Uri.parse(url).getLastPathSegment()));  // 设置文件保存路径
+
+        // Enqueue the download request and store the download ID
+        long downloadId = downloadManager.enqueue(request);
+        downloadIds.add(downloadId);
+    }
+
+    private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            long completedDownloadId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+            if (downloadIds.contains(completedDownloadId)) {
+                DownloadManager.Query query = new DownloadManager.Query();
+                query.setFilterById(completedDownloadId);
+                Cursor cursor = downloadManager.query(query);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    int status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        Log.e("", "Download completed:");
+                        downloadIds.remove(completedDownloadId);
+                        if (downloadIds.size() == 0) {
+                            Log.e("", "Download completed:" + downloadIds.size());
+                            otaFiles.clear();
+                            for (int i = 0; i < urls.length; i++) {
+                                otaFiles.add(folderPath + "/" + Uri.parse(urls[i]).getLastPathSegment());
+                            }
+                            if (blueToothName.contains("20")) {
+                                star20OTA(otaFiles.get(0));
+                            } else {
+                                openHotPort();
+                            }
+                        }
+                    } else if (status == DownloadManager.STATUS_FAILED) {
+                        Log.e("", "Download failed:");
+                    }
+                    cursor.close();
+                }
+            }
+        }
+    };
 }

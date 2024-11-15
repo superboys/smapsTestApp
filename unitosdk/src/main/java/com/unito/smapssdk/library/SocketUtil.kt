@@ -3,6 +3,7 @@ package com.unito.smapssdk.library
 import android.util.Log
 import com.unito.smapssdk.UnitoManager
 import com.unito.smapssdk.UnitoManager.commandList
+import org.bouncycastle.jcajce.provider.asymmetric.rsa.AlgorithmParametersSpi.OAEP
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -19,6 +20,7 @@ class SocketUtil(address: String, port: Int) {
     private val connection: Socket = Socket(address, port)
     private var connected: Boolean = true
     var num = 0
+    private var path:String = ""
 
     init {
         println("Connected to server at $address on port $port")
@@ -26,6 +28,10 @@ class SocketUtil(address: String, port: Int) {
 
     private val writer: OutputStream = connection.getOutputStream()
     private val inputStream: InputStream = connection.getInputStream()
+
+    fun setESPFilePath(path: String) {
+        this.path = path
+    }
 
     fun run(byteArray: ByteArray) {
         ThreadPoolUtil.execute {
@@ -171,9 +177,9 @@ class SocketUtil(address: String, port: Int) {
 
     fun getESPFile() {
         len = 0
-        length = File("/data/data/com.unito.smapstestapp/files/unito_hub_idf.bin").length()
+        length = File(path).length()
         espfis =
-            FileInputStream("/data/data/com.unito.smapstestapp/files/unito_hub_idf.bin")
+            FileInputStream(path)
         espBuffer = ByteArray(1024)
         var num: Int
         if (length % 1024 > 0) {
