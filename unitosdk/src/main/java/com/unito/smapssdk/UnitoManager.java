@@ -48,6 +48,7 @@ import com.unito.smapssdk.library.SocketUtil;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 import com.unito.smapssdk.library.UtilsKt;
+import com.unito.smapssdk.mqtt.MQTTUtil;
 
 import org.json.JSONObject;
 
@@ -2817,4 +2818,8 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
             }
         }
     };
+
+    public void connectMQTT() {
+//        MQTTUtil.Companion.getInstance().connect();
+    }
 }
