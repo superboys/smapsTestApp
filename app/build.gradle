@@ -24,14 +24,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
+            storeFile file('/Users/liu/StudioProjects/sign/smapsTest.jks')
             keyPassword '123456'
             keyAlias 'smapsTest'
             storePassword '123456'
         }
 
         debug {
-            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
+            storeFile file('/Users/liu/StudioProjects/sign/smapsTest.jks')
             storePassword "123456"
             keyAlias "smapsTest"
             keyPassword "123456"
@@ -52,22 +52,26 @@ android {
         }
 
         lintOptions {
-            checkReleaseBuilds false
+//            checkReleaseBuilds false
             // Or, if you prefer, you can continue to check for errors in release builds,
             // but continue the build even when errors are found:
-            abortOnError false
+//            abortOnError false
         }
 
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
 
     //启用DataBinding
     buildFeatures {
         dataBinding true
         viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
 }
@@ -92,4 +96,10 @@ dependencies {
     implementation project(':unitosdk')
     // For developers using the Android Support Library
     implementation 'pub.devrel:easypermissions:3.0.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
