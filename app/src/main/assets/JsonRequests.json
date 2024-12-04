@@ -1,5 +1,53 @@
 [
   {
+    "id": "151",
+    "target": "pie",
+    "msgType": "set",
+    "SMAPS": "none",
+    "json": {
+      "msgId": 0,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "pie",
+      "msgType": "set"
+    }
+  },{
+    "id": "152",
+    "target": "bar",
+    "msgType": "set",
+    "SMAPS": "none",
+    "json": {
+      "msgId": 0,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "bar",
+      "msgType": "set"
+    }
+  },{
+    "id": "153",
+    "target": "boilingLine",
+    "msgType": "set",
+    "SMAPS": "none",
+    "json": {
+      "msgId": 0,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "boilingLine",
+      "msgType": "set"
+    }
+  },{
+    "id": "154",
+    "target": "chilledLine",
+    "msgType": "set",
+    "SMAPS": "none",
+    "json": {
+      "msgId": 0,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "chilledLine",
+      "msgType": "set"
+    }
+  },{
     "id": "0",
     "target": "scanBle",
     "msgType": "set",

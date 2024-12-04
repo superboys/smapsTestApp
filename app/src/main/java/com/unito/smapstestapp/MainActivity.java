@@ -3,6 +3,7 @@ package com.unito.smapstestapp;
 import static com.unito.smapssdk.library.BLEConstant.setRequestForDirModeFlashProcess;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,6 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
@@ -21,6 +25,11 @@ import com.google.gson.reflect.TypeToken;
 import com.heaton.blelibrary.ble.BleLog;
 import com.heaton.blelibrary.ble.callback.BleScanCallback;
 import com.unito.smapssdk.UnitoManager;
+import com.unito.smapssdk.chart.BarChartFrag;
+import com.unito.smapssdk.chart.BoilerLineChartFrag;
+import com.unito.smapssdk.chart.ChillerLineChartFrag;
+import com.unito.smapssdk.chart.PieChartFrag;
+import com.unito.smapssdk.chart.TestActivity;
 import com.unito.smapssdk.library.BleRssiDevice;
 import com.unito.smapssdk.library.NotifyResponse;
 import com.unito.smapssdk.library.ThreadPoolUtil;
@@ -95,6 +104,30 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                     UnitoManager.getSingleton().bleConnectToWaterSystem();
 //                    }
                     return;
+                } else if (UnitoManager.getSingleton().target.equals("pie")) {
+//                    if (null != UnitoManager.getSingleton().mac) {
+                    startActivity(new Intent(MainActivity.this,PieChartFrag.class));
+
+//                    }
+                    return;
+                }else if (UnitoManager.getSingleton().target.equals("bar")) {
+//                    if (null != UnitoManager.getSingleton().mac) {
+                    startActivity(new Intent(MainActivity.this, BarChartFrag.class));
+
+//                    }
+                    return;
+                }else if (UnitoManager.getSingleton().target.equals("boilingLine")) {
+//                    if (null != UnitoManager.getSingleton().mac) {
+                    startActivity(new Intent(MainActivity.this, BoilerLineChartFrag.class));
+
+//                    }
+                    return;
+                } else if (UnitoManager.getSingleton().target.equals("chilledLine")) {
+//                    if (null != UnitoManager.getSingleton().mac) {
+                    startActivity(new Intent(MainActivity.this, ChillerLineChartFrag.class));
+
+//                    }
+                    return;
                 } else if (UnitoManager.getSingleton().target.equals("bleDisconnectFromWaterSystem")) {
                     UnitoManager.getSingleton().bleDisconnectFromWaterSystem();
                     return;
@@ -136,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         jsonRequestAdapter = new JsonRequestAdapter(jsonRequestList);
     }
+
 
     private void initView() {
         // 设置布局管理器

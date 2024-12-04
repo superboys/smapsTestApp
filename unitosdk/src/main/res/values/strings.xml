@@ -1,3 +1,723 @@
-<resources>
-    <string name="app_name">library</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:shrinkMode="strict">
+
+    <string name="app_name">Unito-Anywhere</string>
+
+
+    <!--Smart Water System-->
+    <string name="header_smart_water_system">SMART WATER SYSTEM</string>
+    <string name="lbl_enter">Enter</string>
+
+    <!--Water System DashBoard-->
+    <string name="lbl_filter">Filter Status</string>
+    <string name="lbl_soda_water">Sparkling Water</string>
+    <string name="lbl_cold_water">Cold Water</string>
+    <string name="lbl_hot_water">Hot Water</string>
+    <string name="header_water_system">WATER SYSTEM</string>
+
+    <!--Hot Water-->
+    <string name="alert_connect_device">Please Connect Device</string>
+
+    <!--Soda Water-->
+    <string name="lbl_soft">Soft</string>
+    <string name="lbl_medium">Medium</string>
+    <string name="lbl_intense">Intense</string>
+
+    <!--Settings-->
+    <string name="lbl_start_provisioning">Provisioning</string>
+    <string name="lbl_linking_alexa">Activate voice command</string>
+    <string name="lbl_versions">Versions</string>
+    <string name="lbl_connection_setup">Communication setup</string>
+    <string name="title_connection_setup">Communication setup</string>
+    <string name="lbl_connection_setup_connect">Connect</string>
+    <string name="header_communication">Network Status</string>
+    <string name="header_language">Language</string>
+    <string name="lbl_push_notification">Push Notification</string>
+    <string name="lbl_child_protect">Child Protect</string>
+    <string name="lbl_setting_water_system">WATER SYSTEM</string>
+    <string name="lbl_timer">Timers</string>
+    <string name="header_sterilization">Sterilization</string>
+    <string name="lbl_set_water_system_clock">Set water system clock</string>
+    <string name="lbl_get_water_system_clock">Get water system clock</string>
+    <string name="header_consumables">Consumables</string>
+    <string name="header_diagnostics">Diagnostics</string>
+    <string name="lbl_uv_lamp">UV Lamp</string>
+    <string name="lbl_watersystemuptime">Water system uptime</string>
+    <string name="header_setting">SETTING</string>
+    <string name="label_appversion">App Version %1$s build %2$s</string>
+    <string name="alert_system_clock_is">System clock is :</string>
+    <string name="alert_communication_direct">Communication status is not available in DIR mode</string>
+    <string name="push_communication_direct">Please note that push notification is not available in DIR mode</string>
+    <string name="alert_failed_to_system_clock">Failed to set system clock</string>
+    <string name="alert_failed_pushnotification">Failed to set push notification</string>
+    <string name="alert_system_clock_wa_set_to">System clock was set to: </string>
+    <string name="lbl_general">GENERAL</string>
+    <string name="lbl_co2_tank_replacement">CO2 tank Replacement</string>
+    <string name="lbl_system_realtime_clock">System real-time clock</string>
+
+    <!--Provisioning-->
+    <string name="lbl_scanning">Scanning</string>
+    <string name="lbl_refrsh">Refresh</string>
+    <string name="alert_location_permission">Location Permission required to Scan Device</string>
+    <string name="alert_app_notifications_disabled">Notification is disabled in your app settings please enable it.</string>
+    <string name="alert_ble_permission">Permission required to Scan BLE.</string>
+    <string name="label_ok">OK</string>
+    <string name="msf_connecting_device">Connecting Device..</string>
+    <string name="alert_unable_to_connect">unable to connect.please try again</string>
+    <string name="lbl_unito_peripherals">Unito peripherals</string>
+    <string name="alert_failed_connect_hub">Failed to Connect Hub</string>
+    <string name="alert_failed_water_setup">Failed to set up Water System</string>
+
+    <!--SetUp Company-->
+    <string name="lbl_reset">Reset</string>
+    <string name="lbl_mac">MAC :</string>
+    <string name="lbl_username">Username: </string>
+    <string name="lbl_password">Password: </string>
+    <string name="lbl_company_code">Company Code: </string>
+    <string name="lbl_hub_description">Hub Description: </string>
+    <string name="lbl_user_description">User Description: </string>
+    <string name="label_done">Done</string>
+    <string name="alert_email_validation">Username must be a legal email address</string>
+    <string name="alert_password_validation">Password must have atleast 6 characters</string>
+    <string name="alert_no_internet">Please check internet connection</string>
+    <string name="alert_verification_failed">Verification failed</string>
+
+    <!--Setup Hub-->
+    <string name="header_setuphub">Setup Hub</string>
+    <string name="lbl_ssid_name">SSID Name: </string>
+    <string name="lbl_ssid_password">Password: </string>
+    <string name="lbl_done">Done</string>
+    <string name="lbl_timezone">TimeZone: </string>
+    <string name="lbl_water_system">Water System</string>
+    <string name="dialog_tiana">Tiana</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="alert_ssid_validation">Please enter wifi SSID</string>
+    <string name="alert_wifi_validation">Please enter wifi password</string>
+    <string name="alert_provisioning_success">Provision ended successfully</string>
+    <string name="alert_not_in_provisioning_mode">Hub is not in provisioning mode</string>
+
+    <!--Connection SetUp-->
+    <string name="header_setup">Setup</string>
+    <string name="dialog_water_system">Water System</string>
+    <string name="lbl_hub">HUB</string>
+    <string name="lbl_cloud">Cloud</string>
+    <string name="lbl_server_settings">Server Settings</string>
+    <string name="lbl_dir">DIR</string>
+    <string name="lbl_cld">CLD</string>
+    <string name="lbl_clear">Disconnect</string>
+    <string name="lbl_yes">Yes</string>
+    <string name="lbl_no">No</string>
+    <string name="alert_disconnect">Do you really want disconnect?</string>
+
+    <!--Communication Status-->
+    <string name="lbl_loading">Loading..</string>
+
+    <!--Timer-->
+    <string name="lbl_timer1">Timer 1</string>
+    <string name="lbl_timer2">Timer 2</string>
+    <string name="lbl_repeat">Repeat: </string>
+    <string name="label_timer">Timer: </string>
+    <string name="lbl_intervals">INTERVALS: </string>
+    <string name="header_timers">TIMERS</string>
+    <string name="lbl_on">ON</string>
+    <string name="label_off">OFF</string>
+    <string name="alert_add_inerval_validation">Adding intervals in 24 hour operation is not allowed</string>
+    <string name="alert_delete_interval">Delete interval?</string>
+    <string name="alert_last_interval">Last Interval must not be deleted</string>
+    <string name="lbl_monday">Mon</string>
+    <string name="lbl_tuesday">Tue</string>
+    <string name="lbl_wednesday">Wed</string>
+    <string name="lbl_thursday">Thu</string>
+    <string name="lbl_friday">Fri</string>
+    <string name="lbl_saturday">Sat</string>
+    <string name="lbl_sunday">Sun</string>
+    <string name="lbl_short_monday">Mon</string>
+    <string name="lbl_short_tuesday">Tue</string>
+    <string name="lbl_short_wednesday">Wed</string>
+    <string name="lbl_short_thursday">Thu</string>
+    <string name="lbl_short_friday">Fri</string>
+    <string name="lbl_short_saturday">Sat</string>
+    <string name="lbl_short_sunday">Sun</string>
+    <string name="lbl_24_hours_operation">24 hours operation</string>
+
+    <!--Timer Days-->
+    <string name="header_repeat">REPEAT</string>
+    <string name="alert_failed_set_interval">Failed to set interval</string>
+
+    <!--Timer Interval-->
+    <string name="lbl_edit_timer">Edit Timer</string>
+    <string name="lbl_add_timer">Add Timer</string>
+    <string name="lbl_save">Save</string>
+    <string name="lbl_from">From Time</string>
+    <string name="lbl_to">To Time</string>
+    <string name="label_24_hours_operation">24 hours</string>
+    <string name="alert_timer1_24_hours">Setting 24 hours operation will delete all other enabled intervals on timer1</string>
+    <string name="alert_timer2_24_hours">Setting 24 hours operation will delete all enabled other intervals on timer2</string>
+    <string name="alert_time_validation">To-time must be greater than From-time</string>
+    <string name="alert_timer_set_validation">can not set more than 4 intervals</string>
+    <string name="lbl_error">Error</string>
+
+    <!--Strealization-->
+    <string name="lbl_sterilization">Sterilization</string>
+    <string name="alert_failed_sterilization">Sterilization failed</string>
+    <string name="lbl_time">Time</string>
+    <string name="lbl_days">Days</string>
+    <string name="lbl_fromtime">From Time</string>
+    <string name="lbl_totime">To Time</string>
+
+    <!--Consumables replacement-->
+    <string name="lbl_co2_tank">Co2 tank</string>
+    <string name="label_uv_lamp">UV lamp</string>
+    <string name="alert_replace_water_filter_v">Are you sure you want to replace Filter to new size - V ?</string>
+    <string name="alert_replace_water_filter_xl">Are you sure you want to replace Filter to new size - XL ?</string>
+    <string name="alert_replace_water_filter_x">Are you sure you want to replace Filter to new size - X ?</string>
+    <string name="alert_replace_co2tank">Are you sure you want to replace Co2 tank?</string>
+    <string name="alert_replace_co2tank_rnd_cn">Are you sure you want to replace RND-CN tank?</string>
+    <string name="alert_fail_water_filter">failed to set water filter</string>
+    <!--<string name="alert_fail_flavored_water">Failed to set flavor pouch</string>-->
+    <string name="alert_failed_co2tank">failed to set Co2 tank</string>
+
+    <!--consumables history-->
+    <string name="filterreplacement_header_date">Date</string>
+    <string name="filterreplacement_header_consumption">Consumed</string>
+    <string name="filterreplacement_header_initialvalue">Initial Value</string>
+    <string name="filterreplacement_header_name">Name</string>
+
+    <!--DashBoard-->
+    <string name="header_dashboad">DASHBOARD</string>
+    <string name="lbl_back">Back</string>
+    <string name="lbl_connect">System connected to cloud</string>
+    <string name="lbl_disconnect">System disconnected from cloud</string>
+
+    <!--Splash-->
+    <string name="alert_not_enable_to_contact">Not able to connect Water System</string>
+    <string name="alert_bluetooth_permission">Bluetooth is Required to connect device</string>
+    <string name="lbl_location_permision">Location Permission</string>
+
+    <!--Filter Replacement-->
+    <string name="lbl_replace_co2_tank">Replace CO2 Tank</string>
+    <string name="ll_liters">Liters</string>
+    <string name="ll_co2_tank_capacity">CO2 Replacement</string>
+    <string name="header_service">SERVICE</string>
+    <string name="label_water_filter">Water filter</string>
+    <string name="alert_replace_filter">Are you sure you want to replace Filter?</string>
+    <string name="alert_replace_co2_tank">Are you sure you want to replace co2 tank?</string>
+    <string name="alert_failed_co2_tank">Failed to Replace CO2 tank</string>
+    <string name="header_tank_replacement">CO2 Tank Replacement</string>
+    <string name="lbl_replace_filter">Replace Filter</string>
+    <string name="lbl_coming_soon">Coming Soon</string>
+    <string name="alert_failed_replace_filter">Failed to Replace Filter</string>
+    <string name="header_filter_replacement">Filter Replacement</string>
+
+
+    <!--Dialog Periperl-->
+    <string name="dialog_hood">Hood</string>
+    <string name="dialog_cooker">Cooker</string>
+    <string name="lbl_confirm">Confirm</string>
+
+    <!--Cart-->
+    <string name="header_shop">SHOP</string>
+    <string name="no_internet_dashboard">No internet connection, Dashboard can not be accessed</string>
+
+    <!--Alexa-->
+    <string name="header_alexa">Activate voice command</string>
+    <string name="alert_passwordset_success">User/Password were updated successfully</string>
+    <string name="alert_passwordset_fail">Failed to set User/Password</string>
+    <string name="error_invalidpassword">Password must have at least 6 characters, at least one uppercase letter, one lowercase letter and one number</string>
+    <string name="error_invalidemail">Please enter valid email</string>
+    <string name="error_requestcode">Please enter code</string>
+    <string name="error_invalid_character">‘%1$s’ is illegal in password</string>
+
+    <!--Language-->
+    <string name="label_english">English</string>
+    <string name="label_hebrew">עברית</string>
+    <string name="label_dutch">Nederlands</string>
+    <string name="label_germen">Deutsch</string>
+    <string name="label_chinese">简体中文</string>
+    <string name="label_french">français</string>
+
+    <!--cloud error message-->
+    <string name="cloud_error_toapp_title">Cloud error message to App</string>
+    <string name="cloud_error_tohub_title">Cloud error message to Hub</string>
+    <string name="hub_error_toapp_title">Hub error message to App</string>
+    <string name="CLD00001">Cloud error: Unknown base-url</string>
+    <string name="CLD00002">Cloud error: Mandatory fields are empty</string>
+    <string name="CLD00010">Cloud error: Unidetified AppType</string>
+    <string name="CLD00020">Cloud error: UnIdetified HubType</string>
+    <string name="CLD00030">Cloud error: UnIdetified MySelf</string>
+    <string name="CLD00032">Cloud error: App is not provisioned with hub</string>
+    <string name="CLD00034">Cloud error: Could not set UserName and Password</string>
+    <string name="CLD00036">Cloud error: Failed to add Error log record</string>
+    <string name="CLD00040">Cloud error: Token does not exist</string>
+    <string name="CLD00050">Cloud error: WebSocketToken not supplied</string>
+    <string name="CLD00060">Cloud error: WebSocketToken not found or expired</string>
+    <string name="CLD00070">Cloud error: Missing mandatory parameters</string>
+    <string name="CLD00080">Cloud error: Access Denied</string>
+    <string name="CLD00081">Cloud error: Missing Product Name paramter in version request, Please connect in DIR mode first</string>
+    <string name="CLD00082">Cloud error: Hub versions update is disabled</string>
+    <string name="CLD00083">Cloud error: No new version files to download</string>
+    <string name="CLD00084">Cloud error: General error</string>
+    <string name="CLD00090">Cloud error: Missing mandatory parameters</string>
+    <string name="CLD00100">Access denied</string>
+    <string name="CLD00110">Access denied</string>
+    <string name="CLD00120">Cloud error: Only main user can share</string>
+    <string name="CLD00130">Cloud error: Failed to add user</string>
+    <string name="CLD00140">Cloud error: Hub record not found</string>
+    <string name="CLD00150">Cloud error: HubToken Not supplied</string>
+    <string name="CLD00160">Access denied</string>
+    <string name="CLD00170">Cloud error: UnIdentified company</string>
+    <string name="CLD00180">Cloud error: Unknown Hub</string>
+    <string name="CLD00190">Cloud error: Updating registration record falied</string>
+    <string name="CLD00200">Cloud error: Inserting into User table failed</string>
+    <string name="CLD00210">Cloud error: No active Hub record</string>
+    <string name="CLD00220">Cloud error: Inserting into WebSocketToken table failed</string>
+    <string name="CLD00230">Access denied</string>
+    <string name="CLD00240">Cloud error: User PushNotification token not updated</string>
+    <string name="CLD00250">Cloud error: User Activation was not updated</string>
+    <string name="CLD00260">Cloud error: User deactivation was not updated</string>
+    <string name="CLD00270">Cloud error: User was not deleted</string>
+
+    <!--push notification message-->
+    <string name="PSB00001">Power Off</string>
+    <string name="PSB00002">Power On</string>
+    <string name="PSB00003">Set to factory defaults</string>
+    <string name="PSB00004">Watchdog Off</string>
+    <string name="PSB00005">Watchdog On</string>
+    <string name="PSB00006">Boiler Over-temperature %1$s</string>
+    <string name="PSB00007">Chiller Under-temperature %1$s</string>
+    <string name="PSB00008">Water filter use record, minutes %1$s</string>
+    <string name="PSB00009">Timer1 On</string>
+    <string name="PSB00010">Timer2 On</string>
+    <string name="PSB00011">Timer1 Off</string>
+    <string name="PSB00012">Timer2 Off</string>
+    <string name="PSB00013">Low sparkling water intensity</string>
+    <string name="PSB00014">Medium sparkling water intensity</string>
+    <string name="PSB00015">High sparkling water intensity</string>
+    <string name="PSB00017">Child protection Off</string>
+    <string name="PSB00018">Child protection On</string>
+    <string name="PSB00019">Boiler solenoid error</string>
+    <string name="PSB00020">Chiller solenoid error</string>
+    <string name="PSB00021">Filter solenoid error</string>
+    <string name="PSB00022">Sparkling-out solenoid error</string>
+    <string name="PSB00023">Co2 solenoid error</string>
+    <string name="PSB00024">Gas-out solenoid error</string>
+    <string name="PSB00025">Water-in solenoid error</string>
+    <string name="PSB00026">Chiller trmperature sensor error</string>
+    <string name="PSB00027">Chiller insulation error</string>
+    <string name="PSB00029">Chiller compressor error</string>
+    <string name="PSB00030">Boiler temperature sensor1 error</string>
+    <string name="PSB00031">Boiler temperature sensor2 error</string>
+    <string name="PSB00032">Boiler insulation error</string>
+    <string name="PSB00034">Boiler heater error</string>
+    <string name="PSB00035">Over current up unit 1</string>
+    <string name="PSB00036">Over current down unit 1</string>
+    <string name="PSB00037">Over current up unit 2</string>
+    <string name="PSB00038">Over current down unit 2</string>
+    <string name="PSB00039">Over current up unit 3</string>
+    <string name="PSB00040">Over current down unit 3</string>
+    <string name="PSB00043">Over current up unit 4</string>
+    <string name="PSB00045">Over current down unit 4</string>
+    <string name="PSB00046">Movement timeout up unit 1</string>
+    <string name="PSB00047">Movement timeout down unit 1</string>
+    <string name="PSB00048">Movement timeout up unit 2</string>
+    <string name="PSB00049">Movement timeout down unit 2</string>
+    <string name="PSB00050">Movement timeout up unit 3</string>
+    <string name="PSB00051">Movement timeout down unit 3</string>
+    <string name="PSB00052">Movement timeout up unit 4</string>
+    <string name="PSB00053">Movement timeout down unit 4</string>
+    <string name="PSB00054">Filter needs to be replaced unit 1</string>
+    <string name="PSB00055">Filter replaced unit 1</string>
+    <string name="PSB00056">Filter needs to be replaced up unit 2</string>
+    <string name="PSB00057">Filter replaced unit 2</string>
+    <string name="PSB00058">Filter needs to be replaced up unit 3</string>
+    <string name="PSB00059">Filter replaced unit 3</string>
+    <string name="PSB00060">Filter needs to be replaced up unit 4</string>
+    <string name="PSB00061">Filter replaced unit 4</string>
+    <string name="PSB00062">No pot error unit 1</string>
+    <string name="PSB00063">Circuitry error unit 1</string>
+    <string name="PSB00064">Temperature sensor error unit 1</string>
+    <string name="PSB00065">Supply Voltage is high error unit 1</string>
+    <string name="PSB00066">Supply Voltage is low error unit 1</string>
+    <string name="PSB00067">Surface temperature high error unit 1</string>
+    <string name="PSB00068">Circuit temperature high error unit 1</string>
+    <string name="PSB00069">Internal temperature sensor error unit 1</string>
+    <string name="PSB00070">Non usable pot placed in cook top error unit 1</string>
+    <string name="PSB00098">No pot error unit 2</string>
+    <string name="PSB00099">Circuitry error unit 2</string>
+    <string name="PSB00100">Temperature sensor error unit 2</string>
+    <string name="PSB00101">Supply Voltage is high error unit 2</string>
+    <string name="PSB00102">Supply Voltage is low error unit 2</string>
+    <string name="PSB00103">Surface temperature high error unit 2</string>
+    <string name="PSB00104">Circuit temperature high error unit 2</string>
+    <string name="PSB00105">Internal temperature sensor error unit 2</string>
+    <string name="PSB00106">Non usable pot placed in cook top error unit 2</string>
+    <string name="PSB00107">No pot error unit 3</string>
+    <string name="PSB00108">Circuitry error unit 3</string>
+    <string name="PSB00109">Temperature sensor error unit 3</string>
+    <string name="PSB00110">Supply Voltage is high error unit 3</string>
+    <string name="PSB00111">Supply Voltage is low error unit 3</string>
+    <string name="PSB00112">Surface temperature high error unit 3</string>
+    <string name="PSB00113">Circuit temperature high error unit 3</string>
+    <string name="PSB00114">Internal temperature sensor error unit 3</string>
+    <string name="PSB00115">Non usable pot placed in cook top error unit 3</string>
+    <string name="PSB00116">No pot error unit 4</string>
+    <string name="PSB00117">Circuitry error unit 4</string>
+    <string name="PSB00118">Temperature sensor error unit 4</string>
+    <string name="PSB00119">Supply Voltage is high error unit 4</string>
+    <string name="PSB00120">Supply Voltage is low error unit 4</string>
+    <string name="PSB00121">Surface temperature high error unit 4</string>
+    <string name="PSB00122">Circuit temperature high error unit 4</string>
+    <string name="PSB00123">Internal temperature sensor error unit 4</string>
+    <string name="PSB00124">Non usable pot placed in cook top error unit 4</string>
+    <string name="PSB00125">Need to replace CO2 tank</string>
+
+    <!--push notification message-->
+    <string name="heater_30">heater is working continuously for 30 minutes with no hot water dispense; please contact service</string>
+    <string name="heater_45">heater is working continuously for 45 minutes with no hot water dispense; please contact service</string>
+    <string name="heater_60">heater is working continuously for 60 minutes with no hot water dispense; please contact service</string>
+    <string name="heater_75">heater is working continuously for 75 minutes with no hot water dispense; please contact service</string>
+    <string name="heater_90">heater is working continuously for 90 minutes with no hot water dispense; please contact service</string>
+    <string name="heater_105">heater is working continuously for more than 105 minutes with no hot water dispense; please contact service</string>
+    <string name="compressor_60">compressor is working continuously for 60 minutes with no cold water dispense; please contact service</string>
+    <string name="compressor_90">compressor is working continuously for 90 minutes with no cold water dispense; please contact service</string>
+    <string name="compressor_120">compressor is working continuously for 120 minutes with no cold water dispense; please contact service</string>
+    <string name="compressor_150">compressor is working continuously for 150 minutes with no cold water dispense; please contact service</string>
+    <string name="compressor_180">compressor is working continuously for 180 minutes with no cold water dispense; please contact service</string>
+    <string name="compressor_210">compressor is working continuously for more then 210 minutes with no cold water dispense; please contact service</string>
+    <string name="upper_water_level_sensor_fault">upper water level sensor fault; please contact service</string>
+    <string name="water_system_disinfection_recommended">water system disinfection is highly recommended</string>
+    <string name="chiller_under_temperature">Chiller Under-temperature; please contact service</string>
+    <string name="chiller_temperature_out_of_range">Chiller temperature out of range; please contact service</string>
+    <string name="boiler_upper_sensor_over_temperature">Boiler upper sensor over-temperature; please contact service</string>
+    <string name="boiler_lower_sensor_over_temperature">Boiler lower sensor over-temperature; please contact service</string>
+    <string name="boiler_upper_sensor_out_of_range">Boiler upper sensor out of range; please contact service</string>
+    <string name="boiler_lower_sensor_out_of_range">Boiler lower sensor out of range; please contact service</string>
+    <string name="water_filter_is_going_to_end_soon">Water filter is going to end soon; to purchase a new filter; please click this message and open Unito online store</string>
+    <string name="co2_tank_is_going_end_soon">Co2 tank is going end soon;  to purchase a new tank; please click this message and open Unito online store</string>
+    <string name="child_protect_off">Child protect Off</string>
+    <string name="child_protect_on">Child protect On</string>
+    <string name="water_system_version_updated">Water system version-updated</string>
+    <string name="hub_version_updated">Hub version-updated</string>
+
+
+    <!--Hub Message-->
+    <string name="HUB00001">Hub can not connect to Wifi</string>
+    <string name="HUB00002">Hub can not connect to Water system</string>
+    <string name="HUB00003">Hub can not connect to Hood</string>
+    <string name="HUB00004">Hub can not connect to Cooker</string>
+    <string name="HUB00005">Hub can not connect to VR Tiana</string>
+    <string name="HUB00010">Hub is not in provisioning mode</string>
+    <string name="HUB00020">Hub error: Not a JSON</string>
+    <string name="HUB00021">Hub error: Action is missing</string>
+    <string name="HUB00022">Hub error: Invalid Action (not \'ProvData\')</string>
+    <string name="HUB00023">Hub error: Wifi Ssid is missing</string>
+    <string name="HUB00024">Hub error: Invalid WifiSsid</string>
+    <string name="HUB00025">Hub error: CommTimeoutSec is missing</string>
+    <string name="HUB00026">Hub error: Invalid CommTimeoutSec</string>
+    <string name="HUB00028">Hub error: Invalid HubRefreshTimeOutMsec</string>
+    <string name="HUB00029">Hub error: InstallationCountry is missing</string>
+    <string name="HUB00030">Hub error: UserAppDeviceUuid is missing</string>
+    <string name="HUB00031">Hub error: TimeZone is missing</string>
+    <string name="HUB00032">Hub error: Invalid TimeZone</string>
+    <string name="HUB00033">Hub error: WebServiceUrl is missing</string>
+    <string name="HUB00034">Hub error: Failed parsing WebServiceUrl</string>
+    <string name="HUB00035">Hub error: WebSocketUrl is missing</string>
+    <string name="HUB00036">Hub error: Failed parsing WebSocketUrl</string>
+    <string name="HUB00037">Hub error: No memory</string>
+    <string name="HUB00038">Hub error: Invalid WaterSystemExisting</string>
+    <string name="HUB00039">Hub error: Invalid HoodExisting</string>
+    <string name="HUB00040">Hub error: Invalid CookerExisting</string>
+    <string name="HUB00041">Hub error: Invalid TianaExisting</string>
+    <string name="alert_cloud_not_connected">Application is not connected to cloud</string>
+    <string name="alert_water_system_not_connected">Water System is not connected</string>
+    <string name="lbl_water_filter_replacement">Water filter replacement</string>
+    <string name="lbl_filetr_size_v">Filter size-V</string>
+    <string name="lbl_filetr_size_xl">Filter size-XL</string>
+    <string name="lbl_filetr_size_x">Filter size-X</string>
+    <string name="lbl_co2tank">CO2 Tank</string>
+    <string name="alert_provisioning_title">Home provisioning failed</string>
+    <string name="alert_hub_provisioning_msg">Hub is not in home provisioning mode</string>
+    <string name="lbl_unavailable">Unavailable</string>
+    <string name="lbl_version">"FW date: %1$s/%2$s/%3$s version %4$s - HW version:%5$s"</string>
+    <string name="hub_version">"WIFI date: %1$s/%2$s/%3$s version %4$s"</string>
+    <string name="lbl_uptime_hours">Uptime = %1$s hours</string>
+    <string name="lbl_watersystemuptime_failed">Get water usage command failed</string>
+    <string name="hint_username_active_username">Username (Active email)</string>
+    <string name="hint_password_alexa">Create new password</string>
+    <string name="helper_password_alexa">At least 6 characters, at least one uppercase letter, one lowercase letter and one number</string>
+    <string name="lbl_info_alexa1">A verification code will be sent to your email account, once you have received the code, you will be able to complete the process.</string>
+    <string name="lbl_info_alexa2">Please remember, the login details will be required while adding UNITO to the voice service, via voice service app.</string>
+    <string name="lbl_codesendsuccess">a verication code was sent successfully</string>
+    <string name="lbl_verification_code">Verification Code</string>
+    <string name="alert_noprovisioning">NewData Function is not allowed, Hub is not provisioned with this specific app</string>
+    <string name="alert_provisioningallowfunction">Your app is not provisioned with this hub</string>
+    <string name="alert_no_service_internet">No internet connection, %1$s can not be accessed</string>
+    <string name="service_dashboard">Dashboard</string>
+    <string name="service_shop">Shop</string>
+    <string name="service_service">Service</string>
+    <string name="service_cloud">Cloud</string>
+    <string name="lbl_version_unavailable">Version unavailable</string>
+
+    //hub manual ota init errors
+    <string name="hub_ota_error_init_0">Hub error: Version update can not start, please try later</string>
+    <string name="hub_ota_error_init_1">Hub error: Version update is already in progress</string>
+    <string name="hub_ota_error_init_2">Hub error: Water system is not provisioned</string>
+    <string name="hub_ota_error_init_3">Hub error: Water system is not connected</string>
+    <string name="hub_ota_error_init_4">Hub error: Water system is not identified</string>
+    <string name="hub_ota_error_init_5">Hub error: Water system versions details are not available</string>
+    <string name="hub_ota_error_init_254">Hub message: Version update started</string>
+
+    //hub manual ota init errors
+    <string name="ota_update_failed">Version update failed</string>
+
+
+    <!--New strings-->
+    <string name="alert_actionfail_retry">Action failed, please retry</string>
+    <string name="alert_please_enable_gps_from_setting">Please enable Location from the Setting</string>
+    <string name="soda_state_low">L</string>
+    <string name="soda_state_med">M</string>
+    <string name="soda_state_full">F</string>
+    <string name="alert_downloading_file">Downloading file…</string>
+    <string name="lbl_pairing">Pairing</string>
+    <string name="alert_please_click_the_knob">Please click the knob</string>
+    <string name="alert_knob_press_is_not_detected_msg">Knob click was not detected</string>
+    <string name="alert_knob_release_the_knob_pairing_complete_msg">Pairing ended successfully</string>
+    <string name="device_open_hotspot">Opening hotspot, please wait a few seconds...</string>
+
+    <string name="alert_app_system_not_paired">App and system are not paired, please pair the app and the system first</string>
+    <string name="lbl_update">Update</string>
+    <string name="alert_version_no_internet">No internet connection, Service can not be accessed</string>
+    <string name="alert_version_update_in_cloud_forbidden">Version update in cloud mode is forbidden</string>
+    <string name="alert_version_update_take_minutes">Version update takes few minutes during which you must stay close to the system</string>
+    <string name="version_update_failed">Version update failed please retry</string>
+    <string name="lbl_automatic_versions_update">Allow automatic updates</string>
+    <string name="alert_allow_automatic_water_update">Allow automatic Water system versions update</string>
+    <string name="alert_failed_to_ota_water_system">Failed to update water system version, Please retry</string>
+    <string name="versions_mismatch_need_to_refresh">Versions mismatch, please refresh</string>
+    <string name="lbl_unito_co2_cylinder">UNITO CO2 cylinder</string>
+    <string name="lbl_unito_co2_cylinder_rnd_cn">RND - CN</string>
+    <string name="lbl_unito_a1">UNITO - A1</string>
+    <string name="lbl_unito_b1">UNITO – B1</string>
+    <string name="lbl_bwt_v">BWT - V</string>
+    <string name="lbl_bwt_x">BWT - X</string>
+    <string name="lbl_bwt_x_l">BWT - XL</string>
+    <string name="lbl_my_aqua">BWT - MyAQUA</string>
+    <string name="alert_replace_filter_msg">Are you sure you want to replace filter to new size %1$s?</string>
+    <string name="lbl_filter_replacement_history">Filter replacement history</string>
+    <string name="lbl_co2_replacement_history">CO2 replacement history</string>
+    <string name="lbl_co">CO2</string>
+    <string name="alert_please_confirm_version_update">Please confirm version Update</string>
+    <string name="alert_software_update_required">Software update required</string>
+    <string name="lbl_test_server">Test Server</string>
+    <string name="txt_test_server_suffix">-Test Server</string>
+    <string name="alert_version_update_is_not_available">Version update is not available now, please try later</string>
+    <string name="alert_versions_connect_retry_cancel">Failed to connect to Water System, you may Retry connection or Cancel</string>
+    <string name="btn_popup_retry">Retry</string>
+    <string name="alert_app_is_running_in_background">App is running in background</string>
+    <string name="alert_version_update">Water system version update successfully</string>
+
+
+    <!--    Unito-Sparkle-->
+    <string name="title_water_system_lava">Lava Water System</string>
+    <string name="title_water_system_sparkle">Sparkle Water System</string>
+    <string name="title_water_system_infinity">Infinity Water System</string>
+    <string name="title_water_system_elements">Elements Smart Water System</string>
+    <string name="title_user_setup">User Setup</string>
+    <string name="dashboard_boiling_water">Boiling water</string>
+    <string name="dashboard_chilled_water">Chilled water</string>
+    <string name="dashboard_sparkling_water">Sparkling water</string>
+    <string name="dashboard_system_status">System status</string>
+    <string name="dashboard_timers">Timers</string>
+    <string name="dashboard_unito_shop">Unito Shop</string>
+    <string name="dashboard_settings">Settings</string>
+    <string name="dashboard_service">Service</string>
+    <string name="dashboard_dashboard">Dashboard</string>
+    <string name="lbl_system_status_filter">Filter</string>
+    <string name="lbl_system_status_must_not_used_after">Must not be used after:</string>
+    <string name="lbl_system_status_disinfection_due_in">Disinfection due in:</string>
+    <string name="lbl_system_status_disinfection_overdue">Disinfection overdue:</string>
+    <string name="lbl_system_status_filter_expired">EXPIRED</string>
+    <string name="lbl_system_status_filter_co2">CO2</string>
+
+    <string name="lbl_service_firstname">* First Name:</string>
+    <string name="lbl_service_lastname">* Last Name:</string>
+    <string name="lbl_service_country">* Country:</string>
+    <string name="lbl_service_mobile">* Mobile:</string>
+    <string name="lbl_service_email">* Email:</string>
+    <string name="lbl_submit">Submit</string>
+
+    <string name="lbl_web_dashboard_water">Water\nconsumption</string>
+    <string name="lbl_web_dashboard_power">Power\nconsumption</string>
+    <string name="lbl_web_dashboard_boiler">Boiler\ntemperature</string>
+    <string name="lbl_web_dashboard_chiller">Chiller\ntemperature</string>
+    <string name="header_web_dashboard_water">Water consumption</string>
+    <string name="header_web_dashboard_power">Power consumption</string>
+    <string name="header_web_dashboard_boiler">Boiler temperature</string>
+    <string name="header_web_dashboard_chiller">Chiller temperature</string>
+
+    <string name="lbl_web_dashboard_today">Today</string>
+    <string name="lbl_web_dashboard_last_week">Last week</string>
+    <string name="lbl_web_dashboard_last_month">Last month</string>
+    <string name="lbl_web_dashboard_last_year">Last year</string>
+
+    <string name="alert_message_error">Something went wrong, please try again in a few minutes.</string>
+    <string name="alert_service_all_fields_mandatory">All fields are mandatory</string>
+    <string name="alert_service_accepted">Service call Id %1$s was accepted</string>
+    <string name="lbl_sterilization_time_">STERILIZATION TIME:</string>
+    <string name="lbl_sterilization_time">STERILIZATION TIME</string>
+    <string name="lbl_set_time">SET TIME</string>
+    <string name="lbl_add_time">Add Time</string>
+    <string name="alert_provisioning_error_ws">Hub error message: Water system connection failed</string>
+    <string name="alert_provisioning_error_app">Hub error message: APP connection failed</string>
+    <string name="alert_provisioning_error_wifi">Hub error message: WIFI connection failed</string>
+    <string name="alert_provisioning_error_https">Hub error message: HTTPS connection failed</string>
+    <string name="alert_provisioning_error_wss">Hub error message: WSS connection failed</string>
+    <string name="alert_provisioning_error_provisioning">Hub error message: Provisioning failed</string>
+    <string name="alert_message_slow_metadata">Slow internet, metadata request timed out.</string>
+    <string name="alert_message_slow_file">Slow internet, file download timed out.</string>
+
+    <string name="label_warning">Warning</string>
+    <string name="alert_message_not_production">You are about to use a file from a non production server %1$s, press Ok to continue or Cancel to abort process</string>
+    <string name="alert_clock_time_late">The difference between water system clock and app clock is more than 2 days. Update water system clock?</string>
+
+    <string name="lbl_ble_scan_connect_permision">BLE scan &amp; connect Permission</string>
+    <string name="alert_ble_scan_connect_permission">Permission required to Scan &amp; connect nearby BLE.</string>
+    <string name="lbl_enable_pullout_sensor">Enable pullout sensor</string>
+    <string name="lbl_enable_leakage_sensor">Enable leakage sensor</string>
+
+
+    <string name="header_faucet_settings">Faucet settings</string>
+    <string name="lbl_auto_soda_refill">Auto soda refill</string>
+    <string name="lbl_autofill_timer">AUTOFILL TIMER</string>
+    <string name="lbl_sec">Sec</string>
+    <string name="lbl_flush_timer">FLUSH TIMER</string>
+    <string name="dashboard_flavored_water">Flavored water</string>
+    <string name="lbl_flavored_water">FLAVORED WATER</string>
+    <string name="lbl_flavor_parameters">Flavor parameters</string>
+    <string name="lbl_flavored">FLAVORED</string>
+    <string name="water">WATER</string>
+    <string name="lbl_flavor">FLAVOR</string>
+    <string name="lbl_30_days">30 Days</string>
+    <string name="lbl_or">Or</string>
+    <string name="lbl_liters">Liters</string>
+    <string name="unito_flavor_pouch">UNITO Flavor pouch</string>
+    <string name="lbl_are_you_sure_want_to_replace_flavor_pouch">Are you sure you want to replace Flavor pouch?</string>
+    <string name="flavored_water">Flavored water</string>
+    <string name="alert_exit_screen">Do you really want to exit screen without saving?</string>
+    <string name="lbl_double_click">Double Click</string>
+    <string name="lbl_single_click">Single Click</string>
+    <string name="_01">4</string>
+    <string name="_02">2</string>
+    <string name="_60">60</string>
+    <string name="_6">6</string>
+    <string name="lbl_boiling">Boiling</string>
+    <string name="lbl_sparkle">Sparkle</string>
+    <string name="_00">0</string>
+    <string name="_20">9</string>
+    <string name="lbl_child_protected">Child Protect</string>
+    <string name="lbl_pleasewait">Please wait..</string>
+    <string name="header_select_company">Choose Company</string>
+    <string name="alert_mac_address_validation">Mac Address cannot be empty</string>
+    <string name="alert_userid_validation">Enter User ID</string>
+    <string name="alert_companycode_validation">Enter company code</string>
+    <string name="lblperipherals">Peripherals</string>
+    <string name="lbl_hood">Hood</string>
+    <string name="lbl_cooker">Cooker</string>
+    <string name="lbl_HUB">HUB</string>
+    <string name="alert_could_not_connect_hub_automatically">Can not connect to hub automatically.</string>
+    <string name="lbl_filter_replacement">Filter replacement</string>
+    <string name="lbl_water_filter_capacity">Water Filter Capacity</string>
+
+    <string name="alert_replace_uvlamp">Are you sure you want to replace UV lamp?</string>
+    <string name="alert_failed_uvlamp">failed to set UV lamp</string>
+
+    <!--SERVICE-->
+    <string name="lbl_product_type">PRODUCT TYPE :</string>
+    <string name="lbl_sn">SN :</string>
+    <string name="lbl_vendor">VENDOR :</string>
+    <string name="lbl_counry">COUNRY :</string>
+    <string name="lbl_tel">TEL :</string>
+    <string name="lbl_email">EMAIL :</string>
+    <string name="lbl_service_detail_call">SERVICE DETAIL CALL :</string>
+    <string name="alert_service_response">Your service call will be responded within 3 hours</string>
+    <string name="lbl_send">Send</string>
+    <string name="lbl_faucet">FAUCET</string>
+    <string name="lbl_HOOD">HOOD</string>
+    <string name="lbl_COOKER">COOKER</string>
+    <string name="lbl_service">Service</string>
+
+    <!--Flavor Parameters-->
+    <string name="flavor_injection_intense_cc">Flavor injection intense [cc]</string>
+    <string name="flavor_injection_medium_cc">Flavor injection medium [cc]</string>
+    <string name="flavor_injection_soft_cc">Flavor injection soft [cc]</string>
+    <string name="quantity_water_per_injection_sec">Quantity water per injection [sec]</string>
+    <string name="quantity_soda_per_injection_sec">Quantity soda per injection [sec]</string>
+    <string name="cleaning_duration_sec">Cleaning duration [sec]</string>
+    <string name="cleaning_every_hours">Cleaning every [hours]</string>
+    <string name="disinfection_cycles">Disinfection cycles</string>
+    <string name="disinfection_forward_sec">Disinfection forward [sec]</string>
+    <string name="disinfection_backward_sec">Disinfection backwards [sec]</string>
+    <string name="disinfection_threshold_cc">Disinfection threshold [cc]</string>
+    <string name="disinfection_threshold_days">Disinfection threshold [days]</string>
+    <string name="alert_flavor_parameters_failed">Flavor Parameters failed</string>
+    <string name="alert_message_auto_fill_failed">Auto fill failed</string>
+    <string name="alert_message_flush_timer_failed">Flush timer failed</string>
+    <string name="alert_message_single_click_failed">Single click failed</string>
+
+    <!--Soda Setting Parameters-->
+    <string name="lbl_soda_parameters">Set Soda Settings</string>
+    <string name="title_soda_parameters">Set Soda Settings</string>
+    <string name="alert_soda_parameters_failed">Soda Parameters failed</string>
+    <string name="lbl_soda_solenoid_soda_out_cup">Solenoid Soda Out - Cup</string>
+    <string name="lbl_soda_solenoid_soda_out_jar">Solenoid Soda Out - Jar</string>
+    <string name="lbl_soda_solenoid_water_in">Solenoid Water In</string>
+    <string name="lbl_soda_solenoid_co2_in">Solenoid CO2 In</string>
+    <string name="lbl_soda_solenoid_co2_in_on_off">Solenoid CO2 In On/Off</string>
+    <string name="lbl_soda_wash_pipe">Wash Pipe</string>
+    <string name="lbl_soda_auto_fill">Auto Fill</string>
+    <string name="lbl_soda_sec_string">Sec%d</string>
+    <string name="lbl_soda_consumption_sec">Consumption Sec</string>
+    <string name="lbl_soda_minimum">Minimum</string>
+    <string name="lbl_soda_maximum">Maximum</string>
+    <string name="lbl_soda_tmaxsoda">tMaxSoda</string>
+    <string name="lbl_soda_nominal_soft">Nominal soft</string>
+    <string name="lbl_soda_nominal_medium">Nominal medium</string>
+    <string name="lbl_soda_nominal_intense">Nominal intense</string>
+    <string name="lbl_soda_status">Status</string>
+    <string name="lbl_soda_on_time_nominal">On time nominal</string>
+    <string name="lbl_soda_on_time_maximum">On time maximum</string>
+    <string name="lbl_soda_on_time_minimum">On time minimum</string>
+    <string name="lbl_soda_off_time_nominal">Off time nominal</string>
+    <string name="lbl_soda_off_time_maximum">Off time maximum</string>
+    <string name="lbl_soda_off_time_minimum">Off time minimum</string>
+    <string name="lbl_soda_t_filter_after_boiler">TfilterAfterBoiler</string>
+    <string name="lbl_soda_t_chiller_after_soda">TchillerAfterSoda</string>
+    <string name="lbl_soda_time_duration">Time Duration</string>
+    <string name="alert_message_autofill_duration_error">Autofill timer duration should be between 1 and 120 seconds.</string>
+
+    <!--Oem-->
+    <string name="alert_message_oem_code_failed">Oem Code mismmatch, app now will exit.</string>
+    <string name="alert_message_oem_code_upgrade_required">Please upgrade app to latest version.</string>
+    <string name="alert_btn_go">Go to Wi-Fi setting</string>
+    <string name="alert_check_ota_file">Checking OTA file, please wait a few seconds...</string>
+    <string name="alert_updating_finished">Updating version finished successfully</string>
+    <string name="alert_message_connect_device_wifi">Please press the button to go to Wi-Fi setting to connect the hotspot, back to app when connected.\nssid: "UNITO-Hotspot-xxxx", \npassphrase: "12345678"</string>
+    <string name="water_consumption">WATER CONSUMPTION</string>
+    <string name="chart_boiling">Boiling</string>
+    <string name="chart_filtered">Filtered</string>
+    <string name="chart_chilled">Chilled</string>
+    <string name="chart_sparking">Sparking</string>
+    <string name="chart_today">Today</string>
+    <string name="chart_last_week">Last week</string>
+    <string name="chart_last_month">Last month</string>
+    <string name="chart_last_year">Last year</string>
+    <string name="bar_boiler">Boiler</string>
+    <string name="bar_chiller">Chiller</string>
+    <string name="bar_power_consumption">POWER CONSUMPTION</string>
+    <string name="boiler_linechart_temperature">BOILER TEMPERATURE</string>
+    <string name="chiller_linechart_temperature">CHILLER TEMPERATURE</string>
+    <string name="provisioning_setup">Provisioning setup</string>
+    <string name="pairing_setup">Pairing setup</string>
+    <string name="chart_mixed">Mixed</string>
+    <string name="water_system_is_not_provisioned">Water system is not provisioned</string>
+    <string name="ai_timer">AI Timer</string>
 </resources>

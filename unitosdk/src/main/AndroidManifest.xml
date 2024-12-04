@@ -12,12 +12,25 @@
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
 
-    <application
-        android:label="@string/app_name">
+    <application android:label="@string/app_name">
+        <activity
+            android:name=".chart.TestActivity"
+            android:exported="false" />
+                <activity
+            android:name=".chart.PieChartFrag"
+            android:exported="false" />
+                <activity
+            android:name=".chart.BarChartFrag"
+            android:exported="false" />
+                <activity
+            android:name=".chart.BoilerLineChartFrag"
+            android:exported="false" />
+                <activity
+            android:name=".chart.ChillerLineChartFrag"
+            android:exported="false" />
 
-        <service
-            android:name="com.inuker.bluetooth.library.BluetoothService" />
 
+        <service android:name="com.inuker.bluetooth.library.BluetoothService" />
     </application>
 
 </manifest>

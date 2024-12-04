@@ -1,0 +1,45 @@
+<resources>
+
+    <style name="Style_llWebDashboard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/bg_web_dashboard</item>
+    </style>
+
+    <style name="Style_tvCommon">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="Style_ivWebDashboard">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+
+
+    <style name="Style_tvWebDashboard" parent="Style_tvCommon">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@drawable/bg_web_dashboard_selector</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="android:textColor">@drawable/drawable_web_dashboard_text_selector</item>-->
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Style_tvWebDashboardParent" parent="Style_tvCommon">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">start|center</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:textSize">13dp</item>
+    </style>
+
+</resources>

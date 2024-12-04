@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">smapsTestApp</string>
-    <string name="bluethooth">Allow smapsTestAPP to access this device\'s location</string>
+
 
 </resources>

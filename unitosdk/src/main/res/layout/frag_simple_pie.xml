@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart1"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="27dp"
+        android:layout_height="4dp"
+        android:layout_marginRight="50dp"
+        android:background="#FF4E00"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pieChart1" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:visibility="gone"
+        android:text="@string/chart_boiling"
+        android:textColor="@color/color_0e719f"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintLeft_toRightOf="@+id/view1"
+        app:layout_constraintTop_toTopOf="@+id/view1" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="27dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/color_d8a302"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="@string/chart_filtered"
+        android:textColor="@color/color_0e719f"
+        android:visibility="gone"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintLeft_toRightOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="27dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/color_0084ff"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="@string/chart_chilled"
+        android:textColor="@color/color_0e719f"
+        android:visibility="gone"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view3"
+        app:layout_constraintLeft_toRightOf="@+id/view3"
+        app:layout_constraintTop_toTopOf="@+id/view3" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="27dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/color_0ac478"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="@string/chart_sparking"
+        android:textColor="@color/color_0e719f"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
+        app:layout_constraintLeft_toRightOf="@+id/view4"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="27dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@color/color_b635a3"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:text="@string/chart_mixed"
+        android:textColor="@color/color_0e719f"
+        android:textSize="13sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintLeft_toRightOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <Switch
+        android:id="@+id/swi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text5"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_0e719f"
+        android:track="@drawable/switch_selector"
+        android:padding="10dp"
+        android:checked="false"
+        android:text="Flavor"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvToday"
+            style="@style/Style_tvWebDashboard"
+            android:text="@string/lbl_web_dashboard_today"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_web_dashboard_tvLastWeek"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastWeek"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_week"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_web_dashboard_tvToday"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastMonth"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxHeight="35dp"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_month"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_web_dashboard_tvLastWeek"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_web_dashboard_tvToday" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastYear"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_web_dashboard_tvLastMonth"
+            app:layout_constraintTop_toTopOf="@id/fragment_web_dashboard_tvLastMonth" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

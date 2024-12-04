@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative"
+    android:layout_width="wrap_content"
+    android:minWidth="80dp"
+    android:layout_height="wrap_content"
+    android:padding="3dp">
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="12sp"
+        android:text="士大夫大"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvContent"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="2dp"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        android:text="●"/>
+
+    <TextView
+        android:id="@+id/tvContent2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_below="@id/tvContent"
+        android:layout_toRightOf="@id/tv_point"
+        android:textSize="12sp"
+        android:text="sddd"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tvContent3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/tvContent"
+        android:layout_toRightOf="@id/tvContent2"
+        android:textSize="12sp"
+        android:text="sdfdf"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>

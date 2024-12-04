@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="-90"
+        android:text="°C"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/chart1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chart1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="15sp"
+        android:paddingBottom="15sp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvToday"
+            style="@style/Style_tvWebDashboard"
+            android:text="@string/lbl_web_dashboard_today"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_web_dashboard_tvLastWeek"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastWeek"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_week"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_web_dashboard_tvToday"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastMonth"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxHeight="35dp"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_month"
+            app:layout_constraintEnd_toStartOf="@+id/fragment_web_dashboard_tvLastWeek"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_web_dashboard_tvToday" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_web_dashboard_tvLastYear"
+            style="@style/Style_tvWebDashboard"
+            android:layout_height="wrap_content"
+            android:minHeight="32dp"
+            android:text="@string/lbl_web_dashboard_last_year"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_web_dashboard_tvLastMonth"
+            app:layout_constraintTop_toTopOf="@id/fragment_web_dashboard_tvLastMonth" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

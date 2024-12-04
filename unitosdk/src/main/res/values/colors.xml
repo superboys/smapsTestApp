@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#FF0000</color>
+    <color name="colorPrimaryDark">#FF0000</color>
+    <color name="colorAccent">#D3D3D3</color>
+    <color name="colorBackground">#0B2335</color>
+    <color name="colororange">#FF5836</color>
+    <color name="colorGrey">#BDBDBD</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorOffWhite">#50FFFFFF</color>
+    <color name="colorFilter">#FFFC33</color>
+    <color name="colorHotWater">#FF563C</color>
+    <color name="colorColdWater">#0084FF</color>
+    <color name="colorSodaWater">#027D76</color>
+    <color name="colorGreen">#027D76</color>
+    <color name="colorFlavourWater">#ee0086</color>
+    <color name="colorBlue">#0C00FF</color>
+    <color name="splashBg">#E1E2E6</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="know_textcolor">#BEBCC1</color>
+    <color name="setting_background">#081342</color>
+    <color name="colorBlack">#000000</color>
+    <color name="color_darkgrey">@android:color/darker_gray</color>
+    <color name="colot_timer_bg">#D3DBE2</color>
+    <color name="colorProgressDefault">#7F8788</color>
+    <color name="colorDisable">#80D3D3D3</color>
+
+    <color name="colorRedDark">#FF3B30</color>
+    <color name="colorBlackSemi">#4D4D4D</color>
+    <color name="colorSettingHeader">#0E719F</color>
+    <color name="colorSettingHeaderBG">#081924</color>
+    <color name="colorSettingDivider">#0E3147</color>
+    <color name="colorSegmentRadio">#E6E6E6</color>
+
+    <color name="colorBtnClear">#0F547C</color>
+    <color name="colorBtnClearBG">#0A3751</color>
+    <color name="colorScanningDevice">#8AA7B8</color>
+    <color name="colorNetworkStatusDivider">#187EB4</color>
+    <color name="colorTimerDayName">#067DCE</color>
+    <color name="colorTimerIntervalName">#1d5f8c</color>
+    <color name="colorDashboardPBValue">#819DB0</color>
+    <color name="colorDashboardPBBG">#0A2131</color>
+    <color name="colorDashboardDisabled">#0F3D5D</color>
+    <color name="colorSparklingWater1">#FDFF3B</color>
+    <color name="colorSparklingWater2">#3A9E16</color>
+    <color name="colorSparklingWater3">#2A6C62</color>
+    <color name="colorSparklingWaterNeedle">#FFD200</color>
+    <color name="colorSystemStatusSlate">#4A6070</color>
+    <color name="colorSystemStatusBloodOrange">#FF4E00</color>
+    <color name="colorSystemStatusBloodOrange2">#ff4800</color>
+    <color name="colorSystemStatusLightNavy">#17547D</color>
+    <color name="colorWebDashboardLightNavy">#114061</color>
+    <color name="colorBoilingWaterBG">#0f3148</color>
+    <color name="colorTimerTimeDisable">#133D5A</color>
+
+
+    <color name="kprogresshud_default_color">#b1000000</color>
+    <color name="kprogresshud_grey_color">#b1A9A9A9</color>
+    <color name="colorAutoFillSeekBar">#0284E9</color>
+    <color name="colorAutoFillSeekBarDisable">#0284E9</color>
+    <color name="color_0e719f">#0E719F</color>
+    <color name="color_b635a3">#b635a3</color>
+    <color name="color_d8a302">#D8A302</color>
+    <color name="color_0084ff">#0084FF</color>
+    <color name="color_0ac478">#0AC478</color>
+    <color name="color_0D2B40">#0D2B40</color>
+    <color name="color_114061">#114061</color>
+</resources>
