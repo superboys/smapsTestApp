@@ -146,6 +146,9 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                 } else if (UnitoManager.getSingleton().target.equals("downLoadOtaFile")) {
                     UnitoManager.getSingleton().downLoadOtaFile(MainActivity.this,Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID).getBytes());
                     return;
+                } else if (UnitoManager.getSingleton().target.equals("provisioning")) {
+                    UnitoManager.getSingleton().provision(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID),"mqtt","11221122","4.1.2025");
+                    return;
                 }
                 if (null != UnitoManager.getSingleton().sendBytes) {
                     ThreadPoolUtil.handler.post(new Runnable() {
@@ -169,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         jsonRequestAdapter = new JsonRequestAdapter(jsonRequestList);
     }
-
 
     private void initView() {
         // 设置布局管理器
@@ -201,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                 });
             }
         });
-
     }
 
     @Override
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
     public static final int REQUEST_PERMISSION_CODE = 9527;
     public static final int RC_WRITE_AND_READ_EXTERNAL_STORAGE = 300;//识别码
 
-    /**
+    /**0
      * 请求权限
      */
     @AfterPermissionGranted(REQUEST_PERMISSION_CODE)

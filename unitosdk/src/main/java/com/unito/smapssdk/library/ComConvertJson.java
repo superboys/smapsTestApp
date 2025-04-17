@@ -48,8 +48,22 @@ public class ComConvertJson {
         CONVERT_MAP.put(ComConstant.startFlash, ComConvertJson::startFlash);
         CONVERT_MAP.put(ComConstant.leakageSensorFunction, ComConvertJson::leakageSensorFunction);
         CONVERT_MAP.put(ComConstant.error, ComConvertJson::error);
+        CONVERT_MAP.put(ComConstant.provisioning, ComConvertJson::provisioningFunction);
 
 
+    }
+
+    private static void provisioningFunction(byte[] bytes) {
+        Log.e("provisioningFunction-->", Utils.bytesToHex(bytes));
+        Map map = new LinkedHashMap();
+        map.put("msgId", UnitoManager.msgId);
+        map.put("destination", "appBle");
+        map.put("source", "waterSystem");
+        map.put("msgType", "response");
+        map.put("target", "provisioningFunction");
+        map.put("response", "ack");
+        LiveDataBus.get().with("showComConvertJson").setValue(JsonUtils.mapToJson(map));
+        Log.e("comConvertJson-->",JsonUtils.mapToJson(map));
     }
 
     private static void leakageSensorFunction(byte[] bytes) {

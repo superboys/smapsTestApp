@@ -95,4 +95,7 @@ public class ComConstant {
     public static byte leakageSensorFunction = 0x47;
     public static byte leakageSensorFunction2 = (byte) 0x0C;
 
+    public static byte provisioning = 0x03;
+    public static byte provisioning_2 = (byte) 0xfe;
+
 }

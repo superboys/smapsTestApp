@@ -47,8 +47,11 @@ public interface RequestListener<T> {
     boolean write(T device, byte[]data, BleWriteCallback<T> callback);
 
     boolean writeByUuid(T device, byte[]data, UUID serviceUUID, UUID characteristicUUID, BleWriteCallback<T> callback);
+    boolean writeProvision(T device, byte[]data, UUID serviceUUID, UUID characteristicUUID, BleWriteCallback<T> callback);
 
     void writeEntity(T device, final byte[]data, int packLength, int delay, BleWriteEntityCallback<T> callback);
+
+    void writeEntityProvision(T device, final byte[]data, int packLength, int delay, BleWriteEntityCallback<T> callback);
 
     void writeEntity(EntityData entityData, BleWriteEntityCallback<T> callback);
 

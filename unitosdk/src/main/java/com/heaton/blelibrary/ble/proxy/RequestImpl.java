@@ -116,9 +116,21 @@ public class RequestImpl<T extends BleDevice> implements RequestListener<T> {
     }
 
     @Override
+    public boolean writeProvision(T device, byte[] data, UUID serviceUUID, UUID characteristicUUID, BleWriteCallback<T> callback) {
+        WriteRequest<T> request = Rproxy.getRequest(WriteRequest.class);
+        return request.writeProvision(device, data, callback);
+    }
+
+    @Override
     public void writeEntity(T device, byte[] data, int packLength, int delay, BleWriteEntityCallback<T> callback) {
         WriteRequest<T> request = Rproxy.getRequest(WriteRequest.class);
         request.writeEntity(device, data, packLength, delay, callback);
+    }
+
+    @Override
+    public void writeEntityProvision(T device, byte[] data, int packLength, int delay, BleWriteEntityCallback<T> callback) {
+        WriteRequest<T> request = Rproxy.getRequest(WriteRequest.class);
+        request.writeEntityProvision(device, data, packLength, delay, callback);
     }
 
     @Override

@@ -3,8 +3,9 @@ package com.unito.smapssdk;
 import static android.content.Context.RECEIVER_EXPORTED;
 import static com.heaton.blelibrary.ble.model.BleDevice.TAG;
 import static com.unito.smapssdk.library.BLEConstant.*;
+import static com.unito.smapssdk.library.Utils.BASE_URL_DEFAULT;
+import static com.unito.smapssdk.library.UtilsKt.encrypt;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
 import android.app.DownloadManager;
 import android.bluetooth.BluetoothGatt;
@@ -17,9 +18,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -36,6 +36,7 @@ import com.heaton.blelibrary.ble.callback.BleWriteCallback;
 import com.heaton.blelibrary.ble.callback.BleWriteEntityCallback;
 import com.heaton.blelibrary.ble.model.BleFactory;
 import com.heaton.blelibrary.ble.utils.UuidUtils;
+import com.unito.smapssdk.library.ApsHubStatusService;
 import com.unito.smapssdk.library.BLEConstant;
 import com.unito.smapssdk.library.BleRssiDevice;
 import com.unito.smapssdk.library.ComConvertJson;
@@ -48,7 +49,6 @@ import com.unito.smapssdk.library.SocketUtil;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 import com.unito.smapssdk.library.UtilsKt;
-import com.unito.smapssdk.mqtt.MQTTUtil;
 
 import org.json.JSONObject;
 
@@ -60,10 +60,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -466,6 +464,55 @@ public class UnitoManager {
                     ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
                     if (null != characteristic.getValue() || characteristic.getValue().length > 0) {
                         if (characteristic.getValue()[0] == (byte) 0x00 && characteristic.getValue()[characteristic.getValue().length - 1] == (byte) 0xff) {
+                            if (characteristic.getValue()[3] == BLEConstant.MSGID_COMMUNICATION_1 && characteristic.getValue()[4] == BLEConstant.MSGID_COMMUNICATION_2) {
+                                byte[] hubComval = characteristic.getValue();
+                                if (hubComval[6] > 1) {
+                                    final int[] message = Utils.copyOfRange(hubComval, 7, 7 + hubComval[6]);
+                                    final String response = ApsHubStatusService.HubStatusProtocolToJsonString(message);
+                                    if (!TextUtils.isEmpty(response)) {
+                                        Log.i(TAG, "Hub Provision Status ::: " + response);
+                                    }
+                                    /*{"HubWaterSystem":"NotConnected","HubHood":"DoesNotExist","Hubcooker":"DoesNotExist"
+                                    ,"HubTiana":"DoesNotExist","HubApp":"Connected","HubWiFi":"Connected","HubHttps":"Connected","HubWss":"Connected"}*/
+                                }
+//                                Integer[] byte1 = Utils.convertbytetoBitsInInt(hubComval[7 + 0]);
+//                                Integer[] byte2 = Utils.convertbytetoBitsInInt(hubComval[7 + 1]);
+//                                Integer[] byte3 = Utils.convertbytetoBitsInInt(hubComval[7 + 2]);
+                                Integer[] byte4 = Utils.convertbytetoBitsInInt(hubComval[7 + 3]);
+//                                Integer[] byte5 = Utils.convertbytetoBitsInInt(hubComval[7 + 4]);
+                                int provisioningStatus_40 = byte4[2] * 2 + byte4[1];
+                                Log.e("sioningStatus_40--->", provisioningStatus_40 + "");
+                                if (provisioningStatus_40 == 3) {
+                                    ThreadPoolUtil.handler.removeCallbacks(runnableProvision);
+                                    ThreadPoolUtil.handler.removeCallbacks(runnableProvisionTimeOut);
+                                    Log.e("11111111", "配网成功");
+                                    try {
+                                        JSONObject param = new JSONObject();
+                                        param.put("AppVersion", "4.1.2025");
+                                        param.put("HubToken", hubToken);
+                                        param.put("UserAppDeviceUUID", deviceUuid);
+                                        param.put("UserAppType", "android");
+                                        param.put("MySelf", "app");
+                                        sendPOSTRequest(BASE_URL_DEFAULT + "/unito/app/registerVerification", param);
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                        ThreadPoolUtil.handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try {
+                                                    ComConvertJson.CONVERT_MAP.get(characteristic.getValue()[3]).accept(characteristic.getValue());
+                                                } catch (Exception exception) {
+                                                    exception.printStackTrace();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                                return;
+                            }
                             try {
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                     ThreadPoolUtil.handler.post(new Runnable() {
@@ -668,6 +715,20 @@ public class UnitoManager {
         });
     }
 
+    public void writeEntityData(byte[] bytes) {
+        ble.writeEntityProvision(bleRssiDevice, bytes, 20, 50, new BleWriteEntityCallback<BleRssiDevice>() {
+            @Override
+            public void onWriteSuccess() {
+                BleLog.e("onWriteSuccess: ", "success->" + Utils.bytesToHex(bytes));
+            }
+
+            @Override
+            public void onWriteFailed() {
+//                BleLog.e("onWriteFailed: ", "failed->" + Utils.bytesToHex(bytes));
+            }
+        });
+    }
+
     Runnable runnableTimeOut = new Runnable() {
         @Override
         public void run() {
@@ -678,6 +739,20 @@ public class UnitoManager {
             map.put("source", "waterSystem");
             map.put("msgType", "response");
             map.put("target", UnitoManager.target);
+            map.put("errorMessage", "timeOut");
+            notity(JsonUtils.mapToJson(map));
+        }
+    };
+
+    Runnable runnableProvisionTimeOut = new Runnable() {
+        @Override
+        public void run() {
+            Map map = new LinkedHashMap();
+            map.put("msgId", msgId);
+            map.put("destination", "appBle");
+            map.put("source", "waterSystem");
+            map.put("msgType", "response");
+            map.put("target", "provisioningFunction");
             map.put("errorMessage", "timeOut");
             notity(JsonUtils.mapToJson(map));
         }
@@ -2625,14 +2700,22 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         ThreadPoolUtil.execute(new Runnable() {
             @Override
             public void run() {
-                socketUtil = new SocketUtil(SERVER_IP, SERVER_PORT);
-                socketUtil.run(deviceUuid);
+                try {
+                    socketUtil = new SocketUtil(SERVER_IP, SERVER_PORT);
+                    socketUtil.run(deviceUuid);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
 
     public void openHotPort() {
-        UnitoManager.getSingleton().writeDirData(UnitoManager.getSingleton().Turn_on_wifi((byte) 0x09, deviceUuid));
+        if (null != deviceUuid) {
+            UnitoManager.getSingleton().writeDirData(UnitoManager.getSingleton().Turn_on_wifi((byte) 0x09, deviceUuid));
+        } else {
+            Log.e("openHotPort-->", "please download file");
+        }
     }
 
     public void start_ws_ota() {
@@ -2711,7 +2794,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
                         File folder = new File(folderPath);
                         if (folder.exists()) {
                             Utils.deleteFolder(folder);
-                            Log.e("",Utils.deleteFolder(folder)+"");
+                            Log.e("", Utils.deleteFolder(folder) + "");
                         }
                         folder.mkdirs();
 
@@ -2816,6 +2899,45 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
                     cursor.close();
                 }
             }
+        }
+    };
+
+    public void provision(String deviceUuid,String ssid,String pwd,String appVersion) {
+        ThreadPoolUtil.execute(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void run() {
+                try {
+                    JSONObject param = new JSONObject();
+                    param.put("AppVersion", appVersion);
+                    param.put("HubToken", hubToken);
+                    param.put("UserAppDeviceUUID", deviceUuid);
+                    param.put("UserAppType", "android");
+                    param.put("TimeZone", "8");
+                    param.put("TimeZoneId", "Asia/Shanghai");
+                    param.put("WsProductName", blueToothName);
+                    String response = sendPOSTRequest(BASE_URL_DEFAULT + "/unito/app/homeRegister", param);
+                    Log.e("response-->", response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (null != jsonObject && jsonObject.optInt("code") == 200) {
+                        writeEntityData(encrypt(Utils.makeJson(40, ssid, pwd,deviceUuid).getBytes(StandardCharsets.UTF_8), secretKey));
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision,10000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision,20000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision,30000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision,40000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvisionTimeOut,50000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    Runnable runnableProvision = new Runnable() {
+        @Override
+        public void run() {
+            getRequestForHubProvisoingMode();
         }
     };
 

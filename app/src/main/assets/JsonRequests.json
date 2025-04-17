@@ -1635,5 +1635,18 @@
       "target": "ota_ws_and_hub",
       "msgType": "set"
     }
+  },
+  {
+    "id": "151",
+    "target": "provisioning",
+    "msgType": "set",
+    "SMAPS": "0xFE38",
+    "json": {
+      "msgId": 151,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "provisioning",
+      "msgType": "set"
+    }
   }
 ]

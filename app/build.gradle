@@ -24,14 +24,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/liu/StudioProjects/sign/smapsTest.jks')
+            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
             keyPassword '123456'
             keyAlias 'smapsTest'
             storePassword '123456'
         }
 
         debug {
-            storeFile file('/Users/liu/StudioProjects/sign/smapsTest.jks')
+            storeFile file('D:\\project\\smapsTestApp\\smapsTest.jks')
             storePassword "123456"
             keyAlias "smapsTest"
             keyPassword "123456"
@@ -92,8 +92,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10'
 //    implementation 'androidx.core:core-ktx:1.7.0'
     implementation project(':jsonviewer')
-    implementation files('libs/unitosdk-debug.aar')
-//    implementation project(':unitosdk')
+//    implementation files('libs/unitosdk-debug.aar')
+    implementation project(':unitosdk')
     // For developers using the Android Support Library
     implementation 'pub.devrel:easypermissions:3.0.0'
 }

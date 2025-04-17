@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -39,16 +45,26 @@ import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class Utils {
     private static long mLastClickTime = 0;
     public static boolean isAnimationApplied = true;
     public static boolean isFragmentAnimationApplied = true;
+
+    public static String MQTT_URL = "iot.unito-oauth.com";
+    public static int MQTT_PORT = 8883;
+
+    public static final String BASE_URL_DEFAULT = "https://iot-web.unito-oauth.com";
 
     public static String DATE_FORMAT_DD_MM_YYYY = "dd/MM/yyyy";
     public static String DATE_FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
@@ -919,4 +935,64 @@ public class Utils {
         return folder.delete(); // 删除当前空文件夹
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String makeJson(int type, String ssid, String pwd,String uuid) {
+        final JSONObject jsonObject = new JSONObject();
+        String WaterSystemExisting = "No";
+
+        WaterSystemExisting = "Yes";
+
+        String HoodExisting = "No";
+        String CookerExisting = "No";
+        String TianaExisting = "No";
+
+        try {
+            jsonObject.put("Action", "ProvData");
+            jsonObject.put("From", "App");
+            jsonObject.put("To", "Hub");
+            jsonObject.put("WifiSsid", ssid);
+            jsonObject.put("WifiPassword", pwd);
+            if (type == 40) {
+                jsonObject.put("MqttBaseUrl", "mqtts://" + MQTT_URL + ":" + MQTT_PORT);
+            } else {
+                jsonObject.put("HubRefreshTimeOutMsec", "1800");
+                jsonObject.put("CommTimeoutSec", String.valueOf(BLEConstant.PROVISIONING_COM_TIME_OUT));
+                jsonObject.put("BleTimeoutSec", "30");
+                jsonObject.put("WifiTimeoutSec", "30");
+                jsonObject.put("HoodExisting", HoodExisting);
+                jsonObject.put("CookerExisting", CookerExisting);
+                jsonObject.put("TianaExisting", TianaExisting);
+            }
+            jsonObject.put("BaseUrl", BASE_URL_DEFAULT);
+            jsonObject.put("OtaBackupBaseUrl", "");
+            jsonObject.put("UserAppDeviceUuid", uuid);
+            jsonObject.put("InstallationCountry", String.valueOf(getCurrentTimeZone()));
+            jsonObject.put("WaterSystemExisting", WaterSystemExisting);
+            jsonObject.put("TimeZone", String.valueOf(getCurrentTimeZone()));
+            jsonObject.put("UserAppType", "android");
+            Log.e("HUB OTA", "json value " + jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static long getCurrentTimeZone() {
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+        return TimeUnit.SECONDS.toHours(zonedDateTime.getOffset().getTotalSeconds());
+    }
+
+    public static byte[][] splitData(byte[] data, int chunkSize) {
+        int totalChunks = (int) Math.ceil((double) data.length / chunkSize);
+        byte[][] chunks = new byte[totalChunks][];
+
+        for (int i = 0; i < totalChunks; i++) {
+            int start = i * chunkSize;
+            int length = Math.min(data.length - start, chunkSize);
+            chunks[i] = Arrays.copyOfRange(data, start, start + length);
+        }
+
+        return chunks;
+    }
 }

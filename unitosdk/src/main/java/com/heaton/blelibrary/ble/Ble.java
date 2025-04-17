@@ -357,6 +357,9 @@ public final class Ble<T extends BleDevice> {
     public boolean writeByUuid(T device, byte[]data, UUID serviceUUID, UUID characteristicUUID, BleWriteCallback<T> callback){
         return request.writeByUuid(device, data, serviceUUID, characteristicUUID, callback);
     }
+    public boolean writeProvision(T device, byte[]data, UUID serviceUUID, UUID characteristicUUID, BleWriteCallback<T> callback){
+        return request.writeProvision(device, data, serviceUUID, characteristicUUID, callback);
+    }
 
     /**
      *
@@ -383,6 +386,10 @@ public final class Ble<T extends BleDevice> {
      */
     public void writeEntity(T device, final byte[]data, @IntRange(from = 1,to = 512)int packLength, int delay, BleWriteEntityCallback<T> callback){
         request.writeEntity(device, data, packLength, delay, callback);
+    }
+
+    public void writeEntityProvision(T device, final byte[]data, @IntRange(from = 1,to = 512)int packLength, int delay, BleWriteEntityCallback<T> callback){
+        request.writeEntityProvision(device, data, packLength, delay, callback);
     }
 
     /**
