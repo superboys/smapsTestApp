@@ -2,6 +2,9 @@ package com.unito.smapssdk.library;
 
 import android.util.Log;
 
+import com.unito.smapssdk.UnitoManager;
+import com.unito.smapssdk.mqtt.MQTTUtil;
+
 import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.UUID;
@@ -331,7 +334,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_WATER_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_WATER_PARAMETERS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -354,7 +357,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_WATER_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_WATER_PARAMETERS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -375,7 +378,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_ERROR;//MSGID High
         bytes[4] = MSGID_ERROR2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -398,7 +401,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_CO2_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_CO2_PARAMETERS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -423,7 +426,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_CO2_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_CO2_PARAMETERS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -445,7 +448,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_CO2_INONOFF_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_CO2_INONOFF_PARAMETERS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -472,7 +475,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_SODA_CO2_INONOFF_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_SODA_CO2_INONOFF_PARAMETERS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -493,7 +496,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_REQUEST_STATUS_WATER_SYSTEM1;//MSGID High
         bytes[4] = MSGID_REQUEST_STATUS_WATER_SYSTEM2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -514,7 +517,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WASH_PIPE_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_WASH_PIPE_PARAMETERS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -536,7 +539,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WASH_PIPE_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_WASH_PIPE_PARAMETERS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -558,7 +561,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_OUT_STATUS_1;//MSGID High
         bytes[4] = MSGID_WATER_OUT_STATUS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -579,7 +582,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_OUT_STATUS_1;//MSGID High
         bytes[4] = MSGID_WATER_OUT_STATUS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -601,7 +604,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_POWER_ON_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_POWER_ON_PARAMETERS_2;//MSGID LOW
         bytes[5] = SET;//MSG CATEGORY
@@ -622,7 +625,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_POWER_ON_PARAMETERS_1;//MSGID High
         bytes[4] = MSGID_POWER_ON_PARAMETERS_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -643,7 +646,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_TYPE_1;//MSGID High
         bytes[4] = MSGID_WATER_TYPE_2;//MSGID LOW
         bytes[5] = GET;//MSG CATEGORY
@@ -658,7 +661,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = 0x0B; //Destination
-        bytes[2] = 0X07; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = (byte) 0XEE; //MSGID High
         bytes[4] = (byte) 0XFE; //MSGID LOW
         bytes[5] = 0X01; //MSG CATEGORY
@@ -681,7 +684,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_HOTWATER1; //MSGID High
         bytes[4] = MSGID_GET_HOTWATER2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -701,7 +704,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_HOTWATER1; //MSGID High
         bytes[4] = MSGID_GET_HOTWATER2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -726,7 +729,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_COLDWATER1; //MSGID High
         bytes[4] = MSGID_GET_COLDWATER2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -749,7 +752,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_COLDWATER1; //MSGID High
         bytes[4] = MSGID_GET_COLDWATER2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -774,7 +777,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_SODAWATER1; //MSGID High
         bytes[4] = MSGID_GET_SODAWATER2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -795,7 +798,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_SODAWATER1; //MSGID High
         bytes[4] = MSGID_GET_SODAWATER2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -819,7 +822,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CHILD_PROTECT1; //MSGID High
         bytes[4] = MSGID_CHILD_PROTECT2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -841,7 +844,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CHILD_PROTECT1; //MSGID High
         bytes[4] = MSGID_CHILD_PROTECT2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -858,7 +861,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_SYSTEM_CLOCK1; //MSGID High
         bytes[4] = MSGID_WATER_SYSTEM_CLOCK2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -874,7 +877,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_SYSTEM_CLOCK1; //MSGID High
         bytes[4] = MSGID_WATER_SYSTEM_CLOCK2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -897,7 +900,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FILTER_REPLACEMENT1; //MSGID High
         bytes[4] = MSGID_FILTER_REPLACEMENT2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -918,7 +921,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FILTER_REPLACEMENT1; //MSGID High
         bytes[4] = MSGID_FILTER_REPLACEMENT2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -939,7 +942,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_ACTIVATE_FLAVOR_DISINFECTION; //MSGID High
         bytes[4] = MSGID_ACTIVATE_FLAVOR_DISINFECTION2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -957,7 +960,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CO2_TANK_REPLACEMENT1; //MSGID High
         bytes[4] = MSGID_CO2_TANK_REPLACEMENT2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -978,7 +981,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CO2_TANK_REPLACEMENT1; //MSGID High
         bytes[4] = MSGID_CO2_TANK_REPLACEMENT2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1013,7 +1016,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_TIMER1_1; //MSGID High
         bytes[4] = MSGID_TIMER1_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1029,7 +1032,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_TIMER2_1; //MSGID High
         bytes[4] = MSGID_TIMER2_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1050,7 +1053,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_TIMER1_1; //MSGID High
         bytes[4] = MSGID_TIMER1_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1077,7 +1080,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_TIMER2_1; //MSGID High
         bytes[4] = MSGID_TIMER2_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1104,7 +1107,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_STERILIZATION_1; //MSGID High
         bytes[4] = MSGID_STERILIZATION_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1120,7 +1123,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_STERILIZATION_1; //MSGID High
         bytes[4] = MSGID_STERILIZATION_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1139,7 +1142,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CONSUMABLE_1; //MSGID High
         bytes[4] = MSGID_CONSUMABLE_2; //MSGID LOW
         bytes[5] = setOrGet; //MSG CATEGORY
@@ -1156,7 +1159,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CONSUMABLE_1_NEW; //MSGID High
         bytes[4] = MSGID_CONSUMABLE_2_NEW; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1172,7 +1175,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_CONSUMABLE_1_NEW; //MSGID High
         bytes[4] = MSGID_CONSUMABLE_2_NEW; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1319,7 +1322,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = VERSION_1; //MSGID High
         bytes[4] = VERSION_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1335,7 +1338,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_WATER_SYSTEM_UPTIME_1; //MSGID High
         bytes[4] = MSGID_WATER_SYSTEM_UPTIME_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1395,7 +1398,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_DIR_MODE_FLASH_PROCESS_1; //MSGID High
         bytes[4] = MSGID_DIR_MODE_FLASH_PROCESS_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1443,7 +1446,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_PAIRING_1; //MSGID High
         bytes[4] = MSGID_PAIRING_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1460,7 +1463,7 @@ public class BLEConstant {
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_PAIRING_1; //MSGID High
         bytes[4] = MSGID_PAIRING_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1476,7 +1479,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_HUB_MODE_WS_OTA_1; //MSGID High
         bytes[4] = MSGID_HUB_MODE_WS_OTA_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1492,7 +1495,7 @@ public class BLEConstant {
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_HUB_MODE_WS_OTA_1; //MSGID High
         bytes[4] = MSGID_HUB_MODE_WS_OTA_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1509,12 +1512,13 @@ public class BLEConstant {
      * @return
      */
     public static byte getSourceAddress() {
-//        if (Unito.getInstance().getSharedPreferences().getInt(PREF.SOURCE_ADDRESS, APP_INTERNAL) == APP_INTERNAL) {
-//            return APP_INTERNAL;
-//        } else if (Unito.getInstance().getSharedPreferences().getInt(PREF.SOURCE_ADDRESS, APP_INTERNAL) == APP_EXTERNAL) {
+        if (UnitoManager.getSingleton().getConnectStatus()) {
+            return APP_INTERNAL;
+        }
+//        else if (Unito.getInstance().getSharedPreferences().getInt(PREF.SOURCE_ADDRESS, APP_INTERNAL) == APP_EXTERNAL) {
 //            return APP_EXTERNAL;
 //        }
-        return APP_INTERNAL;
+        return APP_EXTERNAL;
     }
 
     /**
@@ -1561,7 +1565,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_ENABLE_PULL_OUT_SENSOR_1; //MSGID High
         bytes[4] = MSGID_GET_ENABLE_PULL_OUT_SENSOR_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1579,7 +1583,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_ENABLE_PULL_OUT_SENSOR_1; //MSGID High
         bytes[4] = MSGID_GET_ENABLE_PULL_OUT_SENSOR_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1596,7 +1600,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_AUTO_SODA_REFILL_1; //MSGID High
         bytes[4] = MSGID_GET_AUTO_SODA_REFILL_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1612,7 +1616,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_AUTO_SODA_REFILL_1; //MSGID High
         bytes[4] = MSGID_GET_AUTO_SODA_REFILL_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1628,7 +1632,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_AUTO_FILL_TIMER_1; //MSGID High
         bytes[4] = MSGID_AUTO_FILL_TIMER_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1644,7 +1648,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_AUTO_FILL_TIMER_1; //MSGID High
         bytes[4] = MSGID_AUTO_FILL_TIMER_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1662,7 +1666,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLUSH_TIMER_1; //MSGID High
         bytes[4] = MSGID_FLUSH_TIMER_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1678,7 +1682,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLUSH_TIMER_1; //MSGID High
         bytes[4] = MSGID_FLUSH_TIMER_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1695,7 +1699,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1711,7 +1715,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_CLEANING_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_CLEANING_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1727,7 +1731,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         bytes[0] = (byte) 0x00; //First
         /*bytes[1] = getDestinationAddressForIdentification(); //Destination*/
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_DISINFECTION_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_DISINFECTION_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1743,7 +1747,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1763,7 +1767,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_CLEANING_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_CLEANING_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1781,7 +1785,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_PARAMETERS_DISINFECTION_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_PARAMETERS_DISINFECTION_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1802,7 +1806,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_WATER_TYPE_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_WATER_TYPE_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1817,7 +1821,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_FLAVOR_WATER_TYPE_1; //MSGID High
         bytes[4] = MSGID_FLAVOR_WATER_TYPE_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1833,7 +1837,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_ENABLE_LEAKAGE_SENSOR_1; //MSGID High
         bytes[4] = MSGID_GET_ENABLE_LEAKAGE_SENSOR_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1850,7 +1854,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_ENABLE_LEAKAGE_SENSOR_1; //MSGID High
         bytes[4] = MSGID_GET_ENABLE_LEAKAGE_SENSOR_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY
@@ -1866,7 +1870,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         byte[] bytes = new byte[10];
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_SINGLE_CLICK_1; //MSGID High
         bytes[4] = MSGID_GET_SINGLE_CLICK_2; //MSGID LOW
         bytes[5] = GET; //MSG CATEGORY
@@ -1882,7 +1886,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
 
         bytes[0] = (byte) 0x00; //First
         bytes[1] = WATER_SYSTEM_CONTROLLER; //Destination
-        bytes[2] = APP_INTERNAL; //Source
+        bytes[2] = getSourceAddress(); //Source
         bytes[3] = MSGID_GET_SINGLE_CLICK_1; //MSGID High
         bytes[4] = MSGID_GET_SINGLE_CLICK_2; //MSGID LOW
         bytes[5] = SET; //MSG CATEGORY

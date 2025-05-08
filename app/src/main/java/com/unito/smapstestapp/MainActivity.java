@@ -34,6 +34,8 @@ import com.unito.smapssdk.library.BleRssiDevice;
 import com.unito.smapssdk.library.NotifyResponse;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
+import com.unito.smapssdk.mqtt.MQTTUtil;
+import com.unito.smapssdk.mqtt.MQTTUtil.MQTTCallbackHandler;
 import com.unito.smapstestapp.adapter.DataTypeAdapter;
 import com.unito.smapstestapp.adapter.JsonRequestAdapter;
 import com.unito.smapstestapp.databinding.ActivityMainBinding;
@@ -149,6 +151,9 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                 } else if (UnitoManager.getSingleton().target.equals("provisioning")) {
                     UnitoManager.getSingleton().provision(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID),"mqtt","11221122","4.1.2025");
                     return;
+                } else if (UnitoManager.getSingleton().target.equals("mqtt")) {
+                    UnitoManager.getSingleton().initMQTT(MainActivity.this,Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+                    return;
                 }
                 if (null != UnitoManager.getSingleton().sendBytes) {
                     ThreadPoolUtil.handler.post(new Runnable() {
@@ -166,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements NotifyResponse, U
                 }
             }
         });
+
+
     }
 
     private void initData() {

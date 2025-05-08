@@ -859,6 +859,11 @@ public class Utils {
         return array;
     }
 
+    public static String getCurrentTimeZoneId() {
+        TimeZone tz = TimeZone.getDefault();
+        return tz.getID();
+    }
+
     /**
      * FileChannel 获取文件的MD5值
      *

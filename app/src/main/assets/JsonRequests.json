@@ -1648,5 +1648,18 @@
       "target": "provisioning",
       "msgType": "set"
     }
+  },
+  {
+    "id": "152",
+    "target": "mqtt",
+    "msgType": "set",
+    "SMAPS": "0xFE38",
+    "json": {
+      "msgId": 152,
+      "destination": "waterSystem",
+      "source": "appBle",
+      "target": "mqtt",
+      "msgType": "set"
+    }
   }
 ]

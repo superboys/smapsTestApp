@@ -61,7 +61,7 @@ public class ComConvertJson {
         map.put("source", "waterSystem");
         map.put("msgType", "response");
         map.put("target", "provisioningFunction");
-        map.put("response", "ack");
+        map.put("response", "succese");
         LiveDataBus.get().with("showComConvertJson").setValue(JsonUtils.mapToJson(map));
         Log.e("comConvertJson-->",JsonUtils.mapToJson(map));
     }

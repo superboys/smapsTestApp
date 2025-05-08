@@ -4,6 +4,8 @@ import static android.content.Context.RECEIVER_EXPORTED;
 import static com.heaton.blelibrary.ble.model.BleDevice.TAG;
 import static com.unito.smapssdk.library.BLEConstant.*;
 import static com.unito.smapssdk.library.Utils.BASE_URL_DEFAULT;
+import static com.unito.smapssdk.library.Utils.MQTT_PORT;
+import static com.unito.smapssdk.library.Utils.MQTT_URL;
 import static com.unito.smapssdk.library.UtilsKt.encrypt;
 
 import android.app.Application;
@@ -49,7 +51,11 @@ import com.unito.smapssdk.library.SocketUtil;
 import com.unito.smapssdk.library.ThreadPoolUtil;
 import com.unito.smapssdk.library.Utils;
 import com.unito.smapssdk.library.UtilsKt;
+import com.unito.smapssdk.mqtt.MQTTUtil;
 
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -83,7 +89,7 @@ public class UnitoManager {
     public static boolean isWrite;
     private static Ble<BleRssiDevice> ble;
     BleRssiDevice bleRssiDevice;
-    public int timeOut = 3000;
+    public int timeOut = 10000;
     private boolean disConnect = false;
     public static String secretKey = "YellowSubmarine_"; // Replace with your secret key
 
@@ -205,6 +211,9 @@ public class UnitoManager {
     }
 
     public void bleConnectToWaterSystem() {
+        if (null != MQTTUtil.Companion) {
+            MQTTUtil.Companion.getInstance(context).disconnect();
+        }
         if (!isWrite) {
             isWrite = true;
         } else {
@@ -663,7 +672,7 @@ public class UnitoManager {
     }
 
     public int writeDirData(byte[] bytes) {
-        if (getConnectStatus()) {
+        if (getConnectStatus() || MQTTUtil.Companion.getInstance(context).isConnected()) {
             if (!isWrite) {
                 isWrite = true;
             } else {
@@ -674,18 +683,23 @@ public class UnitoManager {
                     return msgId;
                 }
             }
-            ble.write(bleRssiDevice, bytes, new BleWriteCallback<BleRssiDevice>() {
-                @Override
-                public void onWriteSuccess(BleRssiDevice device, BluetoothGattCharacteristic characteristic) {
-                    BleLog.e("onWriteSuccess: ", "success");
-                }
+            if (getConnectStatus()) {
+                ble.write(bleRssiDevice, bytes, new BleWriteCallback<BleRssiDevice>() {
+                    @Override
+                    public void onWriteSuccess(BleRssiDevice device, BluetoothGattCharacteristic characteristic) {
+                        BleLog.e("onWriteSuccess: ", "success");
+                    }
 
-                @Override
-                public void onWriteFailed(BleRssiDevice device, int failedCode) {
-                    super.onWriteFailed(device, failedCode);
-                    BleLog.e("onWriteFailed: ", "failed");
-                }
-            });
+                    @Override
+                    public void onWriteFailed(BleRssiDevice device, int failedCode) {
+                        super.onWriteFailed(device, failedCode);
+                        BleLog.e("onWriteFailed: ", "failed");
+                    }
+                });
+            } else {
+                MQTTUtil.Companion.getInstance(context).publish(bytes);
+            }
+
             ThreadPoolUtil.handler.postDelayed(runnableTimeOut, timeOut);
         } else {
             Map map = new LinkedHashMap();
@@ -760,7 +774,13 @@ public class UnitoManager {
 
     public synchronized void notity(String jsonObject) {
         ThreadPoolUtil.handler.removeCallbacks(runnableTimeOut);
-        notifyResponse.unitoWaterSystemNotify(jsonObject);
+//        ThreadPoolUtil.handler.post(new Runnable() {
+//            @Override
+//            public void run() {
+                notifyResponse.unitoWaterSystemNotify(jsonObject);
+//            }
+//        });
+
     }
 
     public Map sendCommand(Map dataMap) {
@@ -2902,7 +2922,7 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         }
     };
 
-    public void provision(String deviceUuid,String ssid,String pwd,String appVersion) {
+    public void provision(String deviceUuid, String ssid, String pwd, String appVersion) {
         ThreadPoolUtil.execute(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -2920,12 +2940,12 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
                     Log.e("response-->", response);
                     JSONObject jsonObject = new JSONObject(response);
                     if (null != jsonObject && jsonObject.optInt("code") == 200) {
-                        writeEntityData(encrypt(Utils.makeJson(40, ssid, pwd,deviceUuid).getBytes(StandardCharsets.UTF_8), secretKey));
-                        ThreadPoolUtil.handler.postDelayed(runnableProvision,10000);
-                        ThreadPoolUtil.handler.postDelayed(runnableProvision,20000);
-                        ThreadPoolUtil.handler.postDelayed(runnableProvision,30000);
-                        ThreadPoolUtil.handler.postDelayed(runnableProvision,40000);
-                        ThreadPoolUtil.handler.postDelayed(runnableProvisionTimeOut,50000);
+                        writeEntityData(encrypt(Utils.makeJson(40, ssid, pwd, deviceUuid).getBytes(StandardCharsets.UTF_8), secretKey));
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision, 10000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision, 20000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision, 30000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvision, 40000);
+                        ThreadPoolUtil.handler.postDelayed(runnableProvisionTimeOut, 50000);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -2941,7 +2961,160 @@ E (1043398) ROUTE: Unsupported SMAPS message received id = 3134, ignored.*/
         }
     };
 
-    public void connectMQTT() {
-//        MQTTUtil.Companion.getInstance().connect();
+    public void initMQTT(Context context,String deviceUuid) {
+        bleDisconnectFromWaterSystem();
+        this.context = context;
+        ThreadPoolUtil.execute(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void run() {
+                try {
+                    JSONObject param = new JSONObject();
+                    param.put("Action", "RegisterVerification");
+                    param.put("ScreenName", "SetUpHub");
+                    param.put("CompanyCode", "1234");
+                    param.put("UserAppDeviceUUID", deviceUuid);
+                    param.put("UserAppType", "android");
+                    param.put("MySelf", "app");
+                    param.put("UserPushNotificationToken", "");
+                    param.put("WithLogo", "1");
+                    param.put("WithWebSocketToken", "1");
+                    param.put("WebServiceError", "");
+                    param.put("HubToken", hubToken);
+                    param.put("AppVersion", "1.1");
+                    param.put("TimeZone", Utils.getCurrentTimeZone());
+                    param.put("TimeZoneId", Utils.getCurrentTimeZoneId());
+                    param.put("AllowAutomaticWaterSystemVersionsUpdate", "0");
+
+                    String response = sendPOSTRequest("https://iot-web.unito-oauth.com/unito/app/registerVerification", param);
+                    Log.e("response-->", response);
+                    if (!TextUtils.isEmpty(response)) {
+                        JSONObject jsonVal = new JSONObject(response).getJSONObject("data");
+
+                        if (null != jsonVal.optString("MqttTopicNames") && !jsonVal.optString("MqttTopicNames").equals("")) {
+
+                            try {
+                                String name = "";
+                                String pwd = "";
+                                if (null != jsonVal.optString("WebSocketToken") && !jsonVal.optString("WebSocketToken").equals("")) {
+                                    String webSocketToken = jsonVal.optString("WebSocketToken");
+                                    name = webSocketToken.substring(0, webSocketToken.length() / 2);
+                                    pwd = webSocketToken.substring(webSocketToken.length() / 2);
+                                }
+                                JSONArray hubId;
+                                JSONArray userId;
+                                JSONArray perfix;
+                                JSONArray jsonArray1 = new JSONArray(jsonVal.optString("MqttTopicNames"));
+                                if (null != jsonArray1 && jsonArray1.length() > 0) {
+                                    perfix = jsonArray1.getJSONObject(0).optJSONArray("prefix");
+                                    hubId = jsonArray1.getJSONObject(0).optJSONArray("hubId");
+                                    userId = jsonArray1.getJSONObject(0).optJSONArray("userId");
+                                    MQTTUtil.Companion.setPublisher(perfix.getString(0) + "/" + hubId.getString(0) + "/" + userId.getString(0));
+//                            Unito.getInstance().publisher = "h2c/5374/0";
+                                    MQTTUtil.Companion.setSubscriber(perfix.getString(1) + "/" + hubId.getString(0) + "/" + userId.getString(0));
+                                    Log.e("publisher----->", MQTTUtil.Companion.getPublisher() + "    " + MQTTUtil.Companion.getSubscriber());
+                                }
+                                Log.e("pwd----->", name + "    " + pwd + "   " + MQTTUtil.Companion.getMQTT_BROKER_URL());
+//                                    if (null != connection) {
+//                                Unito.getInstance().disconnect();
+//                                connection = null;
+//                                    }
+//                                String languageCode = "";
+//                                if (BuildConfig.APPLICATION_ID.equals(Const.BUNDLE_ID_ENGLISH)) {
+//                                    languageCode = Const.LANGUAGE_ENGLSH;
+//                                } else if (BuildConfig.APPLICATION_ID.equals(Const.BUNDLE_ID_OTHER)) {
+//                                    languageCode = Const.LANGUAGE_GERMEN;
+//                                } else if (BuildConfig.APPLICATION_ID.equals(Const.BUNDLE_ID_IL)) {
+//                                    languageCode = Const.LANGUAGE_HEBREW;
+//                                } else if (BuildConfig.APPLICATION_ID.equals(Const.BUNDLE_ID_DK)) {
+//                                    languageCode = Const.LANGUAGE_DENMARk;
+//                                } else {
+//                                    languageCode = Const.LANGUAGE_ENGLSH;
+//                                }
+                                MQTTUtil.Companion.getInstance(context).connect(deviceUuid+"-en",name,pwd);
+
+                                if (MQTTUtil.Companion.getInstance(context).isConnected()) {
+//                                    Unito.getInstance().getSharedPreferences().edit().putBoolean(PREF.IS_CLOUD_CONNECT, true).apply();
+//                                    Unito.getInstance().sendBroadcastForCloudConnection(true);
+//                                    Unito.getInstance().isMQTT = true;
+//                            Unito.getInstance().sendBroadcastForCloudConnection(true);
+                                    Log.e("details:", "MQTT: Connected");
+                                    Map map = new LinkedHashMap();
+                                    map.put("msgId", msgId);
+                                    map.put("destination", "appBle");
+                                    map.put("source", "waterSystem");
+                                    map.put("msgType", "response");
+                                    map.put("target", UnitoManager.target);
+                                    map.put("MQTTConnectStatus", "succese");
+                                    ThreadPoolUtil.handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notity(JsonUtils.mapToJson(map));
+                                        }
+                                    });
+
+                                    MQTTUtil.Companion.getInstance(context).subscribe();
+                                } else {
+                                    Map map = new LinkedHashMap();
+                                    map.put("msgId", msgId);
+                                    map.put("destination", "appBle");
+                                    map.put("source", "waterSystem");
+                                    map.put("msgType", "response");
+                                    map.put("target", UnitoManager.target);
+                                    map.put("MQTTConnectStatus", "fail");
+                                    ThreadPoolUtil.handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            notity(JsonUtils.mapToJson(map));
+                                        }
+                                    });
+                                    MQTTUtil.Companion.getInstance(context).disconnect();
+                                    Log.e("details:", "MQTT: Disconnected");
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Map map = new LinkedHashMap();
+                                map.put("msgId", msgId);
+                                map.put("destination", "appBle");
+                                map.put("source", "waterSystem");
+                                map.put("msgType", "response");
+                                map.put("target", UnitoManager.target);
+                                map.put("MQTTConnectStatus", "fail");
+                                ThreadPoolUtil.handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        notity(JsonUtils.mapToJson(map));
+                                    }
+                                });
+                                MQTTUtil.Companion.getInstance(context).disconnect();
+                                Log.e("details:", "MQTT: Disconnected");
+                            }
+
+                        } else {
+                            Log.e("details:", "MqttTopicNames: is null");
+                            Map map = new LinkedHashMap();
+                            map.put("msgId", msgId);
+                            map.put("destination", "appBle");
+                            map.put("source", "waterSystem");
+                            map.put("msgType", "response");
+                            map.put("target", UnitoManager.target);
+                            map.put("MQTTConnectStatus", "fail");
+                            ThreadPoolUtil.handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notity(JsonUtils.mapToJson(map));
+                                }
+                            });
+//                        Utils.dismissFancyProgressDialog(progressDialog);
+//                        handlerForCloudConnectionTimeout.removeCallbacks(runnableForCloudConnectionTimeout);
+//                        Utils.displayDialogWithoutTitle(getString(R.string.alert_unable_to_connect), getActivity());
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 }
